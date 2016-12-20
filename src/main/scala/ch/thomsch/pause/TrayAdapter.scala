@@ -11,7 +11,7 @@ import scalafx.application.Platform
   * @author Thomsch
   */
 object TrayAdapter {
-  val image : Image  = Toolkit.getDefaultToolkit.getImage("ironGoldUpgrade.png")
+  val image : Image  = Toolkit.getDefaultToolkit.getImage("icon.png")
   var popup = new PopupMenu
   val trayIcon : TrayIcon  = new TrayIcon(image, "Pause", popup)
 

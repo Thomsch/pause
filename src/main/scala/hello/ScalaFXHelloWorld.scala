@@ -46,9 +46,9 @@ import scalafx.scene.paint._
 import scalafx.scene.text.Text
 
 object ScalaFXHelloWorld extends JFXApp {
-  val image : Image  = Toolkit.getDefaultToolkit().getImage("ironGoldUpgrade.png");
+  val image : Image  = Toolkit.getDefaultToolkit().getImage("icon.png");
   var popup = new PopupMenu()
-  val trayIcon : TrayIcon  = new TrayIcon(image, "Amr_Trial", popup)
+  val trayIcon : TrayIcon  = new TrayIcon(image, "Keep eyes off the screen from time to time", popup)
 
   stage = new PrimaryStage {
     title = "ScalaFX Hello World"
