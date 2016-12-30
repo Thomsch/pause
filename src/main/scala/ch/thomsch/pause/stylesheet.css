@@ -1,0 +1,17 @@
+.root {
+-fx-background-color: rgb(255, 165, 0, 0.15);
+}
+
+#about-app-title {
+-fx-font: bold 50pt sans-serif;
+-fx-text-fill: linear-gradient(DarkCyan, Black);
+-fx-effect: dropshadow( gaussian , LightSteelBlue , 15,0.25,0,0 );
+}
+
+#about-licence{
+-fx-font: bold 14pt sans-serif
+}
+
+#about-github{
+-fx-font: 14pt sans-serif
+}

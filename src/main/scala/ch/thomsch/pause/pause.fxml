@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox alignment="CENTER" minHeight="100" minWidth="300" prefHeight="0.0" prefWidth="300.0" style="-fx-background: #EBEBEB;" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.thomsch.pause.SettingsController">
+      <HBox alignment="CENTER" prefHeight="63.0" prefWidth="300.0">
+              <ProgressIndicator fx:id="progress" maxHeight="50" progress="0.0" />
+              <TextField fx:id="timeField" text="45" />
+              <ToggleButton fx:id="onOffButton" onAction="#onButtonAction" text="On/Off" />
+      </HBox>
+   <Separator prefWidth="200.0" />
+   <BorderPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="300.0" VBox.vgrow="NEVER">
+      <right>
+         <Hyperlink fx:id="about" onAction="#onAboutActionClick" text="about" BorderPane.alignment="CENTER" />
+      </right>
+      <left>
+         <Label text="Version" BorderPane.alignment="CENTER" />
+      </left>
+      <padding>
+         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+      </padding>
+   </BorderPane>
+</VBox>

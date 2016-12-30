@@ -27,29 +27,42 @@
 
 package ch.thomsch.pause
 
-import java.awt._
-import java.awt.event.{ActionEvent, ActionListener}
+import java.awt.SystemTray
 import java.io.IOException
+
 import scalafx.Includes._
-import scalafx.application.{Platform, JFXApp}
 import scalafx.application.JFXApp.PrimaryStage
+import scalafx.application.{JFXApp, Platform}
 import scalafx.scene.{Parent, Scene}
-import scalafxml.core.{NoDependencyResolver, FXMLView}
-import java.net.URL;
-import java.net.URLClassLoader;
+import scalafxml.core.{FXMLView, NoDependencyResolver}
 
 object Pause extends JFXApp {
   if(SystemTray.isSupported) {
-    val resource = getClass.getResource("main.fxml")
+
+    val resource = getClass.getResource("pause.fxml")
+
     if (resource == null) {
-      throw new IOException("Cannot load resource: main.fxml")
+      throw new IOException("Cannot load resource: pause.fxml")
     }
     val root : Parent = FXMLView(resource, NoDependencyResolver)
-    stage = new PrimaryStage {
-      title = "Pause"
-      scene = new Scene(root)
-    }
+
+    stage = new PrimaryStage()
+    val scene : Scene = new Scene(root)
+    stage.setResizable(false)
+    stage.setScene(scene)
+
+    JFXApp.AutoShow = true
+    Platform.implicitExit = false
+    TrayAdapter.initialize
   } else {
     println("No luck. System tray not available")
   }
+
+  def show = Platform.runLater(new Runnable {
+    override def run(): Unit = stage.show
+  })
+
+  def hide = Platform.runLater(new Runnable {
+    override def run(): Unit = stage.hide
+  })
 }

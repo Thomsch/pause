@@ -1,15 +1,12 @@
 package ch.thomsch.pause
 
-import java.awt.TrayIcon.MessageType
-import java.util.TimerTask
-import java.util.concurrent.{ExecutorService, ScheduledExecutorService, Executors, ScheduledThreadPoolExecutor}
-
+import java.util.concurrent.{ExecutorService, Executors}
 import javafx.beans.property.DoubleProperty
 
 /**
   * @author Thomsch
   */
-class NotificationTimer(private val progressProperty : DoubleProperty) {
+class NotificationTimer {
 
   val scheduledExecutor : ExecutorService  = Executors.newSingleThreadExecutor()
   var currentTimer : Option[Command] = None
@@ -18,7 +15,7 @@ class NotificationTimer(private val progressProperty : DoubleProperty) {
     currentTimer.foreach(command => command.cancel())
   }
 
-  def startTimer(time: Long) = {
+  def startTimer(time: Long, progressProperty: DoubleProperty) = {
     currentTimer = Some(new Command(time * 60, progressProperty))
     scheduledExecutor.execute(currentTimer.get)
   }
