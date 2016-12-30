@@ -11,7 +11,7 @@ import scalafxml.core.{FXMLView, NoDependencyResolver}
   */
 object About {
   def show = {
-    val resource = getClass.getResource("about.fxml")
+    val resource = getClass.getResource("/about.fxml")
     if (resource == null) {
       throw new IOException("Cannot load resource: about.fxml")
     }

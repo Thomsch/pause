@@ -39,7 +39,7 @@ import scalafxml.core.{FXMLView, NoDependencyResolver}
 object Pause extends JFXApp {
   if(SystemTray.isSupported) {
 
-    val resource = getClass.getResource("pause.fxml")
+    val resource = getClass.getResource("/pause.fxml")
 
     if (resource == null) {
       throw new IOException("Cannot load resource: pause.fxml")
