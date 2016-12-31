@@ -28,28 +28,19 @@
 package ch.thomsch.pause
 
 import java.awt.SystemTray
-import java.io.IOException
 
 import scalafx.Includes._
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.application.{JFXApp, Platform}
-import scalafx.scene.{Parent, Scene}
-import scalafxml.core.{FXMLView, NoDependencyResolver}
+import scalafx.scene.Scene
 
 object Pause extends JFXApp {
   if(SystemTray.isSupported) {
-
-    val resource = getClass.getResource("/pause.fxml")
-
-    if (resource == null) {
-      throw new IOException("Cannot load resource: pause.fxml")
+    val root = FXMLAdapter.loadFXML("pause.fxml")
+    stage = new PrimaryStage{
+      resizable = false
+      scene = new Scene(root)
     }
-    val root : Parent = FXMLView(resource, NoDependencyResolver)
-
-    stage = new PrimaryStage()
-    val scene : Scene = new Scene(root)
-    stage.setResizable(false)
-    stage.setScene(scene)
 
     JFXApp.AutoShow = true
     Platform.implicitExit = false

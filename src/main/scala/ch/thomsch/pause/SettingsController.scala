@@ -43,6 +43,6 @@ class SettingsController(private val progress: ProgressIndicator,
   }
 
   def onAboutActionClick(event: scalafx.event.ActionEvent) {
-    About.show
+    About.createUI.show()
   }
 }

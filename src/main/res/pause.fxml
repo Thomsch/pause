@@ -12,7 +12,7 @@
    <Separator prefWidth="200.0" />
    <BorderPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="300.0" VBox.vgrow="NEVER">
       <right>
-         <Hyperlink fx:id="about" onAction="#onAboutActionClick" text="about" BorderPane.alignment="CENTER" />
+         <Hyperlink fx:id="about" onAction="#onAboutActionClick" style="-fx-focus-color: transparent;" text="about" BorderPane.alignment="CENTER" />
       </right>
       <left>
          <Label text="Version" BorderPane.alignment="CENTER" />
