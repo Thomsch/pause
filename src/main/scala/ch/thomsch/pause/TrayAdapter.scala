@@ -10,7 +10,7 @@ import scalafx.stage.Stage
   * @author Thomsch
   */
 object TrayAdapter {
-  val image : Image  = Toolkit.getDefaultToolkit.getImage("icon.png")
+  val image : Image  = Toolkit.getDefaultToolkit.getImage(getClass.getResource("/icon-tray.png"))
   var trayMenu = new PopupMenu
   val trayIcon : TrayIcon  = new TrayIcon(image, "Pause", trayMenu)
 

@@ -16,6 +16,7 @@ object About {
       title = "Pause"
       resizable = false
       scene = new Scene(root)
+      icons.add(Config.getAppIcon)
     }
   }
 }

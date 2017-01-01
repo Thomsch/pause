@@ -40,7 +40,9 @@ object Pause extends JFXApp {
     stage = new PrimaryStage{
       resizable = false
       scene = new Scene(root)
+      title = "Pause"
     }
+    stage.icons.add(Config.getAppIcon)
 
     JFXApp.AutoShow = true
     Platform.implicitExit = false

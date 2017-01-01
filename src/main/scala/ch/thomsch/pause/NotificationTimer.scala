@@ -15,6 +15,11 @@ class NotificationTimer {
     currentTimer.foreach(command => command.cancel())
   }
 
+  /**
+    * Starts a new timer.
+    * @param time The time in minutes until the notification
+    * @param progressProperty The property indicator of the progress
+    */
   def startTimer(time: Long, progressProperty: DoubleProperty) = {
     currentTimer = Some(new Command(time * 60, progressProperty))
     scheduledExecutor.execute(currentTimer.get)

@@ -1,6 +1,7 @@
 package ch.thomsch.pause
 
 import java.util.concurrent.Executors
+import javafx.fxml.FXML
 
 import scalafx.scene.control.{ProgressIndicator, TextField, ToggleButton}
 import scalafxml.core.macros.sfxml
@@ -9,9 +10,9 @@ import scalafxml.core.macros.sfxml
   * @author Thomsch
   */
 @sfxml
-class SettingsController(private val progress: ProgressIndicator,
-                         private val timeField: TextField,
-                         private val onOffButton: ToggleButton) {
+class SettingsController(@FXML private val progress: ProgressIndicator,
+                         @FXML private val timeField: TextField,
+                         @FXML private val onOffButton: ToggleButton) {
 
   def time : Option[Long] = try {Some(timeField.text.value.toLong)} catch {case e:NumberFormatException => None}
 
@@ -34,11 +35,15 @@ class SettingsController(private val progress: ProgressIndicator,
   }
 
   def onButtonAction(event: scalafx.event.ActionEvent) {
-    timeField.setEditable(!onOffButton.delegate.isSelected)
+    timeField.setDisable(onOffButton.delegate.isSelected)
     if (onOffButton.delegate.isSelected) {
-      if(time.isDefined) Actions.startTimer(time.get, progress.progressProperty) else inputError
+      if(time.isDefined) {
+        Actions.startTimer(time.get, progress.progressProperty)
+        onOffButton.setText("On")
+      } else inputError
     } else {
       Actions.cancelTimer()
+      onOffButton.setText("Activate")
     }
   }
 
