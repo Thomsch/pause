@@ -2,6 +2,8 @@ package ch.thomsch.pause
 
 import javafx.beans.property.DoubleProperty
 
+import scalafx.application.Platform
+
 /**
   * Created by Thomsch on 28.12.2016.
   */
@@ -26,4 +28,9 @@ object Actions {
     */
   def cancelTimer(): Unit = notificationTimer.cancel()
 
+  def closeApplication() : Unit = {
+    Actions.cancelTimer()
+    TrayAdapter.removeIcon()
+    Platform.exit()
+  }
 }

@@ -1,10 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
 <VBox alignment="CENTER" prefHeight="101.0" prefWidth="318.0" spacing="5.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.thomsch.pause.SettingsController">
+   <BorderPane id="window-bar" maxHeight="26.0" minHeight="26.0" onMouseDragged="#onMouseDraggedWindowBar" onMousePressed="#onMousePressedWindowBar" prefHeight="25.0" prefWidth="200.0" VBox.vgrow="NEVER">
+      <right>
+         <Button id="exit-button" alignment="CENTER" focusTraversable="false" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" onMouseClicked="#onMouseClickedExit" prefHeight="25.0" prefWidth="25.0" text="x" textAlignment="CENTER" textOverrun="CLIP">
+            <tooltip>
+               <Tooltip text="Click to hide&#10;Shift-click to close" />
+            </tooltip></Button>
+      </right>
+      <left>
+         <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+            <image>
+               <Image url="@icon-window.png" />
+            </image>
+            <BorderPane.margin>
+               <Insets left="4.0" />
+            </BorderPane.margin>
+         </ImageView>
+      </left>
+      <center>
+         <Label id="decoration-title" text="Pause" BorderPane.alignment="CENTER_LEFT">
+            <BorderPane.margin>
+               <Insets left="5.0" />
+            </BorderPane.margin>
+         </Label>
+      </center>
+   </BorderPane>
    <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
       <children>
          <BorderPane prefHeight="200.0" prefWidth="200.0">

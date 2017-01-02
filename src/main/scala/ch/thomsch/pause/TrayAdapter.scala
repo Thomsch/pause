@@ -3,7 +3,6 @@ package ch.thomsch.pause
 import java.awt._
 import java.awt.event.{ActionEvent, ActionListener}
 
-import scalafx.application.Platform
 import scalafx.stage.Stage
 
 /**
@@ -11,14 +10,13 @@ import scalafx.stage.Stage
   */
 object TrayAdapter {
   val image : Image  = Toolkit.getDefaultToolkit.getImage(getClass.getResource("/icon-tray.png"))
+
   var trayMenu = new PopupMenu
   val trayIcon : TrayIcon  = new TrayIcon(image, "Pause", trayMenu)
-
   var stage : Stage = null
+  val tray : SystemTray = SystemTray.getSystemTray
 
-  def initialize = {
-    val tray : SystemTray = SystemTray.getSystemTray
-
+  def initialize() = {
     val exit: MenuItem = new MenuItem("Exit")
     val controls: MenuItem = new MenuItem("Settings...")
     controls.setFont(Font.decode(null).deriveFont(Font.BOLD))
@@ -29,8 +27,7 @@ object TrayAdapter {
 
     val listener : ActionListener= new ActionListener() {
       def actionPerformed(arg0 : ActionEvent ) {
-        tray.remove(trayIcon)
-        Platform.exit()
+        Actions.closeApplication()
       }
     }
 
@@ -49,6 +46,10 @@ object TrayAdapter {
     }catch {
       case e : Exception => System.err.println("Can't add to tray")
     }
+  }
+
+  def removeIcon(): Unit = {
+    tray.remove(trayIcon)
   }
 
   def displayNotification(message : String): Unit = {

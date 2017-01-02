@@ -4,6 +4,7 @@ import java.util.concurrent.Executors
 import javafx.fxml.FXML
 
 import scalafx.scene.control.{ProgressIndicator, TextField, ToggleButton}
+import scalafx.scene.input.MouseEvent
 import scalafxml.core.macros.sfxml
 
 /**
@@ -13,6 +14,9 @@ import scalafxml.core.macros.sfxml
 class SettingsController(@FXML private val progress: ProgressIndicator,
                          @FXML private val timeField: TextField,
                          @FXML private val onOffButton: ToggleButton) {
+
+  var x : Double = 0
+  var y : Double = 0
 
   def time : Option[Long] = try {Some(timeField.text.value.toLong)} catch {case e:NumberFormatException => None}
 
@@ -34,6 +38,7 @@ class SettingsController(@FXML private val progress: ProgressIndicator,
     })
   }
 
+  @FXML
   def onButtonAction(event: scalafx.event.ActionEvent) {
     timeField.setDisable(onOffButton.delegate.isSelected)
     if (onOffButton.delegate.isSelected) {
@@ -47,6 +52,25 @@ class SettingsController(@FXML private val progress: ProgressIndicator,
     }
   }
 
+  @FXML
+  def onMouseClickedExit(event: MouseEvent): Unit = {
+    if(event.isShiftDown) Actions.closeApplication()
+    else Pause.hide()
+  }
+
+  @FXML
+  def onMouseDraggedWindowBar(event: MouseEvent): Unit = {
+    Pause.stage.setX(event.getScreenX + x)
+    Pause.stage.setY(event.getScreenY + y)
+  }
+
+  @FXML
+  def onMousePressedWindowBar(event: MouseEvent): Unit = {
+    x = Pause.stage.getX - event.getScreenX
+    y = Pause.stage.getY - event.getScreenY
+  }
+
+  @FXML
   def onAboutActionClick(event: scalafx.event.ActionEvent) {
     About.createUI.show()
   }

@@ -33,29 +33,32 @@ import scalafx.Includes._
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.application.{JFXApp, Platform}
 import scalafx.scene.Scene
+import scalafx.stage.StageStyle
 
 object Pause extends JFXApp {
+
   if(SystemTray.isSupported) {
     val root = FXMLAdapter.loadFXML("pause.fxml")
     stage = new PrimaryStage{
       resizable = false
       scene = new Scene(root)
       title = "Pause"
+      icons.add(Config.getAppIcon)
+      initStyle(StageStyle.Undecorated)
     }
-    stage.icons.add(Config.getAppIcon)
 
     JFXApp.AutoShow = true
     Platform.implicitExit = false
-    TrayAdapter.initialize
+    TrayAdapter.initialize()
   } else {
     println("No luck. System tray not available")
   }
 
-  def show = Platform.runLater(new Runnable {
+  def show(): Unit = Platform.runLater(new Runnable {
     override def run(): Unit = stage.show
   })
 
-  def hide = Platform.runLater(new Runnable {
+  def hide(): Unit = Platform.runLater(new Runnable {
     override def run(): Unit = stage.hide
   })
 }
