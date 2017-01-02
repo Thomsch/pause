@@ -58,7 +58,7 @@
    <Separator prefWidth="200.0" />
    <BorderPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="21.0" prefWidth="318.0" VBox.vgrow="NEVER">
        <left>
-           <Label text="v0.0" BorderPane.alignment="CENTER" />
+           <Label text="v0.5" BorderPane.alignment="CENTER" />
        </left>
 
        <right>
