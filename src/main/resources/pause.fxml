@@ -11,7 +11,7 @@
       <right>
          <Button id="exit-button" alignment="CENTER" focusTraversable="false" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" onMouseClicked="#onMouseClickedExit" prefHeight="25.0" prefWidth="25.0" text="x" textAlignment="CENTER" textOverrun="CLIP">
             <tooltip>
-               <Tooltip text="Click to hide&#10;Shift-click to close" />
+               <Tooltip text="Click to hide this window&#10;Shift-click to close the program" />
             </tooltip></Button>
       </right>
       <left>
@@ -58,7 +58,7 @@
    <Separator prefWidth="200.0" />
    <BorderPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="21.0" prefWidth="318.0" VBox.vgrow="NEVER">
        <left>
-           <Label text="v0.5" BorderPane.alignment="CENTER" />
+           <Label text="v0.6" BorderPane.alignment="CENTER" />
        </left>
 
        <right>

@@ -29,6 +29,7 @@ object Actions {
   def cancelTimer(): Unit = notificationTimer.cancel()
 
   def closeApplication() : Unit = {
+    notificationTimer.stop()
     Actions.cancelTimer()
     TrayAdapter.removeIcon()
     Platform.exit()
