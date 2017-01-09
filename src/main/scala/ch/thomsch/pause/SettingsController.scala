@@ -1,9 +1,11 @@
 package ch.thomsch.pause
 
+import java.awt.Desktop
+import java.net.URL
 import java.util.concurrent.Executors
 import javafx.fxml.FXML
 
-import scalafx.scene.control.{ProgressIndicator, TextField, ToggleButton}
+import scalafx.scene.control.{Hyperlink, ProgressIndicator, TextField, ToggleButton}
 import scalafx.scene.input.MouseEvent
 import scalafxml.core.macros.sfxml
 
@@ -13,7 +15,8 @@ import scalafxml.core.macros.sfxml
 @sfxml
 class SettingsController(@FXML private val progress: ProgressIndicator,
                          @FXML private val timeField: TextField,
-                         @FXML private val onOffButton: ToggleButton) {
+                         @FXML private val onOffButton: ToggleButton,
+                         @FXML private val gitHubLink: Hyperlink) {
 
   var x : Double = 0
   var y : Double = 0
@@ -73,5 +76,13 @@ class SettingsController(@FXML private val progress: ProgressIndicator,
   @FXML
   def onAboutActionClick(event: scalafx.event.ActionEvent) {
     About.createUI.show()
+  }
+
+  @FXML
+  def onGitHubLinkClick(event: scalafx.event.ActionEvent): Unit = {
+    val desktop : Desktop = Desktop.getDesktop
+    if(desktop != null) {
+      desktop.browse(new URL(gitHubLink.getText).toURI)
+    }
   }
 }
