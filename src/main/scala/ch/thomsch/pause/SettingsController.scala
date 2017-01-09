@@ -5,8 +5,9 @@ import java.net.URL
 import java.util.concurrent.Executors
 import javafx.fxml.FXML
 
-import scalafx.scene.control.{Hyperlink, ProgressIndicator, TextField, ToggleButton}
-import scalafx.scene.input.MouseEvent
+import scalafx.event.ActionEvent
+import scalafx.scene.control._
+import scalafx.scene.input.{KeyCode, KeyEvent, MouseEvent}
 import scalafxml.core.macros.sfxml
 
 /**
@@ -31,6 +32,7 @@ class SettingsController(@FXML private val progress: ProgressIndicator,
   def inputError = {
     println("Cannot start timer, input error was made")
     onOffButton.delegate.setSelected(false)
+    timeField.setDisable(false)
 
     Executors.newCachedThreadPool().submit(new Runnable {
       override def run(): Unit = {
@@ -83,6 +85,15 @@ class SettingsController(@FXML private val progress: ProgressIndicator,
     val desktop : Desktop = Desktop.getDesktop
     if(desktop != null) {
       desktop.browse(new URL(gitHubLink.getText).toURI)
+    }
+  }
+
+  @FXML
+  def onEnterPressed(event : KeyEvent) : Unit = {
+    if(event.code == KeyCode.Enter) {
+      onOffButton.delegate.setSelected(!onOffButton.delegate.isSelected)
+      onButtonAction(new ActionEvent(event.source, event.target))
+      event.consume()
     }
   }
 }

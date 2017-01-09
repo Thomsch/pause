@@ -45,6 +45,7 @@ object Pause extends JFXApp {
       title = "Pause"
       icons.add(Config.getAppIcon)
       initStyle(StageStyle.Undecorated)
+      root.requestFocus()
     }
 
     JFXApp.AutoShow = true

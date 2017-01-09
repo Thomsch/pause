@@ -6,7 +6,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
-<VBox alignment="CENTER" prefHeight="101.0" prefWidth="318.0" spacing="5.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.thomsch.pause.SettingsController">
+<VBox alignment="CENTER" onKeyPressed="#onEnterPressed" prefHeight="101.0" prefWidth="318.0" spacing="5.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.thomsch.pause.SettingsController">
    <BorderPane id="window-bar" maxHeight="26.0" minHeight="26.0" onMouseDragged="#onMouseDraggedWindowBar" onMousePressed="#onMousePressedWindowBar" prefHeight="25.0" prefWidth="200.0" VBox.vgrow="NEVER">
       <right>
          <Button id="exit-button" alignment="CENTER" focusTraversable="false" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" onMouseClicked="#onMouseClickedExit" prefHeight="25.0" prefWidth="25.0" text="x" textAlignment="CENTER" textOverrun="CLIP">
@@ -62,7 +62,7 @@
        </left>
 
        <right>
-         <Hyperlink fx:id="about" onAction="#onAboutActionClick" text="About" BorderPane.alignment="CENTER" />
+         <Hyperlink fx:id="about" focusTraversable="false" onAction="#onAboutActionClick" text="About" BorderPane.alignment="CENTER" />
       </right>
 
       <padding>
