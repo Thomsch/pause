@@ -1,7 +1,20 @@
-pause
+Pause
 ===================
 
-An small application to keep your eyes off the screen from time to time.
+An small application that reminds yo to take a break from your screen.
+
+Features
+-------
+* Configurable periodic timer
+* System notification when timer completes
+* Intuitive interface
+* Background application (reduce to tray)
+
+Requirement
+-------
+* JRE 8 or later
+* Windows 7, 8, 10
+Tested on Windows 10 Home x64
 
 About
 -------
