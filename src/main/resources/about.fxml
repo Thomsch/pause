@@ -5,8 +5,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
 <?import java.net.URL?>
-<VBox alignment="CENTER" minWidth="400.0" spacing="5" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.thomsch.pause.SettingsController">
-    <WindowDecorationController text="Closes the window"/>
+<VBox alignment="CENTER" minWidth="400.0" onKeyPressed="#onEnterPressed" spacing="5" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.thomsch.pause.AboutController">
+    <WindowDecorationController text="Closes the window" />
     <Label id="about-app-title" text="PAUSE" />
     <Label id="about-licence" text="Licence : GPL3" />
     <Hyperlink id="about-github" fx:id="gitHubLink" onAction="#onGitHubLinkClick" text="https://github.com/Thomsch" />

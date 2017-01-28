@@ -10,14 +10,20 @@ import scalafx.stage.{Stage, StageStyle}
   */
 object About {
 
+  var stage : Option[Stage] = None
+
+  def hide(): Unit = stage.foreach((s : Stage) => s.hide)
+
+
   def createUI : Stage = {
     val root = FXMLAdapter.loadFXML("about.fxml")
-    new Stage{
+    stage = Some(new Stage{
       title = "Pause"
       resizable = false
       scene = new Scene(root)
       initStyle(StageStyle.Undecorated)
       icons.add(Config.getAppIcon)
-    }
+    })
+    stage.get
   }
 }

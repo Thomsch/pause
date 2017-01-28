@@ -1,13 +1,11 @@
 package ch.thomsch.pause
 
-import java.awt.Desktop
-import java.net.URL
 import java.util.concurrent.Executors
 import javafx.fxml.FXML
 
 import scalafx.event.ActionEvent
 import scalafx.scene.control._
-import scalafx.scene.input.{KeyCode, KeyEvent, MouseEvent}
+import scalafx.scene.input.{KeyCode, KeyEvent}
 import scalafxml.core.macros.sfxml
 
 /**
@@ -16,12 +14,7 @@ import scalafxml.core.macros.sfxml
 @sfxml
 class SettingsController(@FXML private val progress: ProgressIndicator,
                          @FXML private val timeField: TextField,
-                         @FXML private val onOffButton: ToggleButton,
-                         @FXML private val gitHubLink: Hyperlink) {
-
-  var x : Double = 0
-  var y : Double = 0
-
+                         @FXML private val onOffButton: ToggleButton) {
   def time : Option[Long] = try {Some(timeField.text.value.toLong)} catch {case e:NumberFormatException => None}
 
   /**
@@ -58,28 +51,8 @@ class SettingsController(@FXML private val progress: ProgressIndicator,
   }
 
   @FXML
-  def onMouseDraggedWindowBar(event: MouseEvent): Unit = {
-    Pause.stage.setX(event.getScreenX + x)
-    Pause.stage.setY(event.getScreenY + y)
-  }
-
-  @FXML
-  def onMousePressedWindowBar(event: MouseEvent): Unit = {
-    x = Pause.stage.getX - event.getScreenX
-    y = Pause.stage.getY - event.getScreenY
-  }
-
-  @FXML
   def onAboutActionClick(event: scalafx.event.ActionEvent) {
     About.createUI.show()
-  }
-
-  @FXML
-  def onGitHubLinkClick(event: scalafx.event.ActionEvent): Unit = {
-    val desktop : Desktop = Desktop.getDesktop
-    if(desktop != null) {
-      desktop.browse(new URL(gitHubLink.getText).toURI)
-    }
   }
 
   @FXML
@@ -88,6 +61,6 @@ class SettingsController(@FXML private val progress: ProgressIndicator,
       onOffButton.delegate.setSelected(!onOffButton.delegate.isSelected)
       onButtonAction(new ActionEvent(event.source, event.target))
       event.consume()
-    }
+    } else if(event.code == KeyCode.Escape) if(event.isShiftDown) Actions.closeApplication() else Pause.hide()
   }
 }
