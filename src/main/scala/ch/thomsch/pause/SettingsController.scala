@@ -58,12 +58,6 @@ class SettingsController(@FXML private val progress: ProgressIndicator,
   }
 
   @FXML
-  def onMouseClickedExit(event: MouseEvent): Unit = {
-    if(event.isShiftDown) Actions.closeApplication()
-    else Pause.hide()
-  }
-
-  @FXML
   def onMouseDraggedWindowBar(event: MouseEvent): Unit = {
     Pause.stage.setX(event.getScreenX + x)
     Pause.stage.setY(event.getScreenY + y)

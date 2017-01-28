@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import ch.thomsch.pause.WindowDecorationController?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
 <?import java.net.URL?>
-<VBox alignment="CENTER" spacing="5" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.thomsch.pause.SettingsController">
-   <children>
-       <Label id="about-app-title" text="PAUSE" />
-       <Label id="about-licence" text="Licence : GPL3" />
-       <Hyperlink id="about-github" fx:id="gitHubLink" onAction="#onGitHubLinkClick" text="https://github.com/Thomsch" />
-   </children>
-
+<VBox alignment="CENTER" minWidth="400.0" spacing="5" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.thomsch.pause.SettingsController">
+    <WindowDecorationController text="Closes the window"/>
+    <Label id="about-app-title" text="PAUSE" />
+    <Label id="about-licence" text="Licence : GPL3" />
+    <Hyperlink id="about-github" fx:id="gitHubLink" onAction="#onGitHubLinkClick" text="https://github.com/Thomsch" />
     <stylesheets>
         <URL value="@/stylesheet.css" />
     </stylesheets>
-   <padding>
-      <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
-   </padding>
 </VBox>
