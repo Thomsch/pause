@@ -1,4 +1,4 @@
-package ch.thomsch.pause
+package ch.thomsch.pause.time
 
 import java.util.concurrent.{ExecutorService, Executors}
 import javafx.beans.property.DoubleProperty

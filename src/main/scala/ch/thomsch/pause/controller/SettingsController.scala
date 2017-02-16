@@ -1,12 +1,14 @@
-package ch.thomsch.pause
+package ch.thomsch.pause.controller
 
-import java.awt.Desktop
-import java.net.URL
+import java.io.IOException
 import java.util.concurrent.Executors
 import javafx.fxml.FXML
 
-import scalafx.scene.control.{Hyperlink, ProgressIndicator, TextField, ToggleButton}
-import scalafx.scene.input.MouseEvent
+import ch.thomsch.pause.{About, Actions, Pause}
+
+import scalafx.event.ActionEvent
+import scalafx.scene.control._
+import scalafx.scene.input.{KeyCode, KeyEvent}
 import scalafxml.core.macros.sfxml
 
 /**
@@ -15,12 +17,7 @@ import scalafxml.core.macros.sfxml
 @sfxml
 class SettingsController(@FXML private val progress: ProgressIndicator,
                          @FXML private val timeField: TextField,
-                         @FXML private val onOffButton: ToggleButton,
-                         @FXML private val gitHubLink: Hyperlink) {
-
-  var x : Double = 0
-  var y : Double = 0
-
+                         @FXML private val onOffButton: ToggleButton) {
   def time : Option[Long] = try {Some(timeField.text.value.toLong)} catch {case e:NumberFormatException => None}
 
   /**
@@ -31,6 +28,7 @@ class SettingsController(@FXML private val progress: ProgressIndicator,
   def inputError = {
     println("Cannot start timer, input error was made")
     onOffButton.delegate.setSelected(false)
+    timeField.setDisable(false)
 
     Executors.newCachedThreadPool().submit(new Runnable {
       override def run(): Unit = {
@@ -56,33 +54,20 @@ class SettingsController(@FXML private val progress: ProgressIndicator,
   }
 
   @FXML
-  def onMouseClickedExit(event: MouseEvent): Unit = {
-    if(event.isShiftDown) Actions.closeApplication()
-    else Pause.hide()
-  }
-
-  @FXML
-  def onMouseDraggedWindowBar(event: MouseEvent): Unit = {
-    Pause.stage.setX(event.getScreenX + x)
-    Pause.stage.setY(event.getScreenY + y)
-  }
-
-  @FXML
-  def onMousePressedWindowBar(event: MouseEvent): Unit = {
-    x = Pause.stage.getX - event.getScreenX
-    y = Pause.stage.getY - event.getScreenY
-  }
-
-  @FXML
   def onAboutActionClick(event: scalafx.event.ActionEvent) {
-    About.createUI.show()
+    try {
+      About.createUI.show()
+    } catch {
+      case _ : IOException => Pause.showErrorMessage("We are sorry, this window is not available for now : The program cannot find the file about.fxml.")
+    }
   }
 
   @FXML
-  def onGitHubLinkClick(event: scalafx.event.ActionEvent): Unit = {
-    val desktop : Desktop = Desktop.getDesktop
-    if(desktop != null) {
-      desktop.browse(new URL(gitHubLink.getText).toURI)
-    }
+  def onEnterPressed(event : KeyEvent) : Unit = {
+    if(event.code == KeyCode.Enter) {
+      onOffButton.delegate.setSelected(!onOffButton.delegate.isSelected)
+      onButtonAction(new ActionEvent(event.source, event.target))
+      event.consume()
+    } else if(event.code == KeyCode.Escape) if(event.isShiftDown) Actions.closeApplication() else Pause.hide()
   }
 }
