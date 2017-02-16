@@ -1,4 +1,4 @@
-package ch.thomsch.pause
+package ch.thomsch.pause.controller
 
 import java.io.IOException
 import javafx.fxml.{FXML, FXMLLoader}
@@ -6,6 +6,8 @@ import javafx.scene.control.{Button, TextField}
 import javafx.scene.input.MouseEvent
 import javafx.scene.layout.VBox
 import javafx.stage.Window
+
+import ch.thomsch.pause.Actions
 
 /**
   * @author Thomsch

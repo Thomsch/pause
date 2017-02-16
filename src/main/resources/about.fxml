@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import ch.thomsch.pause.WindowDecorationController?>
+<?import ch.thomsch.pause.controller.WindowDecorationController?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
 <?import java.net.URL?>
-<VBox alignment="CENTER" minWidth="400.0" onKeyPressed="#onEnterPressed" spacing="5" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.thomsch.pause.AboutController">
+<VBox alignment="CENTER" minWidth="400.0" onKeyPressed="#onEnterPressed" spacing="5" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.thomsch.pause.controller.AboutController">
     <WindowDecorationController text="Closes the window" />
     <Label id="about-app-title" text="PAUSE" />
     <Label id="about-licence" text="Licence : GPL3" />

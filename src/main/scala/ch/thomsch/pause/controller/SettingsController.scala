@@ -1,7 +1,10 @@
-package ch.thomsch.pause
+package ch.thomsch.pause.controller
 
+import java.io.IOException
 import java.util.concurrent.Executors
 import javafx.fxml.FXML
+
+import ch.thomsch.pause.{About, Actions, Pause}
 
 import scalafx.event.ActionEvent
 import scalafx.scene.control._
@@ -52,7 +55,11 @@ class SettingsController(@FXML private val progress: ProgressIndicator,
 
   @FXML
   def onAboutActionClick(event: scalafx.event.ActionEvent) {
-    About.createUI.show()
+    try {
+      About.createUI.show()
+    } catch {
+      case _ : IOException => Pause.showErrorMessage("We are sorry, this window is not available for now : The program cannot find the file about.fxml.")
+    }
   }
 
   @FXML

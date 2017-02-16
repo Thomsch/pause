@@ -6,6 +6,7 @@ import java.awt.event.{ActionEvent, ActionListener}
 import scalafx.stage.Stage
 
 /**
+  * The application access the tray from here. It offers functionalities and hides the underlying awt tray system.
   * @author Thomsch
   */
 object TrayAdapter {
@@ -16,7 +17,7 @@ object TrayAdapter {
   var stage : Stage = null
   val tray : SystemTray = SystemTray.getSystemTray
 
-  def initialize() = {
+  def initialize(): Unit = {
     val exit: MenuItem = new MenuItem("Exit")
     val controls: MenuItem = new MenuItem("Settings...")
     controls.setFont(Font.decode(null).deriveFont(Font.BOLD))
@@ -41,11 +42,7 @@ object TrayAdapter {
     controls.addActionListener(settingsListener)
     exit.addActionListener(listener)
 
-    try{
-      tray.add(trayIcon)
-    }catch {
-      case e : Exception => System.err.println("Can't add to tray")
-    }
+    tray.add(trayIcon)
   }
 
   def removeIcon(): Unit = {

@@ -2,10 +2,12 @@ package ch.thomsch.pause
 
 import javafx.beans.property.DoubleProperty
 
+import ch.thomsch.pause.time.NotificationTimer
+
 import scalafx.application.Platform
 
 /**
-  * Created by Thomsch on 28.12.2016.
+  * @author Thomsch
   */
 object Actions {
 

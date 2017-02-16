@@ -1,6 +1,8 @@
-package ch.thomsch.pause
+package ch.thomsch.pause.time
 
 import javafx.beans.property.DoubleProperty
+
+import ch.thomsch.pause.TrayAdapter
 
 /**
   * @author Thomsch

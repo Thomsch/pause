@@ -1,8 +1,10 @@
-package ch.thomsch.pause
+package ch.thomsch.pause.controller
 
 import java.awt.Desktop
 import java.net.URL
 import javafx.fxml.FXML
+
+import ch.thomsch.pause.About
 
 import scalafx.scene.control.Hyperlink
 import scalafx.scene.input.{KeyCode, KeyEvent}
@@ -25,7 +27,9 @@ class AboutController(@FXML private val gitHubLink: Hyperlink) {
   def onGitHubLinkClick(event: scalafx.event.ActionEvent): Unit = {
     val desktop : Desktop = Desktop.getDesktop
     if(desktop != null) {
-      desktop.browse(new URL(gitHubLink.getText).toURI)
+      try {
+        desktop.browse(new URL(gitHubLink.getText).toURI)
+      }
     }
   }
 }
