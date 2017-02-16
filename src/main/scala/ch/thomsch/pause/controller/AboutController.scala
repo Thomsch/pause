@@ -27,9 +27,7 @@ class AboutController(@FXML private val gitHubLink: Hyperlink) {
   def onGitHubLinkClick(event: scalafx.event.ActionEvent): Unit = {
     val desktop : Desktop = Desktop.getDesktop
     if(desktop != null) {
-      try {
-        desktop.browse(new URL(gitHubLink.getText).toURI)
-      }
+      desktop.browse(new URL(gitHubLink.getText).toURI)
     }
   }
 }
