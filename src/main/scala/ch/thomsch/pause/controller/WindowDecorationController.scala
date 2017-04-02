@@ -7,7 +7,7 @@ import javafx.scene.input.MouseEvent
 import javafx.scene.layout.VBox
 import javafx.stage.Window
 
-import ch.thomsch.pause.Actions
+import ch.thomsch.pause.{Actions, ControllerRegister}
 
 /**
   * @author Thomsch
@@ -54,7 +54,10 @@ class WindowDecorationController() extends VBox {
   def setText(value : String): Unit = exitButton.getTooltip.setText(value)
 
   def getIsMainWindow: Boolean = mainWindow
-  def setIsMainWindow(value : Boolean): Unit = mainWindow = value
+  def setIsMainWindow(value : Boolean): Unit = {
+    mainWindow = value
+    if(mainWindow) ControllerRegister.mainWindowController = this
+  }
 
   @FXML
   def onMouseClickedExit(event: MouseEvent): Unit = {

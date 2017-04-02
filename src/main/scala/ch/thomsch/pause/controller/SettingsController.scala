@@ -4,7 +4,7 @@ import java.io.IOException
 import java.util.concurrent.Executors
 import javafx.fxml.FXML
 
-import ch.thomsch.pause.{About, Actions, Pause}
+import ch.thomsch.pause.{About, Actions, ControllerRegister, Pause}
 
 import scalafx.event.ActionEvent
 import scalafx.scene.control._
@@ -63,11 +63,30 @@ class SettingsController(@FXML private val progress: ProgressIndicator,
   }
 
   @FXML
-  def onEnterPressed(event : KeyEvent) : Unit = {
-    if(event.code == KeyCode.Enter) {
-      onOffButton.delegate.setSelected(!onOffButton.delegate.isSelected)
-      onButtonAction(new ActionEvent(event.source, event.target))
-      event.consume()
-    } else if(event.code == KeyCode.Escape) if(event.isShiftDown) Actions.closeApplication() else Pause.hide()
+  def onKeyboardEventPressed(event : KeyEvent) : Unit = {
+
+    event.code match {
+      case KeyCode.Enter =>
+        onOffButton.delegate.setSelected(!onOffButton.delegate.isSelected)
+        onButtonAction(new ActionEvent(event.source, event.target))
+        event.consume()
+      case KeyCode.Escape =>
+        if(event.isShiftDown) Actions.closeApplication() else Pause.hide()
+
+      case KeyCode.Shift =>
+        if(ControllerRegister.mainWindowController != null) ControllerRegister.mainWindowController.exitButton.setStyle("-fx-background-color: #9E3146")
+
+      case _ =>
+    }
   }
+
+  @FXML
+  def onKeyboardEventReleased(event : KeyEvent) : Unit = {
+    event.code match {
+      case KeyCode.Shift =>
+        if(ControllerRegister.mainWindowController != null) ControllerRegister.mainWindowController.exitButton.setStyle("-fx-background-color: #559e83")
+      case _ =>
+    }
+  }
+
 }
