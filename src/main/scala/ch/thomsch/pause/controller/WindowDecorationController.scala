@@ -12,7 +12,7 @@ import ch.thomsch.pause.{Actions, ControllerRegister}
 /**
   * @author Thomsch
   */
-class WindowDecorationController() extends VBox {
+class WindowDecorationController extends VBox {
 
   @FXML var exitButton: Button = _
   @FXML var textField : TextField = _
