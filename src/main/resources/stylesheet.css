@@ -70,3 +70,7 @@
 -fx-background-color:#335e4e;
 }
 
+#exit-button:shift, #exit-button:hover:shift {
+-fx-background-color:#9E3146;
+}
+

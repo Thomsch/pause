@@ -20,6 +20,10 @@ class SettingsController(@FXML private val progress: ProgressIndicator,
                          @FXML private val onOffButton: ToggleButton) {
   def time : Option[Long] = try {Some(timeField.text.value.toLong)} catch {case e:NumberFormatException => None}
 
+  import javafx.css.PseudoClass
+
+  val SHIFT_PSEUDO_CLASS = PseudoClass.getPseudoClass("shift")
+
   /**
     * Warn the user that his input is incorrect.
     *
@@ -74,7 +78,7 @@ class SettingsController(@FXML private val progress: ProgressIndicator,
         if(event.isShiftDown) Actions.closeApplication() else Pause.hide()
 
       case KeyCode.Shift =>
-        if(ControllerRegister.mainWindowController != null) ControllerRegister.mainWindowController.exitButton.setStyle("-fx-background-color: #9E3146")
+        if(ControllerRegister.mainWindowController != null) ControllerRegister.mainWindowController.exitButton.pseudoClassStateChanged(SHIFT_PSEUDO_CLASS, true)
 
       case _ =>
     }
@@ -84,7 +88,8 @@ class SettingsController(@FXML private val progress: ProgressIndicator,
   def onKeyboardEventReleased(event : KeyEvent) : Unit = {
     event.code match {
       case KeyCode.Shift =>
-        if(ControllerRegister.mainWindowController != null) ControllerRegister.mainWindowController.exitButton.setStyle("-fx-background-color: #559e83")
+        if(ControllerRegister.mainWindowController != null) ControllerRegister.mainWindowController.exitButton.pseudoClassStateChanged(SHIFT_PSEUDO_CLASS, false)
+
       case _ =>
     }
   }
