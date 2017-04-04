@@ -4,7 +4,7 @@ import java.io.IOException
 import java.util.concurrent.Executors
 import javafx.fxml.FXML
 
-import ch.thomsch.pause.{About, Actions, ControllerRegister, Pause}
+import ch.thomsch.pause.{About, Actions, Pause}
 
 import scalafx.event.ActionEvent
 import scalafx.scene.control._
@@ -78,7 +78,7 @@ class SettingsController(@FXML private val progress: ProgressIndicator,
         if(event.isShiftDown) Actions.closeApplication() else Pause.hide()
 
       case KeyCode.Shift =>
-        if(ControllerRegister.mainWindowController != null) ControllerRegister.mainWindowController.exitButton.pseudoClassStateChanged(SHIFT_PSEUDO_CLASS, true)
+        MainWindowDecoration.instance.foreach(mainWindow => mainWindow.exitButton.pseudoClassStateChanged(SHIFT_PSEUDO_CLASS, true))
 
       case _ =>
     }
@@ -88,7 +88,7 @@ class SettingsController(@FXML private val progress: ProgressIndicator,
   def onKeyboardEventReleased(event : KeyEvent) : Unit = {
     event.code match {
       case KeyCode.Shift =>
-        if(ControllerRegister.mainWindowController != null) ControllerRegister.mainWindowController.exitButton.pseudoClassStateChanged(SHIFT_PSEUDO_CLASS, false)
+        MainWindowDecoration.instance.foreach(mainWindow => mainWindow.exitButton.pseudoClassStateChanged(SHIFT_PSEUDO_CLASS, false))
 
       case _ =>
     }
