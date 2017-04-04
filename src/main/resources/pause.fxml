@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import ch.thomsch.pause.controller.WindowDecorationController?>
+<?import ch.thomsch.pause.controller.MainWindowDecoration?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
 <VBox alignment="CENTER" onKeyReleased="#onKeyboardEventReleased" onKeyPressed="#onKeyboardEventPressed" prefHeight="101.0" prefWidth="318.0" spacing="5.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.thomsch.pause.controller.SettingsController">
-   <WindowDecorationController isMainWindow="true" text="Click to hide this window&#10;Shift-click to close the program" />
+   <MainWindowDecoration text="Click to hide this window&#10;Shift-click to close the program" />
    <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
       <children>
          <BorderPane prefHeight="200.0" prefWidth="200.0">

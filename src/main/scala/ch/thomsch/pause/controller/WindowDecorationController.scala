@@ -7,20 +7,16 @@ import javafx.scene.input.MouseEvent
 import javafx.scene.layout.VBox
 import javafx.stage.Window
 
-import ch.thomsch.pause.{Actions, ControllerRegister}
-
 /**
   * @author Thomsch
   */
-class WindowDecorationController extends VBox {
+abstract class WindowDecorationController extends VBox {
 
   @FXML var exitButton: Button = _
   @FXML var textField : TextField = _
 
   var x : Double = 0
   var y : Double = 0
-
-  var mainWindow : Boolean = false
 
   val fxmlLoader: FXMLLoader = new FXMLLoader(getClass.getResource("/window-decoration.fxml"))
   fxmlLoader.setRoot(this)
@@ -29,9 +25,7 @@ class WindowDecorationController extends VBox {
     fxmlLoader.load
   }
   catch {
-    case exception: IOException => {
-      throw new RuntimeException(exception)
-    }
+    case exception: IOException => throw new RuntimeException(exception)
   }
 
   @FXML
@@ -53,15 +47,7 @@ class WindowDecorationController extends VBox {
   def getText: String = exitButton.getTooltip.getText
   def setText(value : String): Unit = exitButton.getTooltip.setText(value)
 
-  def getIsMainWindow: Boolean = mainWindow
-  def setIsMainWindow(value : Boolean): Unit = {
-    mainWindow = value
-    if(mainWindow) ControllerRegister.mainWindowController = this
-  }
 
   @FXML
-  def onMouseClickedExit(event: MouseEvent): Unit = {
-    if(mainWindow && event.isShiftDown) Actions.closeApplication()
-    else getScene.getWindow.hide()
-  }
+  def onMouseClickedExit(event: MouseEvent): Unit
 }
