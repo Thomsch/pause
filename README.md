@@ -18,6 +18,7 @@ Requirement
 Tested on
 -------
 * Windows 10 Home x64
+* Windows 10 Pro  x64
 
 Licensing
 -------
