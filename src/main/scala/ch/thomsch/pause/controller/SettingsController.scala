@@ -1,7 +1,7 @@
 package ch.thomsch.pause.controller
 
 import java.io.IOException
-import java.util.concurrent.Executors
+import java.util.concurrent.{Executors, Future}
 import javafx.fxml.FXML
 
 import ch.thomsch.pause.{About, Actions, Pause}
@@ -18,18 +18,18 @@ import scalafxml.core.macros.sfxml
 class SettingsController(@FXML private val progress: ProgressIndicator,
                          @FXML private val timeField: TextField,
                          @FXML private val onOffButton: ToggleButton) {
-  def time : Option[Long] = try {Some(timeField.text.value.toLong)} catch {case e:NumberFormatException => None}
+  def time : Option[Long] = try {Some(timeField.text.value.toLong)} catch {case _:NumberFormatException => None}
 
   import javafx.css.PseudoClass
 
-  val SHIFT_PSEUDO_CLASS = PseudoClass.getPseudoClass("shift")
+  val SHIFT_PSEUDO_CLASS: PseudoClass = PseudoClass.getPseudoClass("shift")
 
   /**
     * Warn the user that his input is incorrect.
     *
     * @return
     */
-  def inputError = {
+  def inputError: Future[_] = {
     println("Cannot start timer, input error was made")
     onOffButton.delegate.setSelected(false)
     timeField.setDisable(false)

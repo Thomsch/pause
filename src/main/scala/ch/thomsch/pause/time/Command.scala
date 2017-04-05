@@ -15,7 +15,7 @@ class Command(private val time : Long, private val doubleProperty: DoublePropert
   private val total = time * refreshRate
   private val step = 1000 / refreshRate
 
-  def cancel() = isActive = false
+  def cancel(): Unit = isActive = false
 
   override def run(): Unit = {
 

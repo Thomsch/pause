@@ -18,7 +18,7 @@ object Actions {
     *
     * @param time The duration in minutes
     */
-  def startTimer(time: Long, progressProperty: DoubleProperty) = {
+  def startTimer(time: Long, progressProperty: DoubleProperty): Unit = {
     TrayAdapter.displayNotification("Next pause in " + time + " minutes")
 
     notificationTimer.startTimer(time, progressProperty)
