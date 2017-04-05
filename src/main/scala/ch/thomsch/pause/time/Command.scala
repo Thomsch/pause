@@ -28,7 +28,7 @@ class Command(private val time : Long, private val doubleProperty: DoublePropert
         if (isActive) doubleProperty.set(counter.toFloat / total)
       }
 
-      if (isActive) TrayAdapter.displayNotification("It's time to do a pause !")
+      if (isActive) TrayAdapter.displayNotification("It's time to take a break !")
       else println("Command " + this + " has been cancelled")
       doubleProperty.set(0.0)
     }
