@@ -10,7 +10,7 @@ scalaVersion := "2.11.8"
 // Add dependency on ScalaFX library
 libraryDependencies ++= Seq(
   "org.scalafx" %% "scalafx" % "8.0.102-R11",
-  "org.scalafx" %% "scalafxml-core-sfx8" % "0.2.2"
+  "org.scalafx" %% "scalafxml-core-sfx8" % "0.3"
 )
 
 scalacOptions ++= Seq("-unchecked", "-deprecation", "-Xcheckinit", "-encoding", "utf8", "-feature")
