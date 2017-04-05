@@ -8,7 +8,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
-<fx:root onMouseDragged="#onMouseDraggedWindowBar" onMousePressed="#onMousePressedWindowBar" type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.112">
+<fx:root onMouseDragged="#onMouseDraggedWindowBar" onMousePressed="#onMousePressedWindowBar" type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.60">
     <BorderPane id="window-bar" maxHeight="26.0" minHeight="26.0" prefHeight="25.0" prefWidth="200.0">
         <right>
             <Button id="exit-button" fx:id="exitButton" alignment="CENTER" focusTraversable="false" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" text="x" textAlignment="CENTER" textOverrun="CLIP"  onMouseClicked="#onMouseClickedExit">
