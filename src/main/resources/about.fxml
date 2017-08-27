@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import ch.thomsch.pause.controller.RegularWindowDecoration?>
+<?import ch.thomsch.pause.decoration.RegularWindowDecoration?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>

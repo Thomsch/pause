@@ -1,4 +1,4 @@
-package ch.thomsch.pause.controller
+package ch.thomsch.pause.decoration
 
 import javafx.fxml.FXML
 import javafx.scene.input.MouseEvent

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import ch.thomsch.pause.controller.MainWindowDecoration?>
+<?import ch.thomsch.pause.decoration.MainWindowDecoration?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>

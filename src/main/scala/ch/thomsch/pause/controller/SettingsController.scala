@@ -2,8 +2,10 @@ package ch.thomsch.pause.controller
 
 import java.io.IOException
 import java.util.concurrent.{Executors, Future}
+import javafx.css.PseudoClass
 import javafx.fxml.FXML
 
+import ch.thomsch.pause.decoration.MainWindowDecoration
 import ch.thomsch.pause.{About, Actions, Pause}
 
 import scalafx.event.ActionEvent
@@ -19,8 +21,6 @@ class SettingsController(@FXML private val progress: ProgressIndicator,
                          @FXML private val timeField: TextField,
                          @FXML private val onOffButton: ToggleButton) {
   def time : Option[Long] = try {Some(timeField.text.value.toLong)} catch {case _:NumberFormatException => None}
-
-  import javafx.css.PseudoClass
 
   val SHIFT_PSEUDO_CLASS: PseudoClass = PseudoClass.getPseudoClass("shift")
 
@@ -68,7 +68,6 @@ class SettingsController(@FXML private val progress: ProgressIndicator,
 
   @FXML
   def onKeyboardEventPressed(event : KeyEvent) : Unit = {
-
     event.code match {
       case KeyCode.Enter =>
         onOffButton.delegate.setSelected(!onOffButton.delegate.isSelected)

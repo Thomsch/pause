@@ -1,4 +1,4 @@
-package ch.thomsch.pause.controller
+package ch.thomsch.pause.decoration
 
 import java.io.IOException
 import javafx.fxml.{FXML, FXMLLoader}
