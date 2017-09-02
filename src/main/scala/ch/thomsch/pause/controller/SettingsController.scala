@@ -1,14 +1,14 @@
 package ch.thomsch.pause.controller
 
 import java.io.IOException
-import java.util.concurrent.{Executors, Future}
+import java.util.concurrent.{Executors, TimeUnit}
 import javafx.css.PseudoClass
 import javafx.fxml.FXML
 
+import ch.thomsch.pause._
 import ch.thomsch.pause.decoration.MainWindowDecoration
-import ch.thomsch.pause.{About, Actions, Pause}
 
-import scalafx.event.ActionEvent
+import scalafx.application.Platform
 import scalafx.scene.control._
 import scalafx.scene.input.{KeyCode, KeyEvent}
 import scalafxml.core.macros.sfxml
@@ -19,42 +19,43 @@ import scalafxml.core.macros.sfxml
 @sfxml
 class SettingsController(@FXML private val progress: ProgressIndicator,
                          @FXML private val timeField: TextField,
-                         @FXML private val onOffButton: ToggleButton) {
-  def time : Option[Long] = try {Some(timeField.text.value.toLong)} catch {case _:NumberFormatException => None}
-
+                         @FXML private val onOffButton: ToggleButton) extends TimerObserver {
   val SHIFT_PSEUDO_CLASS: PseudoClass = PseudoClass.getPseudoClass("shift")
+  val timer: Timer = Timer.timer
 
-  /**
-    * Warn the user that his input is incorrect.
-    *
-    * @return
-    */
-  def inputError: Future[_] = {
-    println("Cannot start timer, input error was made")
-    onOffButton.delegate.setSelected(false)
-    timeField.setDisable(false)
-
-    Executors.newCachedThreadPool().submit(new Runnable {
-      override def run(): Unit = {
-        timeField.setStyle("-fx-control-inner-background: red")
-        Thread.sleep(2000)
-        timeField.setStyle("")
-      }
-    })
-  }
+  timeField.setText(Config.workDuration.toString)
+  timer.addObserver(this)
 
   @FXML
   def onButtonAction(event: scalafx.event.ActionEvent) {
-    timeField.setDisable(onOffButton.delegate.isSelected)
-    if (onOffButton.delegate.isSelected) {
-      if(time.isDefined) {
-        Actions.startTimer(time.get, progress.progressProperty)
-        onOffButton.setText("On")
-      } else inputError
-    } else {
-      Actions.cancelTimer()
-      onOffButton.setText("Activate")
-    }
+    if (Timer.timer.isRunning) {
+      timer.stop()
+    } else if (time.isDefined) {
+      Config.workDuration = time.get
+      timer.start(time.get)
+    } else displayInputError()
+  }
+
+  /**
+    * Warn the user that his input is incorrect.
+    */
+  private def displayInputError(): Unit = {
+    timeField.setStyle("-fx-control-inner-background: red")
+    onOffButton.selected = false
+
+    val executor = Executors.newSingleThreadScheduledExecutor()
+    executor.schedule(new Runnable {
+      override def run(): Unit = {
+        timeField.setStyle("")
+        executor.shutdownNow()
+      }
+    }, 2, TimeUnit.SECONDS)
+  }
+
+  private def time: Option[Long] = try {
+    Some(timeField.text.value.toLong)
+  } catch {
+    case _: NumberFormatException => None
   }
 
   @FXML
@@ -62,19 +63,17 @@ class SettingsController(@FXML private val progress: ProgressIndicator,
     try {
       About.createUI.show()
     } catch {
-      case _ : IOException => Pause.showErrorMessage("We are sorry, this window is not available for now : The program cannot find the file about.fxml.")
+      case _: IOException => Pause.showErrorMessage("We are sorry, this window is not available for now : The program cannot find the file about.fxml.")
     }
   }
 
   @FXML
-  def onKeyboardEventPressed(event : KeyEvent) : Unit = {
+  def onKeyboardEventPressed(event: KeyEvent): Unit = {
     event.code match {
       case KeyCode.Enter =>
-        onOffButton.delegate.setSelected(!onOffButton.delegate.isSelected)
-        onButtonAction(new ActionEvent(event.source, event.target))
-        event.consume()
+        onOffButton.fire()
       case KeyCode.Escape =>
-        if(event.isShiftDown) Actions.closeApplication() else Pause.hide()
+        if (event.isShiftDown) Pause.closeApplication() else Pause.hide()
 
       case KeyCode.Shift =>
         MainWindowDecoration.instance.foreach(mainWindow => mainWindow.exitButton.pseudoClassStateChanged(SHIFT_PSEUDO_CLASS, true))
@@ -84,7 +83,7 @@ class SettingsController(@FXML private val progress: ProgressIndicator,
   }
 
   @FXML
-  def onKeyboardEventReleased(event : KeyEvent) : Unit = {
+  def onKeyboardEventReleased(event: KeyEvent): Unit = {
     event.code match {
       case KeyCode.Shift =>
         MainWindowDecoration.instance.foreach(mainWindow => mainWindow.exitButton.pseudoClassStateChanged(SHIFT_PSEUDO_CLASS, false))
@@ -93,4 +92,32 @@ class SettingsController(@FXML private val progress: ProgressIndicator,
     }
   }
 
+  override def onProgressUpdate(progress: Float): Unit = {
+    Platform.runLater {
+      this.progress.progressProperty().setValue(progress)
+    }
+  }
+
+  override def onTimerStarted(duration: Long): Unit = {
+    Platform.runLater {
+      timeField.setDisable(true)
+      onOffButton.setText("On")
+    }
+  }
+
+  override def onTimerFinished(): Unit = {
+    Platform.runLater(resetProgress())
+  }
+
+  private def resetProgress(): Unit = {
+    this.progress.progressProperty().setValue(0)
+  }
+
+  override def onTimerStopped(): Unit = {
+    Platform.runLater {
+      resetProgress()
+      timeField.setDisable(false)
+      onOffButton.setText("Activate")
+    }
+  }
 }

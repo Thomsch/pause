@@ -3,7 +3,7 @@ package ch.thomsch.pause.decoration
 import javafx.fxml.FXML
 import javafx.scene.input.MouseEvent
 
-import ch.thomsch.pause.Actions
+import ch.thomsch.pause.Pause
 
 /**
   * @author Thomsch
@@ -14,7 +14,7 @@ class MainWindowDecoration extends WindowDecorationController{
 
   @FXML
   override def onMouseClickedExit(event: MouseEvent): Unit = {
-    if(event.isShiftDown) Actions.closeApplication()
+    if (event.isShiftDown) Pause.closeApplication()
     else getScene.getWindow.hide()
   }
 }

@@ -28,7 +28,7 @@ object TrayAdapter {
 
     val listener : ActionListener= new ActionListener() {
       def actionPerformed(arg0 : ActionEvent ) {
-        Actions.closeApplication()
+        Pause.closeApplication()
       }
     }
 

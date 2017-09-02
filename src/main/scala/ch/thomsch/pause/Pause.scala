@@ -14,6 +14,8 @@ import scalafx.stage.StageStyle
 
 object Pause extends JFXApp {
 
+  val timer: Timer = Timer.timer
+
   if(SystemTray.isSupported) {
 
     try {
@@ -30,6 +32,7 @@ object Pause extends JFXApp {
 
       Platform.implicitExit = false
       TrayAdapter.initialize()
+      timer.addObserver(new PauseStrategy(timer))
     } catch {
       case _ : IOException =>
         JFXApp.AutoShow = false
@@ -74,5 +77,11 @@ object Pause extends JFXApp {
     }
     dialog.getDialogPane.setContent(layout)
     dialog.showAndWait()
+  }
+
+  def closeApplication(): Unit = {
+    TrayAdapter.removeIcon()
+    timer.clean()
+    Platform.exit()
   }
 }

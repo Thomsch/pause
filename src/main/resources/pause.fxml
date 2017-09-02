@@ -21,7 +21,7 @@
                 <left>
                     <HBox alignment="CENTER_LEFT" prefWidth="300.0" spacing="5.0" BorderPane.alignment="CENTER">
                         <Label text="Time between pauses is"/>
-                        <TextField fx:id="timeField" prefColumnCount="2" promptText="In minutes" text="45"/>
+                        <TextField fx:id="timeField" prefColumnCount="2" promptText="In minutes"/>
                         <Label text="minutes."/>
                     </HBox>
                 </left>
