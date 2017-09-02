@@ -25,7 +25,7 @@ object Pause extends JFXApp {
         resizable = false
         scene = new Scene(root)
         title = "Pause"
-        icons.add(Config.getAppIcon)
+        icons.add(Config.appIcon)
         initStyle(StageStyle.Undecorated)
         root.requestFocus()
       }

@@ -22,7 +22,7 @@ object About {
       resizable = false
       scene = new Scene(root)
       initStyle(StageStyle.Undecorated)
-      icons.add(Config.getAppIcon)
+      icons.add(Config.appIcon)
     })
     stage.get
   }

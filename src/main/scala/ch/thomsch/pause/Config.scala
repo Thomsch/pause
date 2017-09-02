@@ -8,5 +8,5 @@ import javafx.scene.image.Image
 object Config {
   var workDuration: Long = 45
 
-  def getAppIcon = new Image(getClass.getResourceAsStream("/icon-window.png"))
+  val appIcon = new Image(getClass.getResourceAsStream("/icon-window.png"))
 }
