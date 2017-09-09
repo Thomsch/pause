@@ -31,8 +31,8 @@ object Pause extends JFXApp {
       }
 
       Platform.implicitExit = false
-      TrayAdapter.initialize()
       timer.addObserver(new PauseStrategy(timer))
+      TrayAdapter.initialize()
     } catch {
       case _ : IOException =>
         JFXApp.AutoShow = false

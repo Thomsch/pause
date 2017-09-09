@@ -5,36 +5,43 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
-<VBox xmlns:fx="http://javafx.com/fxml/1"
-      alignment="CENTER"
-      onKeyReleased="#onKeyboardEventReleased"
-      onKeyPressed="#onKeyboardEventPressed"
-      prefHeight="101.0"
-      prefWidth="318.0"
-      spacing="5.0"
-      xmlns="http://javafx.com/javafx/8.0.60"
-      fx:controller="ch.thomsch.pause.controller.SettingsController">
+<VBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" onKeyPressed="#onKeyboardEventPressed"
+      onKeyReleased="#onKeyboardEventReleased" prefHeight="101.0" prefWidth="318.0" spacing="5.0"
+      xmlns="http://javafx.com/javafx/8.0.121" fx:controller="ch.thomsch.pause.controller.SettingsController">
     <MainWindowDecoration text="Click to hide this window&#10;Shift-click to close the program"/>
     <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
         <children>
             <BorderPane prefHeight="200.0" prefWidth="200.0">
                 <left>
-                    <HBox alignment="CENTER_LEFT" prefWidth="300.0" spacing="5.0" BorderPane.alignment="CENTER">
-                        <Label text="Time between pauses is"/>
-                        <TextField fx:id="timeField" prefColumnCount="2" promptText="In minutes"/>
-                        <Label text="minutes."/>
-                    </HBox>
+                    <VBox BorderPane.alignment="CENTER">
+                        <children>
+                            <HBox alignment="CENTER_LEFT" prefWidth="300.0" spacing="5.0">
+                                <Label text="Time between pauses is"/>
+                                <TextField fx:id="timeField" prefColumnCount="2" promptText="In minutes"/>
+                                <Label text="minutes."/>
+                            </HBox>
+                            <HBox spacing="10">
+                                <children>
+                                    <Label text="Pause behaviour"/>
+                                    <VBox>
+                                        <fx:define>
+                                            <ToggleGroup fx:id="notificationType"/>
+                                        </fx:define>
+                                        <children>
+                                            <RadioButton text="_Window" toggleGroup="$notificationType"
+                                                         userData="window"/>
+                                            <RadioButton text="_Message" toggleGroup="$notificationType"
+                                                         userData="message"/>
+                                        </children>
+                                    </VBox>
+                                </children>
+                            </HBox>
+                        </children>
+                    </VBox>
                 </left>
                 <right>
-                    <ToggleButton fx:id="onOffButton"
-                                  maxHeight="62.0"
-                                  maxWidth="62.0"
-                                  minHeight="62.0"
-                                  minWidth="62.0"
-                                  onAction="#onButtonAction"
-                                  prefHeight="62.0"
-                                  prefWidth="62.0"
-                                  text="Activate"
+                    <ToggleButton fx:id="onOffButton" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0"
+                                  onAction="#onButtonAction" prefHeight="62.0" prefWidth="62.0" text="Activate"
                                   BorderPane.alignment="CENTER"/>
                 </right>
                 <VBox.margin>
@@ -54,10 +61,7 @@
         </left>
         
         <right>
-            <Hyperlink fx:id="about"
-                       focusTraversable="false"
-                       onAction="#onAboutActionClick"
-                       text="About"
+            <Hyperlink fx:id="about" focusTraversable="false" onAction="#onAboutActionClick" text="About"
                        BorderPane.alignment="CENTER"/>
         </right>
         

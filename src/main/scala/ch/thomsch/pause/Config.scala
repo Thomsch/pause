@@ -11,4 +11,6 @@ object Config {
   var workDuration: Long = 45
 
   val appIcon = new Image(getClass.getResourceAsStream("/icon-window.png"))
+
+  var notificationType: NotificationType.Value = NotificationType.Window
 }
