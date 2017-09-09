@@ -16,8 +16,6 @@ class PauseStrategy(val timer: Timer) extends TimerObserver {
   }
 
   override def onTimerFinished(): Unit = {
-    TrayAdapter.displayNotification("It's time to take a break !")
-
     val fullScreen: Fullscreen = new Fullscreen()
     fullScreen.show()
   }
