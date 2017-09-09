@@ -11,18 +11,22 @@ class Fullscreen {
   def show(): Unit = {
     Platform.runLater {
       val root: Parent = FXMLAdapter.loadFXML("fullscreen.fxml")
-      val stage = new Stage {
-        scene = new Scene(root)
-        maximized = true
-        alwaysOnTop = true
-        scene.get().setFill(Color.Transparent)
-        initStyle(StageStyle.Transparent)
-      }
-
+      val stage: Stage = createStage(root)
       val animation = new PauseTransition(root)
+
       Fullscreen.stage = Some(stage)
       animation.play()
       stage.show()
+    }
+  }
+
+  private def createStage(root: Parent) = {
+    new Stage {
+      scene = new Scene(root)
+      maximized = true
+      alwaysOnTop = true
+      scene.get().setFill(Color.Transparent)
+      initStyle(StageStyle.Transparent)
     }
   }
 }
