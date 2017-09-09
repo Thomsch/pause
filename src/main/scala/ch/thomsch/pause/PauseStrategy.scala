@@ -12,7 +12,6 @@ class PauseStrategy(val timer: Timer) extends TimerObserver {
   }
 
   override def onTimerStarted(duration: Long): Unit = {
-    println("Timer started for " + duration + " minutes")
   }
 
   override def onTimerFinished(): Unit = {
@@ -28,6 +27,5 @@ class PauseStrategy(val timer: Timer) extends TimerObserver {
   }
 
   override def onTimerStopped(): Unit = {
-    println("Timer has been stopped")
   }
 }
