@@ -9,8 +9,8 @@ import javafx.util.Duration
   */
 class PauseTransition(val root: Parent) extends Transition {
 
-  setCycleDuration(Duration.millis(5000))
-  setInterpolator(Interpolator.EASE_IN)
+  setCycleDuration(Duration.millis(3000))
+  setInterpolator(Interpolator.EASE_OUT)
 
   override def interpolate(fraction: Double): Unit = {
     if (fraction > 0.9) stop()
