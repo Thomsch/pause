@@ -8,26 +8,32 @@ import javafx.fxml.FXML
 import ch.thomsch.pause._
 import ch.thomsch.pause.decoration.MainWindowDecoration
 
+import scala.collection.JavaConversions._
 import scalafx.application.Platform
+import scalafx.event.ActionEvent
 import scalafx.scene.control._
 import scalafx.scene.input.{KeyCode, KeyEvent}
 import scalafxml.core.macros.sfxml
-
 /**
   * @author Thomsch
   */
 @sfxml
 class SettingsController(@FXML private val progress: ProgressIndicator,
                          @FXML private val timeField: TextField,
-                         @FXML private val onOffButton: ToggleButton) extends TimerObserver {
+                         @FXML private val onOffButton: ToggleButton,
+                         @FXML private val notificationType: ToggleGroup) extends TimerObserver {
+
   val SHIFT_PSEUDO_CLASS: PseudoClass = PseudoClass.getPseudoClass("shift")
   val timer: Timer = Timer.timer
 
   timeField.setText(Config.workDuration.toString)
   timer.addObserver(this)
 
+  setSelectedNotificationType()
+  notificationType.selectedToggleProperty().addListener(new NotificationTypeChangeListener())
+
   @FXML
-  def onButtonAction(event: scalafx.event.ActionEvent) {
+  def onButtonAction(event: ActionEvent) {
     if (Timer.timer.isRunning) {
       timer.stop()
     } else if (time.isDefined) {
@@ -59,7 +65,7 @@ class SettingsController(@FXML private val progress: ProgressIndicator,
   }
 
   @FXML
-  def onAboutActionClick(event: scalafx.event.ActionEvent) {
+  def onAboutActionClick(event: ActionEvent) {
     try {
       About.createUI.show()
     } catch {
@@ -119,5 +125,13 @@ class SettingsController(@FXML private val progress: ProgressIndicator,
       timeField.setDisable(false)
       onOffButton.setText("Activate")
     }
+  }
+
+  private def setSelectedNotificationType(): Unit = {
+    notificationType.getToggles.foreach(toggle => {
+      if (toggle.getUserData.toString.toLowerCase == Config.notificationType.toString.toLowerCase) {
+        toggle.setSelected(true)
+      }
+    })
   }
 }

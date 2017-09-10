@@ -12,15 +12,20 @@ class PauseStrategy(val timer: Timer) extends TimerObserver {
   }
 
   override def onTimerStarted(duration: Long): Unit = {
-    println("Timer started for " + duration + " minutes")
   }
 
   override def onTimerFinished(): Unit = {
-    TrayAdapter.displayNotification("It's time to take a break !")
-    timer.start(Config.workDuration)
+    Config.notificationType match {
+      case NotificationType.Message =>
+        TrayAdapter.displayNotification("It's time to take a break !")
+        timer.start(Config.workDuration)
+
+      case NotificationType.Window =>
+        val fullScreen: Fullscreen = new Fullscreen()
+        fullScreen.show()
+    }
   }
 
   override def onTimerStopped(): Unit = {
-    println("Timer has been stopped")
   }
 }

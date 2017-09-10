@@ -14,6 +14,22 @@
   -fx-background-color: transparent;
 }
 
+.break-button {
+    -fx-background-color:none;
+    -fx-border-width:3px;
+    -fx-border-color:#fff;
+    -fx-padding:10 20 10 20;
+}
+
+.break-button:hover, .break-button:active {
+	-fx-background-color:#fff;
+}
+
+.break-bar {
+    -fx-background-color:rgba(69,75,77,0.1);
+}
+
+
 .hyperlink {
   -fx-focus-color: transparent;
   -fx-text-fill: #0000EE;
