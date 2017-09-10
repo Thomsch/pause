@@ -13,8 +13,8 @@
         <children>
             <BorderPane>
                 <right>
-                    <ToggleButton fx:id="onOffButton" maxHeight="62.0" maxWidth="62.0" minHeight="62.0" minWidth="62.0"
-                                  onAction="#onButtonAction" prefHeight="62.0" prefWidth="62.0" text="Activate"
+                    <ToggleButton fx:id="onOffButton" maxHeight="70.0" maxWidth="70.0" minHeight="70.0" minWidth="70.0"
+                                  onAction="#onButtonAction" prefHeight="70.0" prefWidth="70.0" text="Activate"
                                   BorderPane.alignment="CENTER"/>
                 </right>
                 <VBox.margin>
