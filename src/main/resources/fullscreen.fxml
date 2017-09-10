@@ -17,9 +17,10 @@
     <Region prefHeight="100"/>
     <HBox alignment="CENTER" prefHeight="100.0" spacing="50" styleClass="break-bar">
         <children>
-            <Button fx:id="skip" minWidth="100" onAction="#onSkip" styleClass="break-button" text="_End"/>
+            <Button fx:id="skip" minWidth="100" onAction="#onSkip" styleClass="break-button" text="_End"
+                    tooltip="Ends the current break and resume work."/>
             <Button fx:id="postpone" minWidth="100" onAction="#onPostpone" styleClass="break-button"
-                    text="_Postpone 5 minutes"/>
+                    text="_Postpone 5 minutes" tooltip="Postpone the break for 5 minutes."/>
         </children>
     </HBox>
     <stylesheets>

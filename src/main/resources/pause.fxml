@@ -15,7 +15,12 @@
                 <right>
                     <ToggleButton fx:id="onOffButton" maxHeight="70.0" maxWidth="70.0" minHeight="70.0" minWidth="70.0"
                                   onAction="#onButtonAction" prefHeight="70.0" prefWidth="70.0" text="Activate"
-                                  BorderPane.alignment="CENTER"/>
+                                  BorderPane.alignment="CENTER">
+                        <tooltip>
+                            <Tooltip
+                                    text="Starts a timer that will remind you to take a break after the time you specified."/>
+                        </tooltip>
+                    </ToggleButton>
                 </right>
                 <VBox.margin>
                     <Insets/>
@@ -33,6 +38,7 @@
                         <children>
                             <Label text="Pause behaviour" GridPane.rowIndex="1"/>
                             <VBox spacing="1.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+    
                                 <fx:define>
                                     <ToggleGroup fx:id="notificationType"/>
                                 </fx:define>
@@ -41,13 +47,27 @@
                                         <toggleGroup>
                                             <ToggleGroup fx:id="notificationType"/>
                                         </toggleGroup>
+                                        <tooltip>
+                                            <Tooltip
+                                                    text="A blocking fullscreen window will be displayed to remind you to take a break."/>
+                                        </tooltip>
                                     </RadioButton>
-                                    <RadioButton text="_Message" toggleGroup="$notificationType" userData="message"/>
+                                    <RadioButton text="_Message" toggleGroup="$notificationType" userData="message">
+                                        <tooltip>
+                                            <Tooltip
+                                                    text="A notification will be sent to remind you to take a break."/>
+                                        </tooltip>
+                                    </RadioButton>
                                 </children>
+
                             </VBox>
                             <Label text="Work duration"/>
                             <TextField fx:id="timeField" maxWidth="50.0" prefColumnCount="2" promptText="In minutes"
-                                       GridPane.columnIndex="1"/>
+                                       GridPane.columnIndex="1">
+                                <tooltip>
+                                    <Tooltip text="Defines the interval between your breaks in minutes."/>
+                                </tooltip>
+                            </TextField>
                         </children>
                         <padding>
                             <Insets right="100.0"/>
