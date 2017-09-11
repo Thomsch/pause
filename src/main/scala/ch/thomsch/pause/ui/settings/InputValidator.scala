@@ -29,7 +29,7 @@ class InputValidator(private val workDuration: TextField,
     */
   def isWorkDurationValid: Boolean = {
     try {
-      workDuration.getText.toLong >= 0
+      workDuration.getText.toLong > 0
     } catch {
       case _: NumberFormatException => false
     }
