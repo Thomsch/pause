@@ -19,7 +19,7 @@ object Pause extends JFXApp {
   if(SystemTray.isSupported) {
 
     try {
-      val root = FXMLAdapter.loadFXML("pause.fxml")
+      val root = FXMLAdapter.loadFXML("settings.fxml")
 
       stage = new PrimaryStage{
         resizable = false
@@ -36,7 +36,7 @@ object Pause extends JFXApp {
     } catch {
       case _ : IOException =>
         JFXApp.AutoShow = false
-        showErrorMessage("The program cannot find the file pause.fxml. The program will stop.")
+        showErrorMessage("The program cannot find the file settings.fxml. The program will stop.")
     }
   } else {
     JFXApp.AutoShow = false
