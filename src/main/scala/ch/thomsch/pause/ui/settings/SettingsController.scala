@@ -1,8 +1,6 @@
 package ch.thomsch.pause.ui.settings
 
 import java.io.IOException
-import java.util.concurrent.{Executors, TimeUnit}
-import javafx.css.PseudoClass
 import javafx.fxml.FXML
 
 import ch.thomsch.pause._
@@ -25,55 +23,22 @@ class SettingsController(@FXML private val progress: ProgressIndicator,
                          @FXML private val timeField: TextField,
                          @FXML private val onOffButton: ToggleButton,
                          @FXML private val notificationType: ToggleGroup) extends TimerObserver {
-  val STYLE_ERROR: PseudoClass = PseudoClass.getPseudoClass("error")
-
   val timer: Timer = Timer.timer
+  val inputValidator: InputValidator = new InputValidator(timeField, onOffButton)
 
   timeField.setText(Config.workDuration.toString)
-  timer.addObserver(this)
-
   setSelectedNotificationType()
+
+  timer.addObserver(this)
   notificationType.selectedToggleProperty().addListener(new NotificationTypeChangeListener())
 
   @FXML
   def onButtonAction(event: ActionEvent) {
     if (Timer.timer.isRunning) {
       timer.stop()
-    } else if (time.isDefined) {
-      Config.workDuration = time.get
-      timer.start(time.get)
-    } else displayInputError()
-  }
-
-
-  /**
-    * Warn the user that his input is incorrect.
-    */
-  private def displayInputError(): Unit = Platform.runLater {
-    timeField.pseudoClassStateChanged(STYLE_ERROR, true)
-    onOffButton.selected = false
-
-    val executor = Executors.newSingleThreadScheduledExecutor()
-    executor.schedule(new Runnable {
-      override def run(): Unit = {
-        Platform.runLater {
-          timeField.pseudoClassStateChanged(STYLE_ERROR, false)
-        }
-        executor.shutdownNow()
-      }
-    }, 2, TimeUnit.SECONDS)
-  }
-
-  private def time: Option[Long] = {
-    try {
-      val duration = timeField.getText.toLong
-      if (duration <= 0) {
-        None
-      } else {
-        Some(duration)
-      }
-    } catch {
-      case _: NumberFormatException => None
+    } else if (inputValidator.isWorkDurationValid) {
+      Config.workDuration = timeField.getText.toLong
+      timer.start(Config.workDuration)
     }
   }
 
