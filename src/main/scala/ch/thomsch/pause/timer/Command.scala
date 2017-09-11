@@ -1,6 +1,4 @@
-package ch.thomsch.pause.time
-
-import ch.thomsch.pause.TimerObserver
+package ch.thomsch.pause.timer
 
 import scala.collection.mutable
 

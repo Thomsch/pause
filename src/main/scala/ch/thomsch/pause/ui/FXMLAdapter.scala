@@ -1,4 +1,4 @@
-package ch.thomsch.pause
+package ch.thomsch.pause.ui
 
 import java.io.IOException
 import javafx.scene.Parent

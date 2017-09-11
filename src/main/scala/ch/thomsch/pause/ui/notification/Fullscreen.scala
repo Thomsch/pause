@@ -1,6 +1,8 @@
-package ch.thomsch.pause
+package ch.thomsch.pause.ui.notification
 
 import javafx.scene.{Parent, Scene}
+
+import ch.thomsch.pause.ui.FXMLAdapter
 
 import scalafx.Includes._
 import scalafx.application.Platform

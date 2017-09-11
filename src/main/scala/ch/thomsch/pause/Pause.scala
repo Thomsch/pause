@@ -3,6 +3,9 @@ package ch.thomsch.pause
 import java.awt.SystemTray
 import java.io.IOException
 
+import ch.thomsch.pause.timer.Timer
+import ch.thomsch.pause.ui.{FXMLAdapter, TrayAdapter}
+
 import scalafx.Includes._
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.application.{JFXApp, Platform}

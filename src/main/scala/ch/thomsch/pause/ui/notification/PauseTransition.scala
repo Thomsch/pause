@@ -1,4 +1,4 @@
-package ch.thomsch.pause
+package ch.thomsch.pause.ui.notification
 
 import javafx.animation.{Interpolator, Transition}
 import javafx.scene.Parent

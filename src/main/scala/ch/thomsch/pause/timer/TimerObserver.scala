@@ -1,7 +1,7 @@
-package ch.thomsch.pause
+package ch.thomsch.pause.timer
 
 /**
-  * Defines an observer of a [[ch.thomsch.pause.Timer]].
+  * Defines an observer of a [[Timer]].
   *
   * @author Thomsch
   */

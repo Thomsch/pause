@@ -1,9 +1,10 @@
-package ch.thomsch.pause.controller
+package ch.thomsch.pause.ui.notification
 
 import javafx.fxml.FXML
 import javafx.scene.control.Button
 
-import ch.thomsch.pause.{Config, Fullscreen, Timer}
+import ch.thomsch.pause.Config
+import ch.thomsch.pause.timer.Timer
 
 import scalafxml.core.macros.sfxml
 

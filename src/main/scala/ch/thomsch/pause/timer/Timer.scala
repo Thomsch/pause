@@ -1,8 +1,6 @@
-package ch.thomsch.pause
+package ch.thomsch.pause.timer
 
 import java.util.concurrent.{ExecutorService, Executors}
-
-import ch.thomsch.pause.time.Command
 
 import scala.collection.mutable
 

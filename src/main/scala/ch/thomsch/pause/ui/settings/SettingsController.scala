@@ -1,4 +1,4 @@
-package ch.thomsch.pause.controller
+package ch.thomsch.pause.ui.settings
 
 import java.io.IOException
 import java.util.concurrent.{Executors, TimeUnit}
@@ -6,7 +6,9 @@ import javafx.css.PseudoClass
 import javafx.fxml.FXML
 
 import ch.thomsch.pause._
-import ch.thomsch.pause.decoration.MainWindowDecoration
+import ch.thomsch.pause.timer.{Timer, TimerObserver}
+import ch.thomsch.pause.ui.about.About
+import ch.thomsch.pause.ui.decoration.MainWindowDecoration
 
 import scala.collection.JavaConversions._
 import scalafx.application.Platform

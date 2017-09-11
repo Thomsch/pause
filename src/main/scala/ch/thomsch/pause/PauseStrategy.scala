@@ -1,5 +1,9 @@
 package ch.thomsch.pause
 
+import ch.thomsch.pause.timer.{Timer, TimerObserver}
+import ch.thomsch.pause.ui.TrayAdapter
+import ch.thomsch.pause.ui.notification.Fullscreen
+
 /**
   * Defines what to do when a work session is over.
   *

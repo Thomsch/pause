@@ -1,7 +1,9 @@
-package ch.thomsch.pause
+package ch.thomsch.pause.ui
 
 import java.awt._
 import java.awt.event.{ActionEvent, ActionListener}
+
+import ch.thomsch.pause.Pause
 
 import scalafx.stage.Stage
 

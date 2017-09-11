@@ -1,5 +1,7 @@
-package ch.thomsch.pause
+package ch.thomsch.pause.ui.about
 
+import ch.thomsch.pause.Config
+import ch.thomsch.pause.ui.FXMLAdapter
 
 import scalafx.Includes._
 import scalafx.scene.Scene

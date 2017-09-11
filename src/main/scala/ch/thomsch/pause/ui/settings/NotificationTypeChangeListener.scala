@@ -1,7 +1,9 @@
-package ch.thomsch.pause
+package ch.thomsch.pause.ui.settings
 
 import javafx.beans.value.{ChangeListener, ObservableValue}
 import javafx.scene.control.Toggle
+
+import ch.thomsch.pause.{Config, NotificationType}
 
 /**
   * @author Thomsch
