@@ -16,6 +16,7 @@ import scalafx.event.ActionEvent
 import scalafx.scene.control._
 import scalafx.scene.input.{KeyCode, KeyEvent}
 import scalafxml.core.macros.sfxml
+
 /**
   * @author Thomsch
   */
@@ -47,23 +48,32 @@ class SettingsController(@FXML private val progress: ProgressIndicator,
   /**
     * Warn the user that his input is incorrect.
     */
-  private def displayInputError(): Unit = {
+  private def displayInputError(): Unit = Platform.runLater {
     timeField.setStyle("-fx-control-inner-background: red")
     onOffButton.selected = false
 
     val executor = Executors.newSingleThreadScheduledExecutor()
     executor.schedule(new Runnable {
       override def run(): Unit = {
-        timeField.setStyle("")
+        Platform.runLater {
+          timeField.setStyle("")
+        }
         executor.shutdownNow()
       }
     }, 2, TimeUnit.SECONDS)
   }
 
-  private def time: Option[Long] = try {
-    Some(timeField.text.value.toLong)
-  } catch {
-    case _: NumberFormatException => None
+  private def time: Option[Long] = {
+    try {
+      val duration = timeField.getText.toLong
+      if (duration <= 0) {
+        None
+      } else {
+        Some(duration)
+      }
+    } catch {
+      case _: NumberFormatException => None
+    }
   }
 
   @FXML
