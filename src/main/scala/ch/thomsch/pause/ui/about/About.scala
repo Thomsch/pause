@@ -18,7 +18,7 @@ object About {
 
 
   def createUI : Stage = {
-    val root = FXMLAdapter.loadFXML("views/about.fxml")
+    val root = FXMLAdapter.load("views/about.fxml")
     stage = Some(new Stage{
       title = "Pause"
       resizable = false
