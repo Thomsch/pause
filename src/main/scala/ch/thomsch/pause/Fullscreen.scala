@@ -10,7 +10,7 @@ import scalafx.stage.{Stage, StageStyle}
 class Fullscreen {
   def show(): Unit = {
     Platform.runLater {
-      val root: Parent = FXMLAdapter.loadFXML("fullscreen.fxml")
+      val root: Parent = FXMLAdapter.loadFXML("views/fullscreen.fxml")
       val stage: Stage = createStage(root)
       val animation = new PauseTransition(root)
 

@@ -18,7 +18,7 @@ abstract class WindowDecorationController extends VBox {
   var x : Double = 0
   var y : Double = 0
 
-  val fxmlLoader: FXMLLoader = new FXMLLoader(getClass.getResource("/window-decoration.fxml"))
+  val fxmlLoader: FXMLLoader = new FXMLLoader(getClass.getResource("/views/window-decoration.fxml"))
   fxmlLoader.setRoot(this)
   fxmlLoader.setController(this)
   try {

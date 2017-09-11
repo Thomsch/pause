@@ -41,7 +41,7 @@
                        preserveRatio="true"
                        BorderPane.alignment="CENTER">
                 <image>
-                    <Image url="@icon-window.png"/>
+                    <Image url="@../icons/icon-window.png"/>
                 </image>
                 <BorderPane.margin>
                     <Insets left="4.0"/>

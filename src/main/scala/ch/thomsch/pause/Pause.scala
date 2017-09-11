@@ -19,7 +19,7 @@ object Pause extends JFXApp {
   if(SystemTray.isSupported) {
 
     try {
-      val root = FXMLAdapter.loadFXML("settings.fxml")
+      val root = FXMLAdapter.loadFXML("views/settings.fxml")
 
       stage = new PrimaryStage{
         resizable = false
