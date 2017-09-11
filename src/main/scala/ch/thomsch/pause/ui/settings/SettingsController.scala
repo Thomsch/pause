@@ -2,7 +2,6 @@ package ch.thomsch.pause.ui.settings
 
 import java.io.IOException
 import java.util.concurrent.{Executors, TimeUnit}
-import javafx.css.PseudoClass
 import javafx.fxml.FXML
 
 import ch.thomsch.pause._
@@ -26,7 +25,6 @@ class SettingsController(@FXML private val progress: ProgressIndicator,
                          @FXML private val onOffButton: ToggleButton,
                          @FXML private val notificationType: ToggleGroup) extends TimerObserver {
 
-  val SHIFT_PSEUDO_CLASS: PseudoClass = PseudoClass.getPseudoClass("shift")
   val timer: Timer = Timer.timer
 
   timeField.setText(Config.workDuration.toString)
@@ -94,7 +92,7 @@ class SettingsController(@FXML private val progress: ProgressIndicator,
         if (event.isShiftDown) Pause.closeApplication() else Pause.hide()
 
       case KeyCode.Shift =>
-        MainWindowDecoration.instance.foreach(mainWindow => mainWindow.exitButton.pseudoClassStateChanged(SHIFT_PSEUDO_CLASS, true))
+        MainWindowDecoration.instance.foreach(windowDecoration => windowDecoration.exitBehaviourChanged(true))
 
       case _ =>
     }
@@ -104,7 +102,7 @@ class SettingsController(@FXML private val progress: ProgressIndicator,
   def onKeyboardEventReleased(event: KeyEvent): Unit = {
     event.code match {
       case KeyCode.Shift =>
-        MainWindowDecoration.instance.foreach(mainWindow => mainWindow.exitButton.pseudoClassStateChanged(SHIFT_PSEUDO_CLASS, false))
+        MainWindowDecoration.instance.foreach(mainWindow => mainWindow.exitBehaviourChanged(false))
 
       case _ =>
     }
