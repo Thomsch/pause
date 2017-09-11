@@ -62,7 +62,8 @@
 
                             </VBox>
                             <Label text="Work duration"/>
-                            <TextField fx:id="timeField" maxWidth="50.0" prefColumnCount="2" promptText="In minutes"
+                            <TextField fx:id="timeField" styleClass="work-duration" maxWidth="50.0" prefColumnCount="2"
+                                       promptText="In minutes"
                                        GridPane.columnIndex="1">
                                 <tooltip>
                                     <Tooltip text="Defines the interval between your breaks in minutes."/>

@@ -2,6 +2,7 @@ package ch.thomsch.pause.ui.settings
 
 import java.io.IOException
 import java.util.concurrent.{Executors, TimeUnit}
+import javafx.css.PseudoClass
 import javafx.fxml.FXML
 
 import ch.thomsch.pause._
@@ -24,6 +25,7 @@ class SettingsController(@FXML private val progress: ProgressIndicator,
                          @FXML private val timeField: TextField,
                          @FXML private val onOffButton: ToggleButton,
                          @FXML private val notificationType: ToggleGroup) extends TimerObserver {
+  val STYLE_ERROR: PseudoClass = PseudoClass.getPseudoClass("error")
 
   val timer: Timer = Timer.timer
 
@@ -43,18 +45,19 @@ class SettingsController(@FXML private val progress: ProgressIndicator,
     } else displayInputError()
   }
 
+
   /**
     * Warn the user that his input is incorrect.
     */
   private def displayInputError(): Unit = Platform.runLater {
-    timeField.setStyle("-fx-control-inner-background: red")
+    timeField.pseudoClassStateChanged(STYLE_ERROR, true)
     onOffButton.selected = false
 
     val executor = Executors.newSingleThreadScheduledExecutor()
     executor.schedule(new Runnable {
       override def run(): Unit = {
         Platform.runLater {
-          timeField.setStyle("")
+          timeField.pseudoClassStateChanged(STYLE_ERROR, false)
         }
         executor.shutdownNow()
       }
@@ -144,4 +147,5 @@ class SettingsController(@FXML private val progress: ProgressIndicator,
       }
     })
   }
+
 }
