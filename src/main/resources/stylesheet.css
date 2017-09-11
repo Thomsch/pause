@@ -4,16 +4,6 @@
   -fx-font-weight: bold;
 }
 
-.text-field {
-  -fx-font-weight: bold;
-}
-
-.text-field:disabled {
-  -fx-font-smoothing-type: gray;
-  -fx-opacity: 1.0;
-  -fx-background-color: transparent;
-}
-
 .work-duration:error {
   -fx-control-inner-background: red;
 }
