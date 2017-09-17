@@ -2,7 +2,9 @@ Pause
 ===================
 Pause allows you to set a timer to remind you to take a break from your computer or whatever you are doing. The timer will restart itself automatically when the time is up unless you stop it or close the application.
 
-![Showcase of the application](showcase.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Thomsch/pause/master/showcase.png" alt="Showcase of the app"/>
+</p>
 
 Features
 -------
