@@ -1,10 +1,8 @@
-package ch.thomsch.pause.controller
+package ch.thomsch.pause.ui.about
 
 import java.awt.Desktop
 import java.net.URL
 import javafx.fxml.FXML
-
-import ch.thomsch.pause.About
 
 import scalafx.scene.control.Hyperlink
 import scalafx.scene.input.{KeyCode, KeyEvent}

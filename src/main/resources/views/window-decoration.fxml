@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<fx:root xmlns:fx="http://javafx.com/fxml/1"
+         onMouseDragged="#onMouseDraggedWindowBar"
+         onMousePressed="#onMousePressedWindowBar"
+         type="javafx.scene.layout.VBox"
+         xmlns="http://javafx.com/javafx/8.0.60">
+    <BorderPane id="window-bar" maxHeight="26.0" minHeight="26.0" prefHeight="25.0" prefWidth="200.0">
+        <right>
+            <Button id="exit-button"
+                    fx:id="exitButton"
+                    alignment="CENTER"
+                    focusTraversable="false"
+                    maxHeight="25.0"
+                    maxWidth="25.0"
+                    minHeight="25.0"
+                    minWidth="25.0"
+                    prefHeight="25.0"
+                    prefWidth="25.0"
+                    text="x"
+                    textAlignment="CENTER"
+                    textOverrun="CLIP"
+                    onMouseClicked="#onMouseClickedExit">
+                <tooltip>
+                    <Tooltip text="Click to hide this window&#10;Shift-click to close the program"/>
+                </tooltip>
+            </Button>
+        </right>
+        <left>
+            <ImageView fitHeight="16.0"
+                       fitWidth="16.0"
+                       pickOnBounds="true"
+                       preserveRatio="true"
+                       BorderPane.alignment="CENTER">
+                <image>
+                    <Image url="@../icons/icon-window.png"/>
+                </image>
+                <BorderPane.margin>
+                    <Insets left="4.0"/>
+                </BorderPane.margin>
+            </ImageView>
+        </left>
+        <center>
+            <Label id="decoration-title" text="Pause" BorderPane.alignment="CENTER_LEFT">
+                <BorderPane.margin>
+                    <Insets left="5.0"/>
+                </BorderPane.margin>
+            </Label>
+        </center>
+    </BorderPane>
+    <stylesheets>
+        <URL value="@/stylesheet.css"/>
+    </stylesheets>
+</fx:root>

@@ -1,4 +1,4 @@
-package ch.thomsch.pause.controller
+package ch.thomsch.pause.ui.decoration
 
 import java.io.IOException
 import javafx.fxml.{FXML, FXMLLoader}
@@ -7,12 +7,10 @@ import javafx.scene.input.MouseEvent
 import javafx.scene.layout.VBox
 import javafx.stage.Window
 
-import ch.thomsch.pause.Actions
-
 /**
   * @author Thomsch
   */
-class WindowDecorationController() extends VBox {
+abstract class WindowDecorationController extends VBox {
 
   @FXML var exitButton: Button = _
   @FXML var textField : TextField = _
@@ -20,18 +18,14 @@ class WindowDecorationController() extends VBox {
   var x : Double = 0
   var y : Double = 0
 
-  var mainWindow : Boolean = false
-
-  val fxmlLoader: FXMLLoader = new FXMLLoader(getClass.getResource("/window-decoration.fxml"))
+  val fxmlLoader: FXMLLoader = new FXMLLoader(getClass.getResource("/views/window-decoration.fxml"))
   fxmlLoader.setRoot(this)
   fxmlLoader.setController(this)
   try {
     fxmlLoader.load
   }
   catch {
-    case exception: IOException => {
-      throw new RuntimeException(exception)
-    }
+    case exception: IOException => throw new RuntimeException(exception)
   }
 
   @FXML
@@ -53,12 +47,7 @@ class WindowDecorationController() extends VBox {
   def getText: String = exitButton.getTooltip.getText
   def setText(value : String): Unit = exitButton.getTooltip.setText(value)
 
-  def getIsMainWindow: Boolean = mainWindow
-  def setIsMainWindow(value : Boolean): Unit = mainWindow = value
 
   @FXML
-  def onMouseClickedExit(event: MouseEvent): Unit = {
-    if(mainWindow && event.isShiftDown) Actions.closeApplication()
-    else getScene.getWindow.hide()
-  }
+  def onMouseClickedExit(event: MouseEvent): Unit
 }

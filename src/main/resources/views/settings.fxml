@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import ch.thomsch.pause.ui.decoration.MainWindowDecoration?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" onKeyPressed="#onKeyboardEventPressed"
+      onKeyReleased="#onKeyboardEventReleased" spacing="5.0" xmlns="http://javafx.com/javafx/8.0.121"
+      fx:controller="ch.thomsch.pause.ui.settings.SettingsController">
+    <MainWindowDecoration text="Click to hide this window&#10;Shift-click to close the program"/>
+    <VBox spacing="10.0">
+        <children>
+            <BorderPane>
+                <right>
+                    <ToggleButton fx:id="onOffButton" maxHeight="70.0" maxWidth="70.0" minHeight="70.0" minWidth="70.0"
+                                  onAction="#onButtonAction" prefHeight="70.0" prefWidth="70.0" text="Activate"
+                                  BorderPane.alignment="CENTER">
+                        <tooltip>
+                            <Tooltip
+                                    text="Starts a timer that will remind you to take a break after the time you specified."/>
+                        </tooltip>
+                    </ToggleButton>
+                </right>
+                <VBox.margin>
+                    <Insets/>
+                </VBox.margin>
+                <left>
+                    <GridPane hgap="5.0" vgap="5.0" BorderPane.alignment="CENTER">
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"/>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"/>
+                        </columnConstraints>
+                        <rowConstraints>
+                            <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+                            <RowConstraints minHeight="10.0" valignment="TOP" vgrow="ALWAYS"/>
+                        </rowConstraints>
+                        <children>
+                            <Label text="Pause behaviour" GridPane.rowIndex="1"/>
+                            <VBox spacing="1.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+    
+                                <fx:define>
+                                    <ToggleGroup fx:id="notificationType"/>
+                                </fx:define>
+                                <children>
+                                    <RadioButton text="_Window" userData="window">
+                                        <toggleGroup>
+                                            <ToggleGroup fx:id="notificationType"/>
+                                        </toggleGroup>
+                                        <tooltip>
+                                            <Tooltip
+                                                    text="A blocking fullscreen window will be displayed to remind you to take a break."/>
+                                        </tooltip>
+                                    </RadioButton>
+                                    <RadioButton text="_Message" toggleGroup="$notificationType" userData="message">
+                                        <tooltip>
+                                            <Tooltip
+                                                    text="A notification will be sent to remind you to take a break."/>
+                                        </tooltip>
+                                    </RadioButton>
+                                </children>
+
+                            </VBox>
+                            <Label text="Work duration"/>
+                            <TextField fx:id="timeField" styleClass="work-duration" maxWidth="50.0" prefColumnCount="2"
+                                       promptText="In minutes"
+                                       GridPane.columnIndex="1">
+                                <tooltip>
+                                    <Tooltip text="Defines the interval between your breaks in minutes."/>
+                                </tooltip>
+                            </TextField>
+                        </children>
+                        <padding>
+                            <Insets right="100.0"/>
+                        </padding>
+                    </GridPane>
+                </left>
+            </BorderPane>
+            <ProgressBar fx:id="progress" maxWidth="Infinity" progress="0.0"/>
+        </children>
+        <padding>
+            <Insets left="10.0" right="10.0" top="10.0"/>
+        </padding>
+    </VBox>
+    <Separator prefWidth="200.0"/>
+    <BorderPane maxHeight="-Infinity" minHeight="-Infinity" VBox.vgrow="NEVER">
+        <left>
+            <Label text="v0.8" BorderPane.alignment="CENTER"/>
+        </left>
+        
+        <right>
+            <Hyperlink fx:id="about" focusTraversable="false" onAction="#onAboutActionClick" text="About"
+                       BorderPane.alignment="CENTER"/>
+        </right>
+        
+        <padding>
+            <Insets bottom="5.0" left="10.0" right="10.0"/>
+        </padding>
+    </BorderPane>
+    <stylesheets>
+        <URL value="@/stylesheet.css"/>
+    </stylesheets>
+</VBox>

@@ -3,6 +3,9 @@ package ch.thomsch.pause
 import java.awt.SystemTray
 import java.io.IOException
 
+import ch.thomsch.pause.timer.Timer
+import ch.thomsch.pause.ui.{FXMLAdapter, TrayAdapter}
+
 import scalafx.Includes._
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.application.{JFXApp, Platform}
@@ -14,26 +17,29 @@ import scalafx.stage.StageStyle
 
 object Pause extends JFXApp {
 
+  val timer: Timer = Timer.timer
+
   if(SystemTray.isSupported) {
 
     try {
-      val root = FXMLAdapter.loadFXML("pause.fxml")
+      val root = FXMLAdapter.load("views/settings.fxml")
 
       stage = new PrimaryStage{
         resizable = false
         scene = new Scene(root)
         title = "Pause"
-        icons.add(Config.getAppIcon)
+        icons.add(Config.appIcon)
         initStyle(StageStyle.Undecorated)
         root.requestFocus()
       }
 
       Platform.implicitExit = false
+      timer.addObserver(new PauseStrategy(timer))
       TrayAdapter.initialize()
     } catch {
       case _ : IOException =>
         JFXApp.AutoShow = false
-        showErrorMessage("The program cannot find the file pause.fxml. The program will stop.")
+        showErrorMessage("The program cannot find the file settings.fxml. The program will stop.")
     }
   } else {
     JFXApp.AutoShow = false
@@ -74,5 +80,11 @@ object Pause extends JFXApp {
     }
     dialog.getDialogPane.setContent(layout)
     dialog.showAndWait()
+  }
+
+  def closeApplication(): Unit = {
+    TrayAdapter.removeIcon()
+    timer.clean()
+    Platform.exit()
   }
 }

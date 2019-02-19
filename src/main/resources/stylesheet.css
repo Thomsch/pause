@@ -1,72 +1,76 @@
-.root {
-/*-fx-background-color: #5a5255;*/
-}
-
 .label {
--fx-font-smoothing-type: gray;
--fx-text-fill: #333333;
--fx-font-weight: bold;
-/*-fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );*/
-}
-
-.text-field {
--fx-font-weight: bold;
-}
-
-#window-bar{
--fx-background-color:#5a5255;
--fx-text-fill: black;
-}
-
-.text-field:disabled {
--fx-font-smoothing-type: gray;
--fx-opacity: 1.0;
--fx-background-color:transparent;
+  -fx-font-smoothing-type: gray;
+  -fx-text-fill: #333333;
+  -fx-font-weight: bold;
 }
 
 .hyperlink {
--fx-focus-color: transparent;
--fx-text-fill: #0000EE;
+  -fx-focus-color: transparent;
+  -fx-text-fill: #0000EE;
 }
 
 .hyperlink:visited {
--fx-focus-color: transparent;
--fx-text-fill: #0000EE;
--fx-underline: false;
-
+  -fx-focus-color: transparent;
+  -fx-text-fill: #0000EE;
+  -fx-underline: false;
 }
 
 .hyperlink:hover {
--fx-underline: true;
+  -fx-underline: true;
+}
+
+/* Components types */
+
+.work-duration:error {
+  -fx-control-inner-background: red;
+}
+
+.break-button {
+  -fx-background-color:none;
+  -fx-border-width:3px;
+  -fx-border-color:#fff;
+  -fx-padding:10 20 10 20;
+}
+
+.break-button:hover, .break-button:active {
+  -fx-background-color:#fff;
+}
+
+.break-bar {
+  -fx-background-color:rgba(69,75,77,0.1);
 }
 
 #about-app-title {
--fx-font: bold 50pt sans-serif;
--fx-font-smoothing-type: gray;
-/*-fx-text-fill: linear-gradient(DarkCyan, Black);*/
--fx-text-fill: #83559E;
-/*-fx-effect: dropshadow( gaussian , LightSteelBlue , 15,0.25,0,0 );*/
+  -fx-font: bold 50pt sans-serif;
+  -fx-font-smoothing-type: gray;
+  -fx-text-fill: #83559E;
 }
 
-#about-licence{
--fx-font-weight : bold
+#about-licence {
+  -fx-font-weight: bold
 }
 
-#about-github{
-/*-fx-font-weight : bold;*/
+/* Window decoration */
+
+#decoration-title {
+  -fx-text-fill: black;
 }
 
-#decoration-title{
--fx-text-fill: black;
+#window-bar {
+  -fx-background-color: #5a5255;
+  -fx-text-fill: black;
 }
-
 
 #exit-button {
--fx-font-weight: bold;
--fx-background-color:#559e83;
--fx-background-radius: 0;
-}
-#exit-button:hover {
--fx-background-color:#335e4e;
+  -fx-font-weight: bold;
+  -fx-background-color: #559e83;
+  -fx-background-radius: 0;
 }
 
+#exit-button:hover {
+  -fx-background-color: #335e4e;
+}
+
+#exit-button:shift, #exit-button:hover:shift {
+  -fx-background-color: #9E3146;
+}

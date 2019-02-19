@@ -1,7 +1,9 @@
-package ch.thomsch.pause
+package ch.thomsch.pause.ui
 
 import java.awt._
 import java.awt.event.{ActionEvent, ActionListener}
+
+import ch.thomsch.pause.Pause
 
 import scalafx.stage.Stage
 
@@ -10,10 +12,10 @@ import scalafx.stage.Stage
   * @author Thomsch
   */
 object TrayAdapter {
-  val image : Image  = Toolkit.getDefaultToolkit.getImage(getClass.getResource("/icon-tray.png"))
+  val image: Image = Toolkit.getDefaultToolkit.getImage(getClass.getResource("/icons/icon-tray.png"))
 
   var trayMenu = new PopupMenu
-  val trayIcon : TrayIcon  = new TrayIcon(image, "Pause", trayMenu)
+  val trayIcon: TrayIcon = new TrayIcon(image.getScaledInstance(16, 16, Image.SCALE_SMOOTH), "Pause", trayMenu)
   var stage : Stage = null
   val tray : SystemTray = SystemTray.getSystemTray
 
@@ -28,7 +30,7 @@ object TrayAdapter {
 
     val listener : ActionListener= new ActionListener() {
       def actionPerformed(arg0 : ActionEvent ) {
-        Actions.closeApplication()
+        Pause.closeApplication()
       }
     }
 

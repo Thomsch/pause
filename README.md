@@ -2,7 +2,9 @@ Pause
 ===================
 Pause allows you to set a timer to remind you to take a break from your computer or whatever you are doing. The timer will restart itself automatically when the time is up unless you stop it or close the application.
 
-![Showcase of the application](showcase.png)
+<p align="center">
+  <img src="https://github.com/Thomsch/pause/blob/develop/assets/showcase.png?raw=true" alt="Showcase of the app"/>
+</p>
 
 Features
 -------
@@ -18,6 +20,7 @@ Requirement
 Tested on
 -------
 * Windows 10 Home x64
+* Windows 10 Pro  x64
 
 Licensing
 -------

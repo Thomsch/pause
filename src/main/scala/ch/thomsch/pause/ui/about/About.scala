@@ -1,5 +1,7 @@
-package ch.thomsch.pause
+package ch.thomsch.pause.ui.about
 
+import ch.thomsch.pause.Config
+import ch.thomsch.pause.ui.FXMLAdapter
 
 import scalafx.Includes._
 import scalafx.scene.Scene
@@ -16,13 +18,13 @@ object About {
 
 
   def createUI : Stage = {
-    val root = FXMLAdapter.loadFXML("about.fxml")
+    val root = FXMLAdapter.load("views/about.fxml")
     stage = Some(new Stage{
       title = "Pause"
       resizable = false
       scene = new Scene(root)
       initStyle(StageStyle.Undecorated)
-      icons.add(Config.getAppIcon)
+      icons.add(Config.appIcon)
     })
     stage.get
   }
