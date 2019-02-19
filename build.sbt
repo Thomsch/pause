@@ -2,7 +2,7 @@
 name := "Pause"
 
 // Project version
-version := "0.7"
+version := "0.8"
 
 // Version of Scala used by the project
 scalaVersion := "2.11.8"
@@ -20,4 +20,4 @@ addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.fu
 // Fork a new JVM for 'run' and 'test:run', to avoid JavaFX double initialization problems
 fork := true
 
-assemblyJarName in assembly := "pause-v0.7.jar"
+assemblyJarName in assembly := "pause-v0.8.jar"

@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import ch.thomsch.pause.ui.decoration.MainWindowDecoration?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import java.net.URL?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <VBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" onKeyPressed="#onKeyboardEventPressed"
       onKeyReleased="#onKeyboardEventReleased" spacing="5.0" xmlns="http://javafx.com/javafx/8.0.121"
       fx:controller="ch.thomsch.pause.ui.settings.SettingsController">
@@ -85,7 +97,7 @@
     <Separator prefWidth="200.0"/>
     <BorderPane maxHeight="-Infinity" minHeight="-Infinity" VBox.vgrow="NEVER">
         <left>
-            <Label text="v0.7" BorderPane.alignment="CENTER"/>
+            <Label text="v0.8" BorderPane.alignment="CENTER"/>
         </left>
         
         <right>
