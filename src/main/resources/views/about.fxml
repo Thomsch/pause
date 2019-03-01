@@ -15,7 +15,7 @@
     <RegularWindowDecoration text="Closes the window"/>
     <Label id="about-app-title" text="PAUSE"/>
     <Label id="about-licence" text="Licence : GPL3"/>
-    <Hyperlink id="about-github" fx:id="gitHubLink" onAction="#onGitHubLinkClick" text="https://github.com/Thomsch"/>
+    <Hyperlink id="about-github" fx:id="gitHubLink" onAction="#onGitHubLinkClick" text="https://github.com/Thomsch/pause/"/>
     <stylesheets>
         <URL value="@/stylesheet.css"/>
     </stylesheets>
