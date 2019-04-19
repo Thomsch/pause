@@ -2,7 +2,7 @@
   "name": "pause",
   "version": "0.9.0",
   "description": "",
-  "main": "app.js",
+  "main": "src/main/app.js",
   "scripts": {
     "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
