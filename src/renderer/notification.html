@@ -1,26 +1,53 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-  </head>
-  <style type="text/css">
 
-    @keyframes start {
-      from {background-color:rgba(255, 255, 255, 0.1);}
-      to {background-color:rgba(255, 255, 255, 0.9);}
+<head>
+  <meta charset="UTF-8">
+</head>
+<style type="text/css">
+  @keyframes start {
+    from {
+      background-color: rgba(255, 255, 255, 0.1);
     }
-    body {
-       animation-name: start;
-       animation-duration: 3s;
-       animation-timing-function:ease-out;
-       animation-fill-mode:forwards;
+
+    to {
+      background-color: rgba(255, 255, 255, 0.9);
     }
-  </style>  
-  <body>
+  }
+
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+    animation-name: start;
+    animation-duration: 3s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+  }
+
+  .container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* NEW */
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+</style>
+
+<body>
+  <div class="container">
     <h1>Time to take a break</h1>
     <h2>Relax your eyes and stretch</h2>
-    <button id="resume">Resume</button>
-    <button id="postpone">Postpone</button>
-  </body>
-  <script src="notification.js"></script>
+    <div> 
+      <button id="resume">Resume</button>
+      <button id="postpone">Postpone</button>
+    </div>
+
+  </div>
+
+</body>
+<script src="notification.js"></script>
+
 </html>
