@@ -2,13 +2,20 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
   </head>
   <style type="text/css">
-    body {
-       background-color:#00009931;
+
+    @keyframes start {
+      from {background-color:rgba(255, 255, 255, 0.1);}
+      to {background-color:rgba(255, 255, 255, 0.9);}
     }
-  </style>
+    body {
+       animation-name: start;
+       animation-duration: 3s;
+       animation-timing-function:ease-out;
+       animation-fill-mode:forwards;
+    }
+  </style>  
   <body>
     <h1>I'm a notification</h1>
     <button id="resume">Resume</button>
