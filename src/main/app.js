@@ -6,6 +6,7 @@ let win
 let timer = new Timer()
 
 timer.on('tick', updateTimestamp)
+timer.on('done', onTimerEnd)
 
 app.on('ready', createWindow)
 
@@ -65,5 +66,28 @@ function createWindow () {
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     win = null
+  })
+}
+
+function onTimerEnd() {
+    let win = new BrowserWindow({ 
+      show:false,
+      frame:false,
+      transparent:true,
+      fullscreen:true,
+      alwaysOnTop:true,
+      skipTaskbar:true,
+      resizable:false,
+      minimizable:false,
+      menu: {}
+  })
+  win.loadFile('src/renderer/notification.html')
+
+  win.once('ready-to-show', () => {
+      win.show()
+  })
+
+  win.on('closed', () => {
+      win = null
   })
 }
