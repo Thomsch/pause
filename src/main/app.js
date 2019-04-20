@@ -26,6 +26,10 @@ app.on('activate', () => {
   }
 })
 
+ipcMain.on('display-notification', () => {
+  onTimerEnd()
+})
+
 ipcMain.on('resume', (event, arg) => {
   win.webContents.send("next-timer", arg)
 })

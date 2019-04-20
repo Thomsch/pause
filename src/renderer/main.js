@@ -8,7 +8,7 @@ const duration_field = document.querySelector("#duration");
 
 
 document.querySelector("#notification").addEventListener('click', function () { 
-    
+    ipcRenderer.send('display-notification')
 })
 
 document.querySelector("#start").addEventListener('click', function () { 
