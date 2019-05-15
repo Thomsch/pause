@@ -1,22 +1,22 @@
-const remote = require('electron').remote
-const { ipcRenderer } = require('electron')
+const remote = require("electron").remote
+const { ipcRenderer } = require("electron")
 
 var resume = document.querySelector("#resume")
 var postpone = document.querySelector("#postpone")
 
-resume.addEventListener('click', function () { 
-    ipcRenderer.send('resume', new Date())
+resume.addEventListener("click", function() {
+  ipcRenderer.send("resume", new Date())
 
-    closeWindow()
+  closeWindow()
 })
 
-postpone.addEventListener('click', function () { 
-    ipcRenderer.send('postpone', new Date())
+postpone.addEventListener("click", function() {
+  ipcRenderer.send("postpone", new Date())
 
-    closeWindow()
+  closeWindow()
 })
 
 function closeWindow() {
-    var window = remote.getCurrentWindow();
-    window.close(); 
+  var window = remote.getCurrentWindow()
+  window.close()
 }
