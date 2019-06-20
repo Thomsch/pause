@@ -59,6 +59,9 @@ function updateTimestamp(ms) {
 }
 
 function createWindow() {
+  if (win != null) {
+    return
+  }
   // Create the browser window.
   win = new BrowserWindow({ width: 800, height: 600 })
 
