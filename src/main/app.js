@@ -9,7 +9,7 @@ timer.on("tick", updateTimestamp)
 timer.on("done", onTimerEnd)
 
 app.on("ready", createWindow)
-app.on("ready", top)
+app.on("ready", setupTray)
 
 app.on("window-all-closed", () => {
   // On macOS it is common for applications and their menu bar
@@ -100,7 +100,7 @@ function onTimerEnd() {
   })
 }
 
-function top() {
+function setupTray() {
   let tray = new Tray("src/assets/icon-tray.png")
   let trayMenu = Menu.buildFromTemplate([
     {
