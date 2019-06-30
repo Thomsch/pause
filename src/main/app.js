@@ -104,17 +104,23 @@ function setupTray() {
   let tray = new Tray("src/assets/icon-tray.png")
   let trayMenu = Menu.buildFromTemplate([
     {
-      label: "Open",
+      label: "Open...",
       click: function() {
         createWindow()
       }
     },
-
     {
-      label: "About",
+      label: "About...",
       click: function() {
         console.log("Clicked on About")
       }
+    },
+    {
+      type: "separator"
+    },
+    {
+      label: "Exit",
+      role: "quit"
     }
   ])
 
