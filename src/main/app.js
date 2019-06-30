@@ -112,7 +112,7 @@ function setupTray() {
     {
       label: "About...",
       click: function() {
-        console.log("Clicked on About")
+        win.webContents.send("display-about")
       }
     },
     {
