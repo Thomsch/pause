@@ -60,6 +60,7 @@ function updateTimestamp(ms) {
 
 function createWindow() {
   if (win != null) {
+    win.show()
     return
   }
   // Create the browser window.
