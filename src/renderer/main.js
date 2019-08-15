@@ -8,10 +8,6 @@ const duration_field = document.querySelector("#duration")
 
 let aboutWindow = null
 
-document.querySelector("#notification").addEventListener("click", function() {
-  ipcRenderer.send("display-notification")
-})
-
 document.querySelector("#start").addEventListener("click", function() {
   ipcRenderer.send("new-timer", duration_field.value)
 })
