@@ -32,7 +32,11 @@ ipcMain.on("display-notification", () => {
 })
 
 ipcMain.on("resume", (event, arg) => {
-  win.webContents.send("next-timer", arg)
+  throw "Not implemented"
+})
+
+ipcMain.on("postpone", (event, arg) => {
+  throw "Not implemented"
 })
 
 ipcMain.on("new-timer", (event, arg) => {
