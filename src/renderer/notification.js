@@ -5,13 +5,13 @@ var resume = document.querySelector("#resume")
 var postpone = document.querySelector("#postpone")
 
 resume.addEventListener("click", function() {
-  ipcRenderer.send("resume", new Date())
+  ipcRenderer.send("resume")
 
   closeWindow()
 })
 
 postpone.addEventListener("click", function() {
-  ipcRenderer.send("postpone", new Date())
+  ipcRenderer.send("postpone")
 
   closeWindow()
 })

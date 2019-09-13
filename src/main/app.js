@@ -4,6 +4,8 @@ const Timer = require("tiny-timer")
 
 let win
 let timer = new Timer()
+let duration
+let postponeDuration = 5
 
 timer.on("tick", updateTimestamp)
 timer.on("done", onTimerEnd)
@@ -31,26 +33,32 @@ ipcMain.on("display-notification", () => {
   onTimerEnd()
 })
 
-ipcMain.on("resume", (event, arg) => {
-  throw "Not implemented"
+ipcMain.on("resume", () => {
+  startSession(duration)
 })
 
-ipcMain.on("postpone", (event, arg) => {
-  throw "Not implemented"
+ipcMain.on("postpone", () => {
+  startSession(postponeDuration)
 })
 
 ipcMain.on("new-timer", (event, arg) => {
+  duration = arg
+
+  startSession(duration)
+})
+
+ipcMain.on("stop-timer", () => {
+  timer.stop()
+  resetTimer()
+})
+
+function startSession(duration) {
   if (timer.status != "stopped") {
     timer.stop()
   }
 
-  timer.start(arg * 1000)
-})
-
-ipcMain.on("stop-timer", (event, arg) => {
-  timer.stop()
-  resetTimer()
-})
+  timer.start(duration * 1000)
+}
 
 function resetTimer() {
   win.webContents.send("timer-stopped")
