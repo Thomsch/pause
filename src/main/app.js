@@ -76,7 +76,12 @@ function createWindow() {
     return
   }
   // Create the browser window.
-  win = new BrowserWindow({ width: 800, height: 600 })
+  win = new BrowserWindow({
+    width: 400,
+    height: 200,
+    autoHideMenuBar: true
+    // resizable: false
+  })
 
   // and load the main.html of the app.
   win.loadFile("src/renderer/main.html")

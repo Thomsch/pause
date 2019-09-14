@@ -1,19 +1,25 @@
 const { BrowserWindow } = require("electron").remote
 const { ipcRenderer } = require("electron")
 
-const progress = document.querySelector("#progress")
-const progress_bar = document.querySelector("#progress-bar")
-const start_button = document.querySelector("#start")
-const duration_field = document.querySelector("#duration")
+const durationField = document.querySelector("#duration")
+
+const progressBar = document.querySelector(".bar-item")
 
 let aboutWindow = null
 
-document.querySelector("#start").addEventListener("click", function() {
-  ipcRenderer.send("new-timer", duration_field.value)
-})
+let running = false
 
-document.querySelector("#stop").addEventListener("click", function() {
-  ipcRenderer.send("stop-timer")
+document.querySelector("#toggle").addEventListener("click", function() {
+  if (running) {
+    ipcRenderer.send("stop-timer")
+    document.querySelector("#toggle").innerHTML = "Start"
+    durationField.removeAttribute("disabled")
+  } else {
+    ipcRenderer.send("new-timer", durationField.value)
+    document.querySelector("#toggle").innerHTML = "Stop"
+    durationField.setAttribute("disabled", null)
+  }
+  running = !running
 })
 
 document.querySelector("#about").addEventListener("click", displayAbout)
@@ -35,9 +41,6 @@ function displayAbout() {
 
   // Emitted when the window is closed.
   aboutWindow.on("closed", () => {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
     aboutWindow = null
   })
 }
@@ -48,11 +51,10 @@ ipcRenderer.on("display-about", (event, arg) => {
 
 ipcRenderer.on("timer-update", (event, arg) => {
   completion = new Number(arg).toFixed(2)
-  progress.innerHTML = `${completion}%`
-  progress_bar.value = completion
+
+  progressBar.setAttribute("style", `width:${completion}%;`)
 })
 
 ipcRenderer.on("timer-stopped", () => {
-  progress.innerHTML = ""
-  progress_bar.value = 0
+  progressBar.setAttribute("style", "width:0%;")
 })
