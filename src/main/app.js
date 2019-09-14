@@ -105,8 +105,7 @@ function onTimerEnd() {
     alwaysOnTop: true,
     skipTaskbar: true,
     resizable: false,
-    minimizable: false,
-    menu: {}
+    minimizable: false
   })
   win.loadFile("src/renderer/notification.html")
 

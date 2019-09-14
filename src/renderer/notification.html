@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="../../dist/spectre.min.css" />
+    <link rel="stylesheet" href="../../dist/spectre-icons.min.css" />
   </head>
   <style type="text/css">
     @keyframes start {
@@ -29,7 +30,6 @@
       height: 100%;
       display: flex;
       flex-direction: column;
-      /* NEW */
       justify-content: center;
       align-items: center;
       flex-wrap: wrap;
@@ -38,11 +38,18 @@
 
   <body>
     <div class="container">
-      <h1>Time to take a break</h1>
-      <h2>Relax your eyes and stretch</h2>
-      <div>
-        <button id="resume">Resume</button>
-        <button id="postpone">Postpone</button>
+      <h1 class="">Enjoy a break</h1>
+      <p class="text-centered" style="margin: 4vh 0">
+        <em>Relax your eyes and stretch</em>
+      </p>
+      <div class="bg-secondary" style="padding: 2vh 42%;">
+        <button id="resume" class="btn btn-primary btn-lg m-2 p-2">
+          Resume
+        </button>
+        <button id="postpone" class="btn btn-lg m-2 p-2">
+          Postpone
+          <i class="icon icon-time" style="margin-left: 4px"></i>
+        </button>
       </div>
     </div>
   </body>
