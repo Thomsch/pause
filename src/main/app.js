@@ -3,7 +3,7 @@ const { ipcMain } = require("electron")
 const Timer = require("tiny-timer")
 
 let win
-let timer = new Timer()
+let timer = new Timer({ interval: 100 })
 let duration
 let postponeDuration = 5
 
