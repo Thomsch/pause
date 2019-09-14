@@ -32,12 +32,13 @@ function displayAbout() {
   // Create the browser window.
   aboutWindow = new BrowserWindow({
     width: 400,
-    height: 300
+    height: 250,
+    autoHideMenuBar: true,
+    resizable: false
   })
 
   // and load the index.html of the app.
   aboutWindow.loadFile("src/renderer/about.html")
-  aboutWindow.setMenu(null)
 
   // Emitted when the window is closed.
   aboutWindow.on("closed", () => {
