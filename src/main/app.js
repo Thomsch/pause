@@ -79,8 +79,9 @@ function createWindow() {
   win = new BrowserWindow({
     width: 400,
     height: 200,
-    autoHideMenuBar: true
-    // resizable: false
+    autoHideMenuBar: true,
+    resizable: false,
+    icon: "../assets/icon-tray.png"
   })
 
   // and load the main.html of the app.

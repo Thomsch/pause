@@ -29,12 +29,14 @@ function displayAbout() {
     aboutWindow.show()
     return
   }
+
   // Create the browser window.
   aboutWindow = new BrowserWindow({
     width: 400,
     height: 250,
     autoHideMenuBar: true,
-    resizable: false
+    resizable: false,
+    icon: "../assets/icon-tray.png"
   })
 
   // and load the index.html of the app.
