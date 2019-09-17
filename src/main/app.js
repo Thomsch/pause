@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Tray, Menu } = require("electron")
+const { app, BrowserWindow, Menu } = require("electron")
 const { ipcMain } = require("electron")
 const Timer = require("tiny-timer")
 
@@ -11,7 +11,6 @@ timer.on("tick", updateTimestamp)
 timer.on("done", onTimerEnd)
 
 app.on("ready", createWindow)
-app.on("ready", setupTray)
 
 app.on("window-all-closed", () => {
   // On macOS it is common for applications and their menu bar
@@ -115,37 +114,5 @@ function onTimerEnd() {
 
   win.on("closed", () => {
     win = null
-  })
-}
-
-function setupTray() {
-  let tray = new Tray("src/assets/icon-tray.png")
-  let trayMenu = Menu.buildFromTemplate([
-    {
-      label: "Open...",
-      click: function() {
-        createWindow()
-      }
-    },
-    {
-      label: "About...",
-      click: function() {
-        win.webContents.send("display-about")
-      }
-    },
-    {
-      type: "separator"
-    },
-    {
-      label: "Exit",
-      role: "quit"
-    }
-  ])
-
-  tray.setContextMenu(trayMenu)
-  tray.setToolTip(app.getName())
-
-  tray.on("click", () => {
-    createWindow()
   })
 }
