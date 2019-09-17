@@ -1,5 +1,6 @@
 const { BrowserWindow, app } = require("electron").remote
 const { ipcRenderer } = require("electron")
+const path = require("path")
 
 const durationField = document.querySelector("#duration")
 
