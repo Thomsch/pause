@@ -1,6 +1,7 @@
 const { app, BrowserWindow, Menu } = require("electron")
 const { ipcMain } = require("electron")
 const Timer = require("tiny-timer")
+const path = require("path")
 
 let win
 let timer = new Timer({ interval: 100 })
@@ -80,7 +81,7 @@ function createWindow() {
     height: 200,
     autoHideMenuBar: true,
     resizable: false,
-    icon: "../assets/icon-tray.png"
+    icon: path.join(app.getAppPath(), "./src/assets/logo-black.ico")
   })
 
   // and load the main.html of the app.

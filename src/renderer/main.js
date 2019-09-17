@@ -1,5 +1,5 @@
 const { BrowserWindow, ipcRenderer, app } = require("electron").remote
-const { ipcRenderer } = require("electron")
+const path = require("path")
 
 const durationField = document.querySelector("#duration")
 
@@ -36,7 +36,7 @@ function displayAbout() {
     height: 250,
     autoHideMenuBar: true,
     resizable: false,
-    icon: "../assets/icon-tray.png"
+    icon: path.join(app.getAppPath(), "./src/assets/logo-black.ico")
   })
 
   // and load the index.html of the app.
