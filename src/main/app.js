@@ -75,7 +75,7 @@ function createWindow() {
     win.show()
     return
   }
-  // Create the browser window.
+
   win = new BrowserWindow({
     width: 400,
     height: 200,
@@ -85,7 +85,7 @@ function createWindow() {
   })
 
   // and load the main.html of the app.
-  win.loadFile("src/renderer/main.html")
+  win.loadFile("./src/renderer/main.html")
 
   // Emitted when the window is closed.
   win.on("closed", () => {
@@ -107,7 +107,7 @@ function onTimerEnd() {
     resizable: false,
     minimizable: false
   })
-  win.loadFile("src/renderer/notification.html")
+  win.loadFile("./src/renderer/notification.html")
 
   win.once("ready-to-show", () => {
     win.show()
