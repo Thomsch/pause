@@ -1,4 +1,4 @@
-const { BrowserWindow } = require("electron").remote
+const { BrowserWindow, ipcRenderer, app } = require("electron").remote
 const { ipcRenderer } = require("electron")
 
 const durationField = document.querySelector("#duration")
