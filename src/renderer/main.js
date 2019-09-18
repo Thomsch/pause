@@ -16,7 +16,7 @@ document.querySelector("#toggle").addEventListener("click", function() {
     document.querySelector("#toggle").innerHTML = "Start"
     durationField.removeAttribute("disabled")
   } else {
-    ipcRenderer.send("new-timer", durationField.value)
+    ipcRenderer.send("new-timer", durationField.value * 60)
     document.querySelector("#toggle").innerHTML = "Stop"
     durationField.setAttribute("disabled", null)
   }
