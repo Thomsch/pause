@@ -25,6 +25,11 @@ document.querySelector("#toggle").addEventListener("click", function() {
 
 document.querySelector("#about").addEventListener("click", displayAbout)
 
+durationField.addEventListener("input", () => {
+  let invalidInput = durationField.matches(":invalid")
+  document.querySelector("#toggle").toggleAttribute("disabled", invalidInput)
+})
+
 function displayAbout() {
   if (aboutWindow != null) {
     aboutWindow.show()

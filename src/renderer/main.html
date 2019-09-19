@@ -9,14 +9,15 @@
   <body style="margin: 5vw 10vw 0 10vw">
 
     <input
-      class="mx-1 text-center input-sm"
+      class="mx-1 text-center input-sm form-input"
       id="duration"
       type="text"
       placeholder="mins."
       value="45"
       maxlength="3"
       size="1"
-      style="margin-left: 0!important"
+      style="margin-left: 0!important; display: inline-block; width: inherit;"
+      pattern="^[1-9][0-9]*$"
     />
     <label">Session's duration</label">
 
