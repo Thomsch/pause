@@ -1,15 +1,17 @@
 {
   "name": "pause",
-  "version": "0.9.0",
+  "version": "0.9.0-snapshot",
   "description": "Health-centered productivity companion",
-  "author": "thomsch",
+  "author": "Thomsch",
+  "homepage": "https://github.com/Thomsch/pause",
   "license": "ISC",
   "main": "src/main/app.js",
+  "repository": "github:Thomsch/pause",
   "scripts": {
     "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder",
+    "dist": "electron-builder --publish always",
     "postinstall": "electron-builder install-app-deps"
   },
   "dependencies": {
@@ -32,7 +34,11 @@
     },
     "linux": {
       "icon": "build/icons/",
-      "category": "Utility"
+      "category": "Utility",
+      "target": [
+        "AppImage",
+        "tar.gz"
+      ]
     },
     "dmg": {
       "contents": [
