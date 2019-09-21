@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.com/Thomsch/pause.svg?branch=develop)](https://travis-ci.com/Thomsch/pause)
+[![Maintainability](https://api.codeclimate.com/v1/badges/d08245ed4044c3580c97/maintainability)](https://codeclimate.com/github/Thomsch/pause/maintainability)
 
 # Pause
 
