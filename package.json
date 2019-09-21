@@ -13,6 +13,7 @@
     "postinstall": "electron-builder install-app-deps"
   },
   "dependencies": {
+    "mousetrap": "^1.6.3",
     "tiny-timer": "^1.4.0"
   },
   "devDependencies": {

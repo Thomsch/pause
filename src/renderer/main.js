@@ -1,23 +1,53 @@
 const { BrowserWindow, app } = require("electron").remote
 const { ipcRenderer } = require("electron")
 const path = require("path")
+const mousetrap = require("mousetrap")
 
 const durationField = document.querySelector("#duration")
+const toggleButton = document.querySelector("#toggle")
 
 const progressBar = document.querySelector(".bar-item")
 
 let aboutWindow = null
-
 let running = false
 
-document.querySelector("#toggle").addEventListener("click", function() {
+mousetrap.bind("enter", function() {
+  document.querySelector("#toggle").click()
+})
+
+mousetrap.bind("space", function() {
+  document.querySelector("#toggle").click()
+})
+
+let fieldTrap = new Mousetrap(durationField)
+fieldTrap.bind("enter", function(event) {
+  if (event.preventDefault) {
+    event.preventDefault()
+  }
+  document.querySelector("#toggle").click()
+})
+
+let toggleTrap = new Mousetrap(toggleButton)
+toggleTrap.bind("enter", function(event) {
+  if (event.preventDefault) {
+    event.preventDefault()
+  }
+  //   document.querySelector("#toggle").click()
+})
+toggleTrap.bind("space", function(event) {
+  if (event.preventDefault) {
+    event.preventDefault()
+  }
+})
+
+toggleButton.addEventListener("click", function() {
   if (running) {
     ipcRenderer.send("stop-timer")
-    document.querySelector("#toggle").innerHTML = "Start"
+    toggleButton.innerHTML = "Start"
     durationField.removeAttribute("disabled")
   } else {
     ipcRenderer.send("new-timer", durationField.value * 60)
-    document.querySelector("#toggle").innerHTML = "Stop"
+    toggleButton.innerHTML = "Stop"
     durationField.setAttribute("disabled", null)
   }
   running = !running
@@ -27,7 +57,7 @@ document.querySelector("#about").addEventListener("click", displayAbout)
 
 durationField.addEventListener("input", () => {
   let invalidInput = durationField.matches(":invalid")
-  document.querySelector("#toggle").toggleAttribute("disabled", invalidInput)
+  toggleButton.toggleAttribute("disabled", invalidInput)
 })
 
 function displayAbout() {
