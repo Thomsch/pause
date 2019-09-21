@@ -81,7 +81,7 @@ function createWindow() {
     height: 200,
     autoHideMenuBar: true,
     resizable: false,
-    icon: path.join(app.getAppPath(), "./src/assets/logo-black.ico")
+    icon: path.join(app.getAppPath(), "./src/assets/icon.ico")
   })
 
   // and load the main.html of the app.
