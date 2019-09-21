@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../assets/spectre.min.css" />
+
+    <title>Pause</title>
+  </head>
+  <body style="margin: 5vw 10vw 0 10vw">
+
+    <input
+      class="mx-1 text-center input-sm form-input"
+      id="duration"
+      type="text"
+      placeholder="mins."
+      value="45"
+      maxlength="3"
+      size="1"
+      style="margin-left: 0!important; display: inline-block; width: inherit;"
+      pattern="^[1-9][0-9]*$"
+    />
+    <label">Session's duration</label">
+
+
+
+    <button id="toggle" class="btn btn-primary float-right">Start</button>
+
+    <div class="bar p-centered" style="margin-top:15vh">
+    <div
+        class="bar-item"
+        role="progressbar"
+        style="width:0%;"
+        aria-valuenow="0"
+        aria-valuemin="0"
+        aria-valuemax="100"
+    ></div>
+    </div>
+
+    <div
+        class="divider p-centered"
+        style="width: 50vw; margin-top:30px;"
+    ></div>
+
+    <div class="text-center">
+        <em><a href="#" id="about" class="text-secondary">about</a></em>
+    </div>
+  </body>
+  <script src="main.js"></script>
+</html>

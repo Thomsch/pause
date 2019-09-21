@@ -1,0 +1,62 @@
+{
+  "name": "pause",
+  "version": "0.9.0-snapshot",
+  "description": "Health-centered productivity companion",
+  "author": "Thomsch",
+  "homepage": "https://github.com/Thomsch/pause",
+  "license": "ISC",
+  "main": "src/main/app.js",
+  "repository": "github:Thomsch/pause",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder --publish always",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "dependencies": {
+    "mousetrap": "^1.6.3",
+    "tiny-timer": "^1.4.0"
+  },
+  "devDependencies": {
+    "electron": "^4.2.10",
+    "electron-builder": "^21.2.0"
+  },
+  "build": {
+    "productName": "Pause",
+    "appId": "ch.thomsch.pause",
+    "win": {
+      "icon": "build/icons/icon.ico",
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "linux": {
+      "icon": "build/icons/",
+      "category": "Utility",
+      "target": [
+        "AppImage",
+        "tar.gz"
+      ]
+    },
+    "dmg": {
+      "contents": [
+        {
+          "x": 410,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 130,
+          "y": 150,
+          "type": "file"
+        }
+      ]
+    },
+    "mac": {
+      "icon": "build/icons/icon.icns"
+    }
+  }
+}
