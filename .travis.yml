@@ -26,6 +26,5 @@ script:
 
 branches:
   only:
-    - electron
     - develop
     - master
