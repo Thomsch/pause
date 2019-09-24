@@ -37,7 +37,8 @@
       "category": "Utility",
       "target": [
         "AppImage",
-        "tar.gz"
+        "tar.gz",
+        "deb"
       ]
     },
     "dmg": {
