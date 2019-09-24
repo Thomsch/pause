@@ -46,7 +46,7 @@ toggleButton.addEventListener("click", function() {
     toggleButton.innerHTML = "Start"
     durationField.removeAttribute("disabled")
   } else {
-    ipcRenderer.send("new-timer", durationField.value * 60)
+    ipcRenderer.send("new-timer", durationField.value)
     toggleButton.innerHTML = "Stop"
     durationField.setAttribute("disabled", null)
   }

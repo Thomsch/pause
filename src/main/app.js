@@ -57,7 +57,7 @@ function startSession(duration) {
     timer.stop()
   }
 
-  timer.start(duration * 1000)
+  timer.start(duration * 60 * 1000)
 }
 
 function resetTimer() {
