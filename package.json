@@ -2,7 +2,11 @@
   "name": "pause",
   "version": "0.9.0-snapshot",
   "description": "Health-centered productivity companion",
-  "author": "Thomsch",
+  "author": {
+    "name": "Thomsch",
+    "email": "thms.sch@gmail.com",
+    "url": "https://github.com/Thomsch/pause"
+  },
   "homepage": "https://github.com/Thomsch/pause",
   "license": "ISC",
   "main": "src/main/app.js",
