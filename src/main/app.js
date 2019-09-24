@@ -110,6 +110,7 @@ function onTimerEnd() {
   win.loadFile("./src/renderer/notification.html")
 
   win.once("ready-to-show", () => {
+    win.maximize()
     win.show()
   })
 
