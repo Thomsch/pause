@@ -6,7 +6,7 @@ const path = require("path")
 let win
 let timer = new Timer({ interval: 100 })
 let duration
-let postponeDuration = 5
+let postponeDuration = 3
 
 timer.on("tick", updateTimestamp)
 timer.on("done", onTimerEnd)
