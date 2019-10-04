@@ -1,7 +1,7 @@
+# Pause
+
 [![Build Status](https://travis-ci.com/Thomsch/pause.svg?branch=develop)](https://travis-ci.com/Thomsch/pause)
 [![Maintainability](https://api.codeclimate.com/v1/badges/d08245ed4044c3580c97/maintainability)](https://codeclimate.com/github/Thomsch/pause/maintainability)
-
-# Pause
 
 Pause allows you to set a timer to remind you to take a break from your work on the computer. The timer will restart itself automatically when the time is up unless you stop it or close the application.
 
