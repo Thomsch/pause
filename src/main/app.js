@@ -1,5 +1,5 @@
-const { app, BrowserWindow, Menu } = require("electron")
-const { ipcMain } = require("electron")
+const electron = require("electron")
+const { app, BrowserWindow, Menu, ipcMain } = electron
 const Timer = require("tiny-timer")
 const path = require("path")
 
@@ -7,6 +7,7 @@ let win
 let timer = new Timer({ interval: 100 })
 let duration
 let postponeDuration = 3
+let notificationWindowsRegister = []
 
 timer.on("tick", updateTimestamp)
 timer.on("done", onTimerEnd)
@@ -34,10 +35,12 @@ ipcMain.on("display-notification", () => {
 })
 
 ipcMain.on("resume", () => {
+  closeNotifications()
   startSession(duration)
 })
 
 ipcMain.on("postpone", () => {
+  closeNotifications()
   startSession(postponeDuration)
 })
 
@@ -98,25 +101,51 @@ function createWindow() {
   })
 }
 
+function closeNotifications() {
+  for (let win of notificationWindowsRegister) {
+    win.close()
+  }
+  notificationWindowsRegister = []
+}
+
 function onTimerEnd() {
-  let win = new BrowserWindow({
-    show: false,
-    frame: false,
-    transparent: true,
-    fullscreen: true,
-    alwaysOnTop: true,
-    skipTaskbar: true,
-    resizable: false,
-    minimizable: false
-  })
-  win.loadFile("./src/renderer/notification.html")
+  const screenApi = electron.screen
+  let screens = screenApi.getAllDisplays()
 
-  win.once("ready-to-show", () => {
-    win.maximize()
-    win.show()
-  })
+  console.log(`There is ${screens.length} screens detected`)
 
-  win.on("closed", () => {
-    win = null
-  })
+  screens.push(screens[0])
+  for (var screen of screens) {
+    console.log(`Bounds:`)
+    console.log(screen.bounds)
+    console.log(`Work size area:`)
+    console.log(screen.workAreaSize)
+
+    let win = new BrowserWindow({
+      width: screen.bounds.width,
+      height: screen.bounds.height,
+      x: screen.bounds.x,
+      y: screen.bounds.y,
+      show: false,
+      frame: true,
+      transparent: true,
+      fullscreen: true,
+      alwaysOnTop: true,
+      skipTaskbar: true,
+      resizable: false,
+      minimizable: false
+    })
+    win.loadFile("./src/renderer/notification.html")
+
+    win.once("ready-to-show", () => {
+      win.maximize()
+      win.show()
+    })
+
+    win.on("closed", () => {
+      win = null
+    })
+
+    notificationWindowsRegister.push(win)
+  }
 }
