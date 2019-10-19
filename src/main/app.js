@@ -115,7 +115,6 @@ function onTimerEnd() {
 
   console.log(`There is ${screens.length} screens detected`)
 
-  screens.push(screens[0])
   for (var screen of screens) {
     console.log(`Bounds:`)
     console.log(screen.bounds)
