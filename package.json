@@ -1,6 +1,6 @@
 {
   "name": "pause",
-  "version": "0.9.0-snapshot",
+  "version": "0.9.0",
   "description": "Health-centered productivity companion",
   "author": {
     "name": "Thomsch",
@@ -15,7 +15,7 @@
     "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder --publish always",
+    "dist": "electron-builder --publish onTagOrDraft",
     "postinstall": "electron-builder install-app-deps"
   },
   "dependencies": {
