@@ -23,8 +23,8 @@
     "tiny-timer": "^1.4.0"
   },
   "devDependencies": {
-    "electron": "^4.2.10",
-    "electron-builder": "^21.2.0"
+    "electron": "^8.2.0",
+    "electron-builder": "^22.4.1"
   },
   "build": {
     "productName": "Pause",
