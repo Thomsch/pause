@@ -28,7 +28,7 @@
   },
   "build": {
     "productName": "Pause",
-    "appId": "ch.thomsch.pause",
+    "appId": "org.thomsch.pause",
     "win": {
       "icon": "build/icons/icon.ico",
       "target": [
