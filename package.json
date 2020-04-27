@@ -45,6 +45,14 @@
         "deb"
       ]
     },
+    "mac": {
+      "icon": "build/icons/icon.icns",
+      "category": "public.app-category.productivity",
+      "target": [
+        "zip",
+        "dmg"
+      ]
+    },
     "dmg": {
       "contents": [
         {
@@ -59,9 +67,6 @@
           "type": "file"
         }
       ]
-    },
-    "mac": {
-      "icon": "build/icons/icon.icns"
     }
   }
 }
