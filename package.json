@@ -42,15 +42,13 @@
       "category": "Utility",
       "target": [
         "AppImage",
-        "tar.gz",
-        "deb"
+        "tar.gz"
       ]
     },
     "mac": {
       "icon": "build/icons/icon.icns",
       "category": "public.app-category.productivity",
       "target": [
-        "zip",
         "dmg"
       ]
     },
