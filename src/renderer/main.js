@@ -11,16 +11,16 @@ const progressBar = document.querySelector(".bar-item")
 let aboutWindow = null
 let running = false
 
-mousetrap.bind("enter", function() {
+mousetrap.bind("enter", function () {
   document.querySelector("#toggle").click()
 })
 
-mousetrap.bind("space", function() {
+mousetrap.bind("space", function () {
   document.querySelector("#toggle").click()
 })
 
 let fieldTrap = new Mousetrap(durationField)
-fieldTrap.bind("enter", function(event) {
+fieldTrap.bind("enter", function (event) {
   if (event.preventDefault) {
     event.preventDefault()
   }
@@ -28,19 +28,19 @@ fieldTrap.bind("enter", function(event) {
 })
 
 let toggleTrap = new Mousetrap(toggleButton)
-toggleTrap.bind("enter", function(event) {
+toggleTrap.bind("enter", function (event) {
   if (event.preventDefault) {
     event.preventDefault()
   }
   //   document.querySelector("#toggle").click()
 })
-toggleTrap.bind("space", function(event) {
+toggleTrap.bind("space", function (event) {
   if (event.preventDefault) {
     event.preventDefault()
   }
 })
 
-toggleButton.addEventListener("click", function() {
+toggleButton.addEventListener("click", function () {
   if (running) {
     ipcRenderer.send("stop-timer")
     toggleButton.innerHTML = "Start"
