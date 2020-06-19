@@ -12,10 +12,10 @@
   "main": "src/main/app.js",
   "repository": "github:Thomsch/pause",
   "scripts": {
-    "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "pack": "electron-builder --dir",
-    "dist": "electron-builder --publish onTagOrDraft",
+    "start": "electron .",
+    "build": "electron-builder build --publish never",
+    "deploy": "electron-builder build --publish always",
     "postinstall": "electron-builder install-app-deps"
   },
   "dependencies": {

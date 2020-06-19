@@ -22,9 +22,4 @@ cache:
     - $HOME/.cache/electron-builder
 
 script:
-  - npm run dist
-
-branches:
-  only:
-    - develop
-    - master
+  - npm run build
