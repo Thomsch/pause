@@ -9,7 +9,7 @@
   },
   "homepage": "https://github.com/Thomsch/pause",
   "license": "ISC",
-  "main": "src/app.js",
+  "main": "src/background.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
