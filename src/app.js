@@ -77,7 +77,7 @@ function createWindow() {
   })
 
   // and load the main.html of the app.
-  mainWindow.loadFile("./src/renderer/main.html")
+  mainWindow.loadFile("./src/main.html")
 
   // Emitted when the window is closed.
   mainWindow.on("closed", () => {
