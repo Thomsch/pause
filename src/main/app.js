@@ -84,7 +84,10 @@ function createWindow() {
     height: 200,
     autoHideMenuBar: true,
     resizable: false,
-    icon: path.join(app.getAppPath(), "./src/assets/icon.ico")
+    icon: path.join(app.getAppPath(), "./src/assets/icon.ico"),
+    webPreferences: {
+      nodeIntegration: true,
+    },
   })
 
   // and load the main.html of the app.
@@ -133,7 +136,10 @@ function onTimerEnd() {
       alwaysOnTop: true,
       skipTaskbar: true,
       resizable: false,
-      minimizable: false
+      minimizable: false,
+      webPreferences: {
+        nodeIntegration: true,
+      },
     })
     win.loadFile("./src/renderer/notification.html")
 
