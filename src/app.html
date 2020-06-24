@@ -1,24 +1,16 @@
 <!DOCTYPE html>
 <html>
+
   <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="../assets/spectre.min.css" />
+    <link rel="stylesheet" href="./stylesheets/spectre.min.css" />
 
     <title>Pause</title>
   </head>
+
   <body style="margin: 5vw 10vw 0 10vw">
     <div style="display: flex; align-items: center">
-      <input
-        class="mx-1 text-center input-sm form-input"
-        id="duration"
-        type="text"
-        placeholder="duration"
-        value="30"
-        maxlength="3"
-        size="1"
-        style="margin-left: 0!important; display: inline-block; width: inherit;"
-        pattern="^[0-9]*$"
-      />
+      <input class="mx-1 text-center input-sm form-input" id="duration" type="text" placeholder="duration" value="30" maxlength="3" size="1" style="margin-left: 0!important; display: inline-block; width: inherit;" pattern="^[0-9]*$" />
       <label style="flex-grow: 2">minutes of work</label>
 
       <button id="toggle" class="btn btn-primary">
@@ -27,14 +19,7 @@
     </div>
 
     <div class="bar p-centered" style="margin-top:15vh">
-      <div
-        class="bar-item"
-        role="progressbar"
-        style="width:0%;"
-        aria-valuenow="0"
-        aria-valuemin="0"
-        aria-valuemax="100"
-      ></div>
+      <div class="bar-item" role="progressbar" style="width:0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
 
     <div class="divider p-centered" style="width: 50vw; margin-top:30px;"></div>
@@ -43,5 +28,6 @@
       <em><a href="#" id="about" class="text-secondary">about</a></em>
     </div>
   </body>
-  <script src="main.js"></script>
+  <script src="app.js"></script>
+
 </html>

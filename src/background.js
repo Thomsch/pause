@@ -3,14 +3,11 @@ const { app, BrowserWindow, Menu, ipcMain } = electron
 const Timer = require("tiny-timer")
 const path = require("path")
 
-let win
+let mainWindow
 let timer = new Timer({ interval: 100 })
 let duration
 let postponeDuration = 3
 let notificationWindowsRegister = []
-
-timer.on("tick", updateTimestamp)
-timer.on("done", onTimerEnd)
 
 app.on("ready", createWindow)
 
@@ -25,35 +22,74 @@ app.on("window-all-closed", () => {
 app.on("activate", () => {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
-  if (win === null) {
+  if (mainWindow === null) {
     createWindow()
   }
 })
 
-ipcMain.on("display-notification", () => {
-  onTimerEnd()
-})
+setupProcessListeners();
 
-ipcMain.on("resume", () => {
-  closeNotifications()
-  startSession(duration)
-})
+timer.on("tick", updateTimestamp)
+timer.on("done", onTimerEnd)
 
-ipcMain.on("postpone", () => {
-  closeNotifications()
-  startSession(postponeDuration)
-})
+function setupProcessListeners() {
+  ipcMain.on("display-notification", () => {
+    onTimerEnd()
+  })
 
-ipcMain.on("new-timer", (event, arg) => {
-  duration = arg
+  ipcMain.on("resume", () => {
+    closeNotifications()
+    startSession(duration)
+  })
 
-  startSession(duration)
-})
+  ipcMain.on("postpone", () => {
+    closeNotifications()
+    startSession(postponeDuration)
+  })
 
-ipcMain.on("stop-timer", () => {
-  timer.stop()
-  resetTimer()
-})
+  ipcMain.on("new-timer", (event, arg) => {
+    duration = arg
+
+    startSession(duration)
+  })
+
+  ipcMain.on("stop-timer", () => {
+    timer.stop()
+    resetTimer()
+  })
+}
+
+function createWindow() {
+  if (mainWindow != null) {
+    mainWindow.show()
+    return
+  }
+
+  mainWindow = new BrowserWindow({
+    width: 400,
+    height: 200,
+    autoHideMenuBar: true,
+    resizable: false,
+    icon: path.join(app.getAppPath(), "./src/assets/icon.ico"),
+    webPreferences: {
+      nodeIntegration: true,
+    },
+  })
+
+  // and load the main.html of the app.
+  mainWindow.loadFile("./src/app.html")
+
+  // Emitted when the window is closed.
+  mainWindow.on("closed", () => {
+    timer.stop()
+    closeNotifications()
+
+    // Dereference the window object, usually you would store windows
+    // in an array if your app supports multi windows, this is the time
+    // when you should delete the corresponding element.
+    mainWindow = null
+  })
+}
 
 function startSession(duration) {
   if (timer.status != "stopped") {
@@ -63,50 +99,21 @@ function startSession(duration) {
   timer.start(duration * 60 * 1000)
 }
 
-function resetTimer() {
-  win.webContents.send("timer-stopped")
-}
-
 function updateTimestamp(ms) {
   n = new Number((1 - ms / timer.duration) * 100)
 
-  win.webContents.send("timer-update", n.toString())
-}
-
-function createWindow() {
-  if (win != null) {
-    win.show()
-    return
-  }
-
-  win = new BrowserWindow({
-    width: 400,
-    height: 200,
-    autoHideMenuBar: true,
-    resizable: false,
-    icon: path.join(app.getAppPath(), "./src/assets/icon.ico")
-  })
-
-  // and load the main.html of the app.
-  win.loadFile("./src/renderer/main.html")
-
-  // Emitted when the window is closed.
-  win.on("closed", () => {
-    timer.stop()
-    closeNotifications()
-
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
-    win = null
-  })
+  mainWindow.webContents.send("timer-update", n.toString())
 }
 
 function closeNotifications() {
-  for (let win of notificationWindowsRegister) {
-    win.close()
+  for (let window of notificationWindowsRegister) {
+    window.close()
   }
   notificationWindowsRegister = []
+}
+
+function resetTimer() {
+  mainWindow.webContents.send("timer-stopped")
 }
 
 function onTimerEnd() {
@@ -121,7 +128,7 @@ function onTimerEnd() {
     console.log(`Work size area:`)
     console.log(screen.workAreaSize)
 
-    let win = new BrowserWindow({
+    let notificationWindow = new BrowserWindow({
       width: screen.bounds.width,
       height: screen.bounds.height,
       x: screen.bounds.x,
@@ -133,19 +140,22 @@ function onTimerEnd() {
       alwaysOnTop: true,
       skipTaskbar: true,
       resizable: false,
-      minimizable: false
+      minimizable: false,
+      webPreferences: {
+        nodeIntegration: true,
+      },
     })
-    win.loadFile("./src/renderer/notification.html")
+    notificationWindow.loadFile("./src/notification/notification.html")
 
-    win.once("ready-to-show", () => {
-      win.maximize()
-      win.show()
+    notificationWindow.once("ready-to-show", () => {
+      notificationWindow.maximize()
+      notificationWindow.show()
     })
 
-    win.on("closed", () => {
-      win = null
+    notificationWindow.on("closed", () => {
+      notificationWindow = null
     })
 
-    notificationWindowsRegister.push(win)
+    notificationWindowsRegister.push(notificationWindow)
   }
 }

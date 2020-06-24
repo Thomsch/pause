@@ -4,10 +4,10 @@ const { ipcRenderer } = require("electron")
 var resume = document.querySelector("#resume")
 var postpone = document.querySelector("#postpone")
 
-resume.addEventListener("click", function() {
+resume.addEventListener("click", function () {
   ipcRenderer.send("resume")
 })
 
-postpone.addEventListener("click", function() {
+postpone.addEventListener("click", function () {
   ipcRenderer.send("postpone")
 })
