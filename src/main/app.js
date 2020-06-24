@@ -3,7 +3,7 @@ const { app, BrowserWindow, Menu, ipcMain } = electron
 const Timer = require("tiny-timer")
 const path = require("path")
 
-let win
+let mainWindow
 let timer = new Timer({ interval: 100 })
 let duration
 let postponeDuration = 3
@@ -25,7 +25,7 @@ app.on("window-all-closed", () => {
 app.on("activate", () => {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
-  if (win === null) {
+  if (mainWindow === null) {
     createWindow()
   }
 })
@@ -64,22 +64,22 @@ function startSession(duration) {
 }
 
 function resetTimer() {
-  win.webContents.send("timer-stopped")
+  mainWindow.webContents.send("timer-stopped")
 }
 
 function updateTimestamp(ms) {
   n = new Number((1 - ms / timer.duration) * 100)
 
-  win.webContents.send("timer-update", n.toString())
+  mainWindow.webContents.send("timer-update", n.toString())
 }
 
 function createWindow() {
-  if (win != null) {
-    win.show()
+  if (mainWindow != null) {
+    mainWindow.show()
     return
   }
 
-  win = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 400,
     height: 200,
     autoHideMenuBar: true,
@@ -91,23 +91,23 @@ function createWindow() {
   })
 
   // and load the main.html of the app.
-  win.loadFile("./src/renderer/main.html")
+  mainWindow.loadFile("./src/renderer/main.html")
 
   // Emitted when the window is closed.
-  win.on("closed", () => {
+  mainWindow.on("closed", () => {
     timer.stop()
     closeNotifications()
 
     // Dereference the window object, usually you would store windows
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
-    win = null
+    mainWindow = null
   })
 }
 
 function closeNotifications() {
-  for (let win of notificationWindowsRegister) {
-    win.close()
+  for (let window of notificationWindowsRegister) {
+    window.close()
   }
   notificationWindowsRegister = []
 }
@@ -124,7 +124,7 @@ function onTimerEnd() {
     console.log(`Work size area:`)
     console.log(screen.workAreaSize)
 
-    let win = new BrowserWindow({
+    let notificationWindow = new BrowserWindow({
       width: screen.bounds.width,
       height: screen.bounds.height,
       x: screen.bounds.x,
@@ -141,17 +141,17 @@ function onTimerEnd() {
         nodeIntegration: true,
       },
     })
-    win.loadFile("./src/renderer/notification.html")
+    notificationWindow.loadFile("./src/renderer/notification.html")
 
-    win.once("ready-to-show", () => {
-      win.maximize()
-      win.show()
+    notificationWindow.once("ready-to-show", () => {
+      notificationWindow.maximize()
+      notificationWindow.show()
     })
 
-    win.on("closed", () => {
-      win = null
+    notificationWindow.on("closed", () => {
+      notificationWindow = null
     })
 
-    notificationWindowsRegister.push(win)
+    notificationWindowsRegister.push(notificationWindow)
   }
 }
