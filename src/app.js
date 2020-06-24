@@ -102,7 +102,7 @@ function displayAbout() {
   })
 
   // and load the index.html of the app.
-  aboutWindow.loadFile("src/renderer/about.html")
+  aboutWindow.loadFile("src/about/about.html")
 
   // Emitted when the window is closed.
   aboutWindow.on("closed", () => {

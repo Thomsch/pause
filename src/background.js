@@ -145,7 +145,7 @@ function onTimerEnd() {
         nodeIntegration: true,
       },
     })
-    notificationWindow.loadFile("./src/renderer/notification.html")
+    notificationWindow.loadFile("./src/notification/notification.html")
 
     notificationWindow.once("ready-to-show", () => {
       notificationWindow.maximize()
