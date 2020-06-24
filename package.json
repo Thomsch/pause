@@ -20,10 +20,10 @@
   },
   "dependencies": {
     "mousetrap": "^1.6.5",
-    "tiny-timer": "^1.4.0"
+    "tiny-timer": "^1.5.0"
   },
   "devDependencies": {
-    "electron": "^8.2.0",
-    "electron-builder": "^22.4.1"
+    "electron": "^8.3.3",
+    "electron-builder": "^22.6.1"
   }
 }
