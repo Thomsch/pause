@@ -12,52 +12,76 @@ let running = false
 let toggleTrap = new Mousetrap(toggleButton)
 let fieldTrap = new Mousetrap(durationField)
 
-mousetrap.bind("enter", function () {
-  document.querySelector("#toggle").click()
-})
+bindShortcuts();
+setupEventListeners();
+setupProcessListeners();
 
-mousetrap.bind("space", function () {
-  document.querySelector("#toggle").click()
-})
+function setupProcessListeners() {
+  ipcRenderer.on("display-about", (event, arg) => {
+    displayAbout()
+  })
 
-fieldTrap.bind("enter", function (event) {
-  if (event.preventDefault) {
-    event.preventDefault()
-  }
-  document.querySelector("#toggle").click()
-})
+  ipcRenderer.on("timer-update", (event, arg) => {
+    completion = new Number(arg).toFixed(2)
 
-toggleTrap.bind("enter", function (event) {
-  if (event.preventDefault) {
-    event.preventDefault()
-  }
-  //   document.querySelector("#toggle").click()
-})
-toggleTrap.bind("space", function (event) {
-  if (event.preventDefault) {
-    event.preventDefault()
-  }
-})
+    progressBar.setAttribute("style", `width:${completion}%;`)
+  })
 
-toggleButton.addEventListener("click", function () {
-  if (running) {
-    ipcRenderer.send("stop-timer")
-    toggleButton.innerHTML = "Start"
-    durationField.removeAttribute("disabled")
-  } else {
-    ipcRenderer.send("new-timer", durationField.value)
-    toggleButton.innerHTML = "Stop"
-    durationField.setAttribute("disabled", null)
-  }
-  running = !running
-})
+  ipcRenderer.on("timer-stopped", () => {
+    progressBar.setAttribute("style", "width:0%;")
+  })
+}
 
-document.querySelector("#about").addEventListener("click", displayAbout)
+function setupEventListeners() {
+  document.querySelector("#about").addEventListener("click", displayAbout)
 
-durationField.addEventListener("input", () => {
-  let invalidInput = durationField.matches(":invalid")
-  toggleButton.toggleAttribute("disabled", invalidInput)
-})
+  durationField.addEventListener("input", () => {
+    let invalidInput = durationField.matches(":invalid")
+    toggleButton.toggleAttribute("disabled", invalidInput)
+  })
+
+  toggleButton.addEventListener("click", function () {
+    if (running) {
+      ipcRenderer.send("stop-timer")
+      toggleButton.innerHTML = "Start"
+      durationField.removeAttribute("disabled")
+    } else {
+      ipcRenderer.send("new-timer", durationField.value)
+      toggleButton.innerHTML = "Stop"
+      durationField.setAttribute("disabled", null)
+    }
+    running = !running
+  })
+}
+
+function bindShortcuts() {
+  mousetrap.bind("enter", function () {
+    document.querySelector("#toggle").click()
+  })
+
+  mousetrap.bind("space", function () {
+    document.querySelector("#toggle").click()
+  })
+
+  fieldTrap.bind("enter", function (event) {
+    if (event.preventDefault) {
+      event.preventDefault()
+    }
+    document.querySelector("#toggle").click()
+  })
+
+  toggleTrap.bind("enter", function (event) {
+    if (event.preventDefault) {
+      event.preventDefault()
+    }
+    //   document.querySelector("#toggle").click()
+  })
+  toggleTrap.bind("space", function (event) {
+    if (event.preventDefault) {
+      event.preventDefault()
+    }
+  })
+}
 
 function displayAbout() {
   if (aboutWindow != null) {
@@ -85,17 +109,3 @@ function displayAbout() {
     aboutWindow = null
   })
 }
-
-ipcRenderer.on("display-about", (event, arg) => {
-  displayAbout()
-})
-
-ipcRenderer.on("timer-update", (event, arg) => {
-  completion = new Number(arg).toFixed(2)
-
-  progressBar.setAttribute("style", `width:${completion}%;`)
-})
-
-ipcRenderer.on("timer-stopped", () => {
-  progressBar.setAttribute("style", "width:0%;")
-})

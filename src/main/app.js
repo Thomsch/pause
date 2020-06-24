@@ -9,9 +9,6 @@ let duration
 let postponeDuration = 3
 let notificationWindowsRegister = []
 
-timer.on("tick", updateTimestamp)
-timer.on("done", onTimerEnd)
-
 app.on("ready", createWindow)
 
 app.on("window-all-closed", () => {
@@ -30,47 +27,36 @@ app.on("activate", () => {
   }
 })
 
-ipcMain.on("display-notification", () => {
-  onTimerEnd()
-})
+setupProcessListeners();
 
-ipcMain.on("resume", () => {
-  closeNotifications()
-  startSession(duration)
-})
+timer.on("tick", updateTimestamp)
+timer.on("done", onTimerEnd)
 
-ipcMain.on("postpone", () => {
-  closeNotifications()
-  startSession(postponeDuration)
-})
+function setupProcessListeners() {
+  ipcMain.on("display-notification", () => {
+    onTimerEnd()
+  })
 
-ipcMain.on("new-timer", (event, arg) => {
-  duration = arg
+  ipcMain.on("resume", () => {
+    closeNotifications()
+    startSession(duration)
+  })
 
-  startSession(duration)
-})
+  ipcMain.on("postpone", () => {
+    closeNotifications()
+    startSession(postponeDuration)
+  })
 
-ipcMain.on("stop-timer", () => {
-  timer.stop()
-  resetTimer()
-})
+  ipcMain.on("new-timer", (event, arg) => {
+    duration = arg
 
-function startSession(duration) {
-  if (timer.status != "stopped") {
+    startSession(duration)
+  })
+
+  ipcMain.on("stop-timer", () => {
     timer.stop()
-  }
-
-  timer.start(duration * 60 * 1000)
-}
-
-function resetTimer() {
-  mainWindow.webContents.send("timer-stopped")
-}
-
-function updateTimestamp(ms) {
-  n = new Number((1 - ms / timer.duration) * 100)
-
-  mainWindow.webContents.send("timer-update", n.toString())
+    resetTimer()
+  })
 }
 
 function createWindow() {
@@ -105,11 +91,29 @@ function createWindow() {
   })
 }
 
+function startSession(duration) {
+  if (timer.status != "stopped") {
+    timer.stop()
+  }
+
+  timer.start(duration * 60 * 1000)
+}
+
+function updateTimestamp(ms) {
+  n = new Number((1 - ms / timer.duration) * 100)
+
+  mainWindow.webContents.send("timer-update", n.toString())
+}
+
 function closeNotifications() {
   for (let window of notificationWindowsRegister) {
     window.close()
   }
   notificationWindowsRegister = []
+}
+
+function resetTimer() {
+  mainWindow.webContents.send("timer-stopped")
 }
 
 function onTimerEnd() {
