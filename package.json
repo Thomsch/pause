@@ -10,13 +10,16 @@
   "homepage": "https://github.com/Thomsch/pause",
   "license": "ISC",
   "main": "src/main/app.js",
-  "repository": "github:Thomsch/pause",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
     "build": "electron-builder build --publish never",
     "deploy": "electron-builder build --publish always",
     "postinstall": "electron-builder install-app-deps"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thomsch/pause.git"
   },
   "dependencies": {
     "mousetrap": "^1.6.5",
