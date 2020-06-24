@@ -5,11 +5,12 @@ const mousetrap = require("mousetrap")
 
 const durationField = document.querySelector("#duration")
 const toggleButton = document.querySelector("#toggle")
-
 const progressBar = document.querySelector(".bar-item")
 
 let aboutWindow = null
 let running = false
+let toggleTrap = new Mousetrap(toggleButton)
+let fieldTrap = new Mousetrap(durationField)
 
 mousetrap.bind("enter", function () {
   document.querySelector("#toggle").click()
@@ -19,7 +20,6 @@ mousetrap.bind("space", function () {
   document.querySelector("#toggle").click()
 })
 
-let fieldTrap = new Mousetrap(durationField)
 fieldTrap.bind("enter", function (event) {
   if (event.preventDefault) {
     event.preventDefault()
@@ -27,7 +27,6 @@ fieldTrap.bind("enter", function (event) {
   document.querySelector("#toggle").click()
 })
 
-let toggleTrap = new Mousetrap(toggleButton)
 toggleTrap.bind("enter", function (event) {
   if (event.preventDefault) {
     event.preventDefault()
