@@ -2,6 +2,7 @@ const electron = require("electron")
 const { app, BrowserWindow, Menu, ipcMain } = electron
 const Timer = require("tiny-timer")
 const path = require("path")
+const log = require('electron-log');
 
 let mainWindow
 let timer = new Timer({ interval: 100 })
@@ -120,13 +121,13 @@ function onTimerEnd() {
   const screenApi = electron.screen
   let screens = screenApi.getAllDisplays()
 
-  console.log(`There is ${screens.length} screens detected`)
+  log.info(`There is ${screens.length} screens detected`)
 
   for (var screen of screens) {
-    console.log(`Bounds:`)
-    console.log(screen.bounds)
-    console.log(`Work size area:`)
-    console.log(screen.workAreaSize)
+    log.info(`Bounds:`)
+    log.info(screen.bounds)
+    log.info(`Work size area:`)
+    log.info(screen.workAreaSize)
 
     let notificationWindow = new BrowserWindow({
       width: screen.bounds.width,
