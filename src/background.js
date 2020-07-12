@@ -3,6 +3,7 @@ const { app, BrowserWindow, Menu, ipcMain } = electron
 const Timer = require("tiny-timer")
 const path = require("path")
 const log = require('electron-log');
+const { autoUpdater } = require('electron-updater');
 
 let mainWindow
 let timer = new Timer({ interval: 100 })
@@ -29,6 +30,7 @@ app.on("activate", () => {
 })
 
 setupProcessListeners();
+setupAutoUpdateListeners();
 
 timer.on("tick", updateTimestamp)
 timer.on("done", onTimerEnd)
@@ -58,6 +60,24 @@ function setupProcessListeners() {
     timer.stop()
     resetTimer()
   })
+
+  ipcMain.on('restart-app', () => {
+    log.info("Restart received")
+    autoUpdater.quitAndInstall();
+  });
+}
+
+function setupAutoUpdateListeners() {
+  autoUpdater.on('update-available', () => {
+    log.info("Update available!")
+    mainWindow.webContents.send('update-available');
+  });
+
+  autoUpdater.on('update-downloaded', () => {
+    log.info("Update downloaded!")
+    mainWindow.webContents.send('update-downloaded');
+  });
+
 }
 
 function createWindow() {
@@ -71,6 +91,7 @@ function createWindow() {
     height: 200,
     autoHideMenuBar: true,
     resizable: false,
+    show: false,
     icon: path.join(app.getAppPath(), "./src/assets/icon.ico"),
     webPreferences: {
       nodeIntegration: true,
@@ -89,6 +110,15 @@ function createWindow() {
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     mainWindow = null
+  })
+
+  mainWindow.on('ready-to-show', () => {
+    log.info('Main window is ready to show')
+
+    autoUpdater.checkForUpdatesAndNotify()
+    log.info('Auto update check done')
+
+    mainWindow.show()
   })
 }
 
