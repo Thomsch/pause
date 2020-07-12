@@ -1,1 +1,0 @@
-{"name":"pause","version":"1.0.0","description":"","main":"app.js","scripts":{"start":"electron .","test":"echo \"Error: no test specified\" && exit 1"},"author":"thomsch","license":"ISC","devDependencies":{"electron":"^4.1.4"}}
