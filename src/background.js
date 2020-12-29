@@ -92,7 +92,7 @@ function createWindow() {
     autoHideMenuBar: true,
     resizable: false,
     show: false,
-    icon: path.join(app.getAppPath(), "./src/assets/icon.ico"),
+    icon: path.join(app.getAppPath(), "./build/icons/icon.ico"),
     webPreferences: {
       nodeIntegration: true,
     },

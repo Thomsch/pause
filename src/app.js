@@ -132,7 +132,7 @@ function displayAbout() {
     height: 250,
     autoHideMenuBar: true,
     resizable: false,
-    icon: path.join(app.getAppPath(), "./src/assets/logo-black.ico"),
+    icon: path.join(app.getAppPath(), "./build/icons/icon.ico"),
     webPreferences: {
       nodeIntegration: true,
     },
