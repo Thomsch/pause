@@ -135,6 +135,7 @@ function displayAbout() {
     icon: path.join(app.getAppPath(), "./build/icons/icon.ico"),
     webPreferences: {
       nodeIntegration: true,
+      enableRemoteModule: true,
     },
   })
 

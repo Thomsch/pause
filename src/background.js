@@ -95,6 +95,7 @@ function createWindow() {
     icon: path.join(app.getAppPath(), "./build/icons/icon.ico"),
     webPreferences: {
       nodeIntegration: true,
+      enableRemoteModule: true,
     },
   })
 
@@ -174,6 +175,7 @@ function onTimerEnd() {
       minimizable: false,
       webPreferences: {
         nodeIntegration: true,
+        enableRemoteModule: true,
       },
     })
     notificationWindow.loadFile("./src/notification/notification.html")
