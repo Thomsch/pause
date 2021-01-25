@@ -1,5 +1,5 @@
 # Pause
-[![Build Status](https://github.com/thomsch/pause/workflows/.github/workflows/build.yml/badge.svg)](https://github.com/thomsch/pause/actions)
+[![Build Status](https://github.com/thomsch/pause/workflows/build/badge.svg)](https://github.com/thomsch/pause/actions)
 [![Maintainability](https://api.codeclimate.com/v1/badges/d08245ed4044c3580c97/maintainability)](https://codeclimate.com/github/Thomsch/pause/maintainability)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Thomsch_pause&metric=alert_status)](https://sonarcloud.io/dashboard?id=Thomsch_pause)
 
