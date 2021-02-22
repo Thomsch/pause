@@ -1,0 +1,24 @@
+appId: org.thomsch.pause
+publish:
+  provider: github
+productName: Pause
+copyright: Copyright © 2020 Thomsch
+
+win:
+  icon: build/icons/icon.ico
+  target: [nsis, portable]
+linux:
+  icon: build/icons/
+  category: Utility
+  target: [AppImage, tar.gz]
+mac:
+  icon: build/icons/icon.icns
+  category: public.app-category.productivity
+  target: [dmg]
+
+dmg:
+  contents:
+    [
+      { x: 410, y: 150, type: link, path: /Applications },
+      { x: 130, y: 150, type: file },
+    ]

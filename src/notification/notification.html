@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../stylesheets/spectre.min.css" />
+    <link rel="stylesheet" href="../stylesheets/spectre-icons.min.css" />
+  </head>
+  <style type="text/css">
+    @keyframes start {
+      from {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      to {
+        background-color: rgba(255, 255, 255, 0.9);
+      }
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      animation-name: start;
+      animation-duration: 3s;
+      animation-timing-function: ease-out;
+      animation-fill-mode: forwards;
+    }
+
+    .container {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 0;
+    }
+  </style>
+
+  <body>
+    <div class="container">
+      <h1 class="">Enjoy a break</h1>
+      <p class="text-centered" style="margin: 4vh 0">
+        <em>Relax your eyes and stretch</em>
+      </p>
+      <div class="bg-secondary" style="padding: 2vh; width: 100%; display: flex; justify-content: center;">
+        <button id="resume" class="btn btn-primary btn-lg m-2 p-2">
+          Resume
+        </button>
+        <button id="postpone" class="btn btn-lg m-2 p-2">
+          Postpone
+          <i class="icon icon-time" style="margin-left: 4px"></i>
+        </button>
+      </div>
+    </div>
+  </body>
+  <script src="notification.js"></script>
+
+</html>
