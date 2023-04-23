@@ -9,8 +9,11 @@ Pause allows you to set a timer to remind you to take a break from your work on 
   <img src="https://raw.githubusercontent.com/Thomsch/pause/develop/misc/app.png" alt="Screenshot of the application"/>
 </p>
 
-## Features
+## Developing
+- Install dependencies: `yarn add electron-builder --dev`
+- Build and run: `yarn start`
 
+## Features
 - Minimalist look
 - Configurable timer
 
