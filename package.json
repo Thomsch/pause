@@ -26,7 +26,7 @@
     "electron-log": "^4.3.0",
     "electron-updater": "^4.3.5",
     "mousetrap": "^1.6.5",
-    "node-sass": "^7.0.3",
+    "node-sass": "^9.0.0",
     "spectre.css": "^0.5.9",
     "tiny-timer": "^1.5.0"
   },
