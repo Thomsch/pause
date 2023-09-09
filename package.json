@@ -1,37 +1,15 @@
 {
   "name": "pause",
-  "version": "0.9.0",
-  "description": "Healthy productivity companion",
-  "author": {
-    "name": "Thomsch",
-    "email": "thms.sch@gmail.com",
-    "url": "https://github.com/Thomsch/pause"
-  },
-  "homepage": "https://github.com/Thomsch/pause",
-  "license": "ISC",
-  "main": "src/background.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron .",
-    "build": "electron-builder build --publish never",
-    "deploy": "electron-builder build --publish always",
-    "postinstall": "electron-builder install-app-deps",
-    "scss": "node-sass pause.scss -o src/stylesheets"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/thomsch/pause.git"
-  },
-  "dependencies": {
-    "electron-log": "^4.3.0",
-    "electron-updater": "^4.3.5",
-    "mousetrap": "^1.6.5",
-    "node-sass": "^7.0.3",
-    "spectre.css": "^0.5.9",
-    "tiny-timer": "^1.5.0"
-  },
+  "version": "1.0.0",
+  "description": "Health and productivity companion",
+  "main": "main.js",
+  "repository": "https://github.com/Thomsch/pause.git",
+  "author": "Thomas Schweizer <thms.sch@gmail.com>",
+  "license": "MIT",
   "devDependencies": {
-    "electron": "^18.3.7",
-    "electron-builder": "^23.6.0"
+    "electron": "26.2.0"
+  },
+  "scripts": {
+    "start": "electron ."
   }
 }
