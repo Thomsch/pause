@@ -9,32 +9,17 @@ Pause allows you to set a timer to remind you to take a break from your work on 
   <img src="https://raw.githubusercontent.com/Thomsch/pause/develop/misc/app.png" alt="Screenshot of the application"/>
 </p>
 
-## Developing
-- Install dependencies: `yarn add electron-builder --dev`
-- Build and run: `yarn start`
-
-## Features
-- Minimalist look
-- Configurable timer
-
-## Download
+## Installation
 
 Pause is available for Windows, MacOS and Linux.
 
 Download the latest version from the [releases](https://github.com/Thomsch/pause/releases) page.
 
-## Roadmap
+## Developing
+Pause is build on Electron. We use `yarn` to manage packages.h
 
-- Minimize to tray
-- Notifications
-- Auto-update
-
-## Tested on
-
-- Windows 10 Home x64
-- Windows 10 Pro x64
-
-Help welcome to test the application on Linux or MacOS. If you find bugs, feel free to open an issue!
+- Install dependencies: `yarn add electron-builder --dev`
+- Build and run: `yarn start`
 
 ## Licensing
 

@@ -7,9 +7,12 @@
   "author": "Thomas Schweizer <thms.sch@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "electron": "26.2.0"
+    "electron": "26.2.0",
+    "typescript": "^5.2.2"
   },
   "scripts": {
-    "start": "electron ."
+    "build": "tsc",
+    "watch": "tsc -w",
+    "start": "yarn build && electron ./dist/main.js"
   }
 }

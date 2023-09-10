@@ -1,6 +1,6 @@
-const { app, BrowserWindow } = require('electron')
+import { app, BrowserWindow } from 'electron'
 // include the Node.js 'path' module at the top of your file
-const path = require('node:path')
+import path from 'node:path'
 
 const createWindow = () => {
     const win = new BrowserWindow({
@@ -11,7 +11,7 @@ const createWindow = () => {
           }
     })
 
-    win.loadFile('index.html')
+    win.loadFile(path.join(__dirname, "../index.html"));
 }
 
 app.whenReady().then(() => {
@@ -20,10 +20,6 @@ app.whenReady().then(() => {
 
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') app.quit()
-})
-
-app.whenReady().then(() => {
-    createWindow()
 })
 
 app.on('activate', () => {
