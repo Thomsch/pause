@@ -3,9 +3,15 @@ import { app, BrowserWindow } from 'electron'
 import path from 'node:path'
 
 const createWindow = () => {
+    const goldenRatio: number = 1.618;
+    const windowWidth: number = 250;
+    const windowHeight = Math.round(windowWidth * goldenRatio); // Result needs to be an integer otherwise the height default to 600.
+
+    console.log(`window size: ${windowWidth} ${windowHeight}`);
+
     const win = new BrowserWindow({
-        width: 800,
-        height: 600,
+        width: windowWidth,
+        height: windowHeight,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js')
           }
