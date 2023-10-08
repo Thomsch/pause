@@ -7,8 +7,6 @@ const createWindow = () => {
     const windowWidth: number = 250;
     const windowHeight = Math.round(windowWidth * goldenRatio); // Result needs to be an integer otherwise the height default to 600.
 
-    console.log(`window size: ${windowWidth} ${windowHeight}`);
-
     const win = new BrowserWindow({
         width: windowWidth,
         height: windowHeight,
