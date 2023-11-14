@@ -10,8 +10,6 @@ jobs:
         os: [macos-latest, ubuntu-latest, windows-latest]
 
     steps:
-      - run: python3 -m pip install packaging
-      
       - name: Check out Git repository
         uses: actions/checkout@v4
 
@@ -19,6 +17,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
+
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10' 
+
+      - run: python3 --version
+      - run: python3 -m pip install packaging
 
       - name: Build/release Electron app
         uses: samuelmeuli/action-electron-builder@v1.6.0
