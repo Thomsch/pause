@@ -10,6 +10,8 @@ jobs:
         os: [macos-latest, ubuntu-latest, windows-latest]
 
     steps:
+      - run: python3 -m pip install packaging
+      
       - name: Check out Git repository
         uses: actions/checkout@v4
 
