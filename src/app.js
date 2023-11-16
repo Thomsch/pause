@@ -1,4 +1,4 @@
-const { BrowserWindow, app } = require("electron").remote
+const { BrowserWindow, app } = require('@electron/remote')
 const { ipcRenderer } = require("electron")
 const path = require("path")
 const mousetrap = require("mousetrap")

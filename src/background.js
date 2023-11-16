@@ -5,6 +5,8 @@ const path = require("path")
 const log = require('electron-log');
 const { autoUpdater } = require('electron-updater');
 
+require('@electron/remote/main').initialize()
+
 let mainWindow
 let timer = new Timer({ interval: 100 })
 let duration
@@ -86,18 +88,23 @@ function createWindow() {
     return
   }
 
+
+
   mainWindow = new BrowserWindow({
     width: 400,
     height: 200,
     autoHideMenuBar: true,
-    resizable: false,
+    resizable: true,
     show: false,
     icon: path.join(app.getAppPath(), "./build/icons/icon.ico"),
     webPreferences: {
       nodeIntegration: true,
+      contextIsolation: false,
       enableRemoteModule: true,
     },
   })
+
+  require("@electron/remote/main").enable(mainWindow.webContents)
 
   // and load the main.html of the app.
   mainWindow.loadFile("./src/app.html")
@@ -175,9 +182,11 @@ function onTimerEnd() {
       minimizable: false,
       webPreferences: {
         nodeIntegration: true,
+        contextIsolation: false,
         enableRemoteModule: true,
       },
     })
+    require("@electron/remote/main").enable(notificationWindow.webContents)
     notificationWindow.loadFile("./src/notification/notification.html")
 
     notificationWindow.once("ready-to-show", () => {
