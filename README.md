@@ -10,7 +10,7 @@ Pause allows you to set a timer to remind you to take a break from your work on 
 </p>
 
 ## Developing
-- Install dependencies: `yarn add electron-builder --dev`
+- Install dependencies: `yarn install`
 - Build and run: `yarn start`
 
 ## Features
