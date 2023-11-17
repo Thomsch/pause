@@ -1,11 +1,16 @@
 const electron = require("electron")
 const { app, BrowserWindow, Menu, ipcMain } = electron
+
 const Timer = require("tiny-timer")
-const path = require("path")
-const log = require('electron-log');
+const path = require('node:path')
 const { autoUpdater } = require('electron-updater');
 
-require('@electron/remote/main').initialize()
+const log = require('electron-log/main');
+
+// Optional, initialize the logger for any renderer process
+log.initialize({ preload: true });
+
+log.info('Log from the main process');
 
 let mainWindow
 let timer = new Timer({ interval: 100 })
@@ -13,21 +18,20 @@ let duration
 let postponeDuration = 3
 let notificationWindowsRegister = []
 
-app.on("ready", createWindow)
+app.whenReady().then(() => {
+  ipcMain.handle('ping', () => 'pong')
+  createWindow()
+
+  app.on('activate', () => {
+    if (BrowserWindow.getAllWindows().length === 0) createWindow()
+  })
+})
 
 app.on("window-all-closed", () => {
   // On macOS it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
   if (process.platform !== "darwin") {
     app.quit()
-  }
-})
-
-app.on("activate", () => {
-  // On macOS it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
-  if (mainWindow === null) {
-    createWindow()
   }
 })
 
@@ -88,8 +92,6 @@ function createWindow() {
     return
   }
 
-
-
   mainWindow = new BrowserWindow({
     width: 400,
     height: 200,
@@ -98,16 +100,15 @@ function createWindow() {
     show: false,
     icon: path.join(app.getAppPath(), "./build/icons/icon.ico"),
     webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false,
-      enableRemoteModule: true,
-    },
+        nodeIntegration: false, // is default value after Electron v5
+        contextIsolation: true, // protect against prototype pollution
+        enableRemoteModule: false, // turn off remote
+        preload: path.join(__dirname, 'preload.js'),
+      }
   })
 
-  require("@electron/remote/main").enable(mainWindow.webContents)
-
   // and load the main.html of the app.
-  mainWindow.loadFile("./src/app.html")
+  mainWindow.loadFile(path.join(__dirname, 'index.html'))
 
   // Emitted when the window is closed.
   mainWindow.on("closed", () => {
@@ -140,7 +141,7 @@ function startSession(duration) {
 
 function updateTimestamp(ms) {
   n = new Number((1 - ms / timer.duration) * 100)
-
+  console.log(n.toString())
   mainWindow.webContents.send("timer-update", n.toString())
 }
 
@@ -186,7 +187,6 @@ function onTimerEnd() {
         enableRemoteModule: true,
       },
     })
-    require("@electron/remote/main").enable(notificationWindow.webContents)
     notificationWindow.loadFile("./src/notification/notification.html")
 
     notificationWindow.once("ready-to-show", () => {
