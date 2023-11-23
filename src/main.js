@@ -4,7 +4,6 @@ const { app, BrowserWindow, Menu, ipcMain } = electron
 const Timer = require("tiny-timer")
 const path = require('node:path')
 const { autoUpdater } = require('electron-updater');
-
 const log = require('electron-log/main');
 
 // Optional, initialize the logger for any renderer process
@@ -58,6 +57,7 @@ function setupProcessListeners() {
 
   ipcMain.on("new-timer", (event, arg) => {
     duration = arg
+    log.info(`New timer received: ${duration}`)
 
     startSession(duration)
   })
@@ -141,7 +141,6 @@ function startSession(duration) {
 
 function updateTimestamp(ms) {
   n = new Number((1 - ms / timer.duration) * 100)
-  console.log(n.toString())
   mainWindow.webContents.send("timer-update", n.toString())
 }
 
