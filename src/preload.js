@@ -8,7 +8,7 @@ contextBridge.exposeInMainWorld('versions', {
   },
 
   handleTimerUpdate: (callback) => ipcRenderer.on('timer-update', callback),
-  handleTimerStopped: (callback) => ipcRenderer.on('timer-stopped', callback)
+  handleTimerStopped: (callback) => ipcRenderer.on('timer-stopped', callback),
 })
 
 window.addEventListener('DOMContentLoaded', () => {

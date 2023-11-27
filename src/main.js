@@ -19,6 +19,7 @@ let notificationWindowsRegister = []
 
 app.whenReady().then(() => {
   ipcMain.handle('ping', () => 'pong')
+
   createWindow()
 
   app.on('activate', () => {

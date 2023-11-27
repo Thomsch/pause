@@ -20,7 +20,6 @@ const progressBar = document.querySelector(".bar-item")
 const message = document.getElementById('update-message');
 const updateControls = document.getElementById('update-controls')
 
-// let aboutWindow = null
 let running = false
 
 // setupEventListeners();
@@ -43,10 +42,6 @@ setupProcessListeners();
 // }
 
 function setupProcessListeners() {
-  // ipcRenderer.on("display-about", (event, arg) => {
-  //   displayAbout()
-  // })
-
   window.versions.handleTimerUpdate((event, value) => {
     // const oldValue = Number(counter.innerText)
     // const newValue = oldValue + value
@@ -83,8 +78,6 @@ function setupProcessListeners() {
 }
 
 // function setupEventListeners() {
-//   document.querySelector("#about").addEventListener("click", displayAbout)
-
   durationField.addEventListener("input", () => {
     let invalidInput = durationField.matches(":invalid")
     toggleButton.toggleAttribute("disabled", invalidInput)
