@@ -85,10 +85,10 @@ function setupProcessListeners() {
 // function setupEventListeners() {
 //   document.querySelector("#about").addEventListener("click", displayAbout)
 
-//   durationField.addEventListener("input", () => {
-//     let invalidInput = durationField.matches(":invalid")
-//     toggleButton.toggleAttribute("disabled", invalidInput)
-//   })
+  durationField.addEventListener("input", () => {
+    let invalidInput = durationField.matches(":invalid")
+    toggleButton.toggleAttribute("disabled", invalidInput)
+  })
 
   toggleButton.addEventListener("click", function () {
     __electronLog.info('Clicked');
