@@ -58,7 +58,6 @@ function setupProcessListeners() {
 
   ipcMain.on("new-timer", (event, arg) => {
     duration = arg
-    log.info(`New timer received: ${duration}`)
 
     startSession(duration)
   })
