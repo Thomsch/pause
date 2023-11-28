@@ -1,8 +1,3 @@
-// const { BrowserWindow, app } = require('@electron/remote')
-// const { ipcRenderer } = require("electron")
-// const path = require("path")
-// const mousetrap = require("mousetrap")
-
 __electronLog.info('Log from the renderer');
 
 let completion = new Number(0).toFixed(2)
@@ -99,4 +94,3 @@ function setupProcessListeners() {
     running = !running
   })
 // }
-

@@ -1,3 +1,5 @@
+// const mousetrap = require("mousetrap")
+
 // let toggleTrap = new Mousetrap(toggleButton)
 // let fieldTrap = new Mousetrap(durationField)
 
