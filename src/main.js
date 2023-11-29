@@ -66,7 +66,6 @@ function setupProcessListeners() {
   })
 
   ipcMain.on('restart-app', () => {
-    log.info("Restart received")
     autoUpdater.quitAndInstall();
   });
 }
@@ -82,6 +81,10 @@ function setupAutoUpdateListeners() {
     mainWindow.webContents.send('update-downloaded');
   });
 
+  autoUpdater.on('error', (message) => {
+    console.error('There was a problem updating the application')
+    console.error(message)
+  })
 }
 
 function createWindow() {
@@ -122,6 +125,10 @@ function createWindow() {
   mainWindow.on('ready-to-show', () => {
     log.info('Main window is ready to show')
 
+    const server = 'https://update.electronjs.org'
+    const feed = `${server}/OWNER/REPO/${process.platform}-${process.arch}/${app.getVersion()}`
+
+    autoUpdater.setFeedURL(feed)
     autoUpdater.checkForUpdatesAndNotify()
     log.info('Auto update check done')
 

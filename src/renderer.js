@@ -17,72 +17,63 @@ const updateControls = document.getElementById('update-controls')
 
 let running = false
 
-// setupEventListeners();
-setupProcessListeners();
-
-// function restartLater() {
-//   log.info("The update will be installed later")
-
-//   updateControls.classList.add('hidden')
-//   message.classList.add('hidden')
-// }
-
-// function restartNow() {
-//   log.info("Sending restart app.")
-
-//   updateControls.classList.add('hidden')
-//   message.classList.add('hidden')
-
-//   ipcRenderer.send('restart-app');
-// }
-
-function setupProcessListeners() {
-  window.versions.handleTimerUpdate((event, value) => {
-    completion = new Number(value).toFixed(2)
-
-    progressBar.setAttribute("style", `width:${completion}%;`)
-  })
-
-  window.versions.handleTimerStopped((event, value) => {
-    progressBar.setAttribute("style", "width:0%;")
-  })
-
-  // ipcRenderer.on('update-available', () => {
-  //   log.info("Received update available")
-  //   ipcRenderer.removeAllListeners('update-available');
-
-  //   message.classList.remove('hidden')
-  //   message.innerText = 'Downloading update...';
-  // });
-
-  // ipcRenderer.on('update-downloaded', () => {
-  //   log.info("Received update downloaded")
-  //   ipcRenderer.removeAllListeners('update-downloaded');
-
-  //   message.innerText = 'Update Ready';
-
-  //   updateControls.classList.remove('hidden')
-  // });
+function hideUpdateControls() {
+  updateControls.classList.add('hidden')
+  message.classList.add('hidden')
 }
 
-// function setupEventListeners() {
-  durationField.addEventListener("input", () => {
-    let invalidInput = durationField.matches(":invalid")
-    toggleButton.toggleAttribute("disabled", invalidInput)
-  })
+function restartLater() {
+  __electronLog.info("The update will be installed later")
+  hideUpdateControls()
+}
 
-  toggleButton.addEventListener("click", function () {
-    if (running) {
-      window.versions.stopTimer()
+function restartNow() {
+  __electronLog.info("Sending restart app.")
+  hideUpdateControls()
+  window.versions.restartApp()
+}
 
-      toggleButton.innerHTML = "Start"
-      durationField.removeAttribute("disabled")
-    } else {
-      window.versions.startTimer(durationField.value)
-    
-      toggleButton.innerHTML = "Stop"
-      durationField.setAttribute("disabled", null)
-    }
-    running = !running
-  })
-// }
+window.versions.handleAppUpdateAvailable((event, value) => {
+  message.classList.remove('hidden')
+  message.innerText = 'Update available. Downloading...';
+})
+
+window.versions.handleAppUpdateDownloaded((event, value) => {
+  message.innerText = 'Update ready.';
+  updateControls.classList.remove('hidden')
+})
+
+window.versions.handleTimerUpdate((event, value) => {
+  completion = new Number(value).toFixed(2)
+
+  progressBar.setAttribute("style", `width:${completion}%;`)
+})
+
+window.versions.handleTimerStopped((event, value) => {
+  progressBar.setAttribute("style", "width:0%;")
+})
+
+
+//
+// Listeners for the controls
+//
+
+durationField.addEventListener("input", () => {
+  let invalidInput = durationField.matches(":invalid")
+  toggleButton.toggleAttribute("disabled", invalidInput)
+})
+
+toggleButton.addEventListener("click", function () {
+  if (running) {
+    window.versions.stopTimer()
+
+    toggleButton.innerHTML = "Start"
+    durationField.removeAttribute("disabled")
+  } else {
+    window.versions.startTimer(durationField.value)
+  
+    toggleButton.innerHTML = "Stop"
+    durationField.setAttribute("disabled", null)
+  }
+  running = !running
+})
