@@ -3,8 +3,10 @@ const { app, BrowserWindow, Menu, ipcMain } = electron
 
 const Timer = require("tiny-timer")
 const path = require('node:path')
-const { autoUpdater } = require('electron-updater');
 const log = require('electron-log/main');
+
+const { updateElectronApp } = require('update-electron-app')
+updateElectronApp()
 
 // Optional, initialize the logger for any renderer process
 log.initialize({ preload: true });
@@ -34,7 +36,6 @@ app.on("window-all-closed", () => {
 })
 
 setupProcessListeners();
-setupAutoUpdateListeners();
 
 timer.on("tick", updateTimestamp)
 timer.on("done", onTimerEnd)
@@ -63,27 +64,6 @@ function setupProcessListeners() {
   ipcMain.on("stop-timer", () => {
     timer.stop()
     resetTimer()
-  })
-
-  ipcMain.on('restart-app', () => {
-    autoUpdater.quitAndInstall();
-  });
-}
-
-function setupAutoUpdateListeners() {
-  autoUpdater.on('update-available', () => {
-    log.info("Update available!")
-    mainWindow.webContents.send('update-available');
-  });
-
-  autoUpdater.on('update-downloaded', () => {
-    log.info("Update downloaded!")
-    mainWindow.webContents.send('update-downloaded');
-  });
-
-  autoUpdater.on('error', (message) => {
-    console.error('There was a problem updating the application')
-    console.error(message)
   })
 }
 
@@ -123,15 +103,6 @@ function createWindow() {
   })
 
   mainWindow.on('ready-to-show', () => {
-    log.info('Main window is ready to show')
-
-    const server = 'https://update.electronjs.org'
-    const feed = `${server}/OWNER/REPO/${process.platform}-${process.arch}/${app.getVersion()}`
-
-    autoUpdater.setFeedURL(feed)
-    autoUpdater.checkForUpdatesAndNotify()
-    log.info('Auto update check done')
-
     mainWindow.show()
   })
 }
