@@ -1,9 +1,12 @@
 const electron = require("electron")
 const { app, BrowserWindow, Menu, ipcMain } = electron
+
 const Timer = require("tiny-timer")
-const path = require("path")
-const log = require('electron-log');
-const { autoUpdater } = require('electron-updater');
+const path = require('node:path')
+const log = require('electron-log/main');
+
+// Optional, initialize the logger for any renderer process
+log.initialize({ preload: true });
 
 let mainWindow
 let timer = new Timer({ interval: 100 })
@@ -11,7 +14,15 @@ let duration
 let postponeDuration = 3
 let notificationWindowsRegister = []
 
-app.on("ready", createWindow)
+app.whenReady().then(() => {
+  ipcMain.handle('ping', () => 'pong')
+
+  createWindow()
+
+  app.on('activate', () => {
+    if (BrowserWindow.getAllWindows().length === 0) createWindow()
+  })
+})
 
 app.on("window-all-closed", () => {
   // On macOS it is common for applications and their menu bar
@@ -21,16 +32,7 @@ app.on("window-all-closed", () => {
   }
 })
 
-app.on("activate", () => {
-  // On macOS it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
-  if (mainWindow === null) {
-    createWindow()
-  }
-})
-
 setupProcessListeners();
-setupAutoUpdateListeners();
 
 timer.on("tick", updateTimestamp)
 timer.on("done", onTimerEnd)
@@ -60,24 +62,6 @@ function setupProcessListeners() {
     timer.stop()
     resetTimer()
   })
-
-  ipcMain.on('restart-app', () => {
-    log.info("Restart received")
-    autoUpdater.quitAndInstall();
-  });
-}
-
-function setupAutoUpdateListeners() {
-  autoUpdater.on('update-available', () => {
-    log.info("Update available!")
-    mainWindow.webContents.send('update-available');
-  });
-
-  autoUpdater.on('update-downloaded', () => {
-    log.info("Update downloaded!")
-    mainWindow.webContents.send('update-downloaded');
-  });
-
 }
 
 function createWindow() {
@@ -90,17 +74,19 @@ function createWindow() {
     width: 400,
     height: 200,
     autoHideMenuBar: true,
-    resizable: false,
+    resizable: true,
     show: false,
     icon: path.join(app.getAppPath(), "./build/icons/icon.ico"),
     webPreferences: {
-      nodeIntegration: true,
-      enableRemoteModule: true,
-    },
+        nodeIntegration: false, // is default value after Electron v5
+        contextIsolation: true, // protect against prototype pollution
+        enableRemoteModule: false, // turn off remote
+        preload: path.join(__dirname, 'preload.js'),
+      }
   })
 
   // and load the main.html of the app.
-  mainWindow.loadFile("./src/app.html")
+  mainWindow.loadFile(path.join(__dirname, 'index.html'))
 
   // Emitted when the window is closed.
   mainWindow.on("closed", () => {
@@ -114,11 +100,6 @@ function createWindow() {
   })
 
   mainWindow.on('ready-to-show', () => {
-    log.info('Main window is ready to show')
-
-    autoUpdater.checkForUpdatesAndNotify()
-    log.info('Auto update check done')
-
     mainWindow.show()
   })
 }
@@ -133,7 +114,6 @@ function startSession(duration) {
 
 function updateTimestamp(ms) {
   n = new Number((1 - ms / timer.duration) * 100)
-
   mainWindow.webContents.send("timer-update", n.toString())
 }
 
@@ -175,6 +155,7 @@ function onTimerEnd() {
       minimizable: false,
       webPreferences: {
         nodeIntegration: true,
+        contextIsolation: false,
         enableRemoteModule: true,
       },
     })
