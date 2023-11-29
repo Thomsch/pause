@@ -17,32 +17,6 @@ const updateControls = document.getElementById('update-controls')
 
 let running = false
 
-function hideUpdateControls() {
-  updateControls.classList.add('hidden')
-  message.classList.add('hidden')
-}
-
-function restartLater() {
-  __electronLog.info("The update will be installed later")
-  hideUpdateControls()
-}
-
-function restartNow() {
-  __electronLog.info("Sending restart app.")
-  hideUpdateControls()
-  window.versions.restartApp()
-}
-
-window.versions.handleAppUpdateAvailable((event, value) => {
-  message.classList.remove('hidden')
-  message.innerText = 'Update available. Downloading...';
-})
-
-window.versions.handleAppUpdateDownloaded((event, value) => {
-  message.innerText = 'Update ready.';
-  updateControls.classList.remove('hidden')
-})
-
 window.versions.handleTimerUpdate((event, value) => {
   completion = new Number(value).toFixed(2)
 

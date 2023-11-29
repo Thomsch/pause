@@ -10,9 +10,6 @@ contextBridge.exposeInMainWorld('versions', {
   handleTimerUpdate: (callback) => ipcRenderer.on('timer-update', callback),
   handleTimerStopped: (callback) => ipcRenderer.on('timer-stopped', callback),
 
-  handleAppUpdateAvailable: (callback) => ipcRenderer.on('update-available', callback),
-  handleAppUpdateDownloaded: (callback) => ipcRenderer.on('update-downloaded', callback),
-
   restartApp: () => ipcRenderer.send('restart-app')
 })
 

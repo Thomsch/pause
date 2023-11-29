@@ -5,9 +5,6 @@ const Timer = require("tiny-timer")
 const path = require('node:path')
 const log = require('electron-log/main');
 
-const { updateElectronApp } = require('update-electron-app')
-updateElectronApp()
-
 // Optional, initialize the logger for any renderer process
 log.initialize({ preload: true });
 
