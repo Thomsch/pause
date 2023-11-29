@@ -38,21 +38,14 @@ setupProcessListeners();
 
 function setupProcessListeners() {
   window.versions.handleTimerUpdate((event, value) => {
-    // const oldValue = Number(counter.innerText)
-    // const newValue = oldValue + value
-    // counter.innerText = newValue
-    // event.sender.send('counter-value', newValue)
-
     completion = new Number(value).toFixed(2)
 
-    __electronLog.info(`Received timer update: ${completion}`)
     progressBar.setAttribute("style", `width:${completion}%;`)
   })
 
   window.versions.handleTimerStopped((event, value) => {
     progressBar.setAttribute("style", "width:0%;")
   })
-
 
   // ipcRenderer.on('update-available', () => {
   //   log.info("Received update available")
@@ -79,7 +72,6 @@ function setupProcessListeners() {
   })
 
   toggleButton.addEventListener("click", function () {
-    __electronLog.info('Clicked');
     if (running) {
       window.versions.stopTimer()
 

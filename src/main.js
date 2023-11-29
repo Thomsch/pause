@@ -9,8 +9,6 @@ const log = require('electron-log/main');
 // Optional, initialize the logger for any renderer process
 log.initialize({ preload: true });
 
-log.info('Log from the main process');
-
 let mainWindow
 let timer = new Timer({ interval: 100 })
 let duration
