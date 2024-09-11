@@ -16,7 +16,9 @@ Pause is available for Windows, MacOS and Linux.
 Download the latest version from the [releases](https://github.com/Thomsch/pause/releases) page.
 
 ## Developing
-
+- Install Yarn
+- Install nvm 
+- `nvm install 18.17.1 && nvm use 18.17.1`
 - Install dependencies: `yarn install`
 - Build and run: `yarn start`
 
