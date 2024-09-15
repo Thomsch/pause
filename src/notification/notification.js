@@ -1,5 +1,6 @@
 const remote = require("electron").remote
 const { ipcRenderer } = require("electron")
+const log = require('electron-log/main');
 
 var resume = document.querySelector("#resume")
 var postpone = document.querySelector("#postpone")

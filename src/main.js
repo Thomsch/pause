@@ -105,7 +105,9 @@ function createWindow() {
 }
 
 function startSession(duration) {
+  log.info(`Starting session with duration ${duration}`)
   if (timer.status != "stopped") {
+    log.info("Stopping previous timer")
     timer.stop()
   }
 
@@ -118,7 +120,10 @@ function updateTimestamp(ms) {
 }
 
 function closeNotifications() {
+  length = notificationWindowsRegister.length
+  log.info(`There are ${length} windows to close`)
   for (let window of notificationWindowsRegister) {
+    log.info(`Closing window ${JSON.stringify(window, null, 2)}`)
     window.close()
   }
   notificationWindowsRegister = []
@@ -145,29 +150,27 @@ function onTimerEnd() {
       height: screen.bounds.height,
       x: screen.bounds.x,
       y: screen.bounds.y,
-      show: false,
-      frame: true,
+      show: true,
+      frame: false,
       transparent: true,
-      fullscreen: true,
+      fullscreen: false,
       alwaysOnTop: true,
       skipTaskbar: true,
       resizable: false,
       minimizable: false,
+
       webPreferences: {
         nodeIntegration: true,
         contextIsolation: false,
         enableRemoteModule: true,
       },
     })
+
     notificationWindow.loadFile("./src/notification/notification.html")
 
     notificationWindow.once("ready-to-show", () => {
-      notificationWindow.maximize()
       notificationWindow.show()
-    })
-
-    notificationWindow.on("closed", () => {
-      notificationWindow = null
+      log.info(`Showing window ${JSON.stringify(notificationWindow, null, 2)}`)
     })
 
     notificationWindowsRegister.push(notificationWindow)
