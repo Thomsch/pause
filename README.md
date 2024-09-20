@@ -9,11 +9,10 @@ Pause allows you to set a timer to remind you to take a break from your work on 
   <img src="https://raw.githubusercontent.com/Thomsch/pause/develop/misc/app.png" alt="Screenshot of the application"/>
 </p>
 
-## Download
-
+## Installation
 Pause is available for Windows, MacOS and Linux.
 
-Download the latest version from the [releases](https://github.com/Thomsch/pause/releases) page.
+1. Download the latest version from the [releases](https://github.com/Thomsch/pause/releases) page.
 
 ## Developing
 - Install Yarn
@@ -23,8 +22,9 @@ Download the latest version from the [releases](https://github.com/Thomsch/pause
 - Build and run: `yarn start`
 
 ### Releasing
+- Create a new release draft on GitHub. You can use any name.
+- Add tag 'vX.Y.Z', matching the `version` in package.json (but with a 'v' appended).
 - Run `GH_TOKEN=<Personal Access Token> yarn deploy`
-
 
 ## Licensing
 
