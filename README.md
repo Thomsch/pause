@@ -23,11 +23,18 @@ Pause is available for Windows, MacOS and Linux.
 
 ### Releasing
 - Create a new release draft on GitHub. You can use any name.
-- Add tag 'vX.Y.Z', matching the `version` in package.json (but with a 'v' appended).
+  - Add tag 'vX.Y.Z', matching the `version` in package.json (but with a 'v' appended).
 - Run `GH_TOKEN=<Personal Access Token> yarn deploy`
+- Test signing conformance
+  - `spctl -a -t exec -vv dist/mac-universal/pause.app/Contents/MacOS/pause`
+  - `codesign --verify --deep --strict --verbose=2 dist/mac-universal/pause.app/Contents/MacOS/pause`
+  - Send the DMG to yourself from website, messages, or air drop. This will trigger the GateKeeper check during installation or first opening.
 
 ## Licensing
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation version 3.
 
 See [LICENSE](LICENSE) for details.
+
+## Acknowledgements
+Thank you [Kilian Valkhof](https://kilianvalkhof.com/2019/electron/notarizing-your-electron-application/) for the resources on code signing and notarizing Electron apps.
