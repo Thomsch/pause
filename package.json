@@ -33,5 +33,14 @@
   "devDependencies": {
     "electron": "^27.1.0",
     "electron-builder": "^24.6.4"
+  },
+  "build": {
+    "mac": {
+      "mergeASARs": false,
+      "target": {
+        "target": "default",
+        "arch": "universal"
+      }
+    }
   }
 }
