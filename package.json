@@ -1,7 +1,8 @@
 {
   "name": "pause",
-  "version": "0.9.2",
+  "version": "0.9.3",
   "description": "Healthy productivity companion",
+  "bundleId": "org.thomsch.pause",
   "author": {
     "name": "Thomsch",
     "email": "thms.sch@gmail.com",
@@ -31,11 +32,21 @@
     "tiny-timer": "^1.5.0"
   },
   "devDependencies": {
+    "dotenv": "^16.4.5",
     "electron": "^27.1.0",
-    "electron-builder": "^24.6.4"
+    "electron-builder": "^24.6.4",
+    "electron-notarize": "^1.2.2"
   },
   "build": {
+    "afterSign": "scripts/notarize.js",
+    "dmg": {
+      "sign": false
+    },
     "mac": {
+      "hardenedRuntime": true,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist",
+      "gatekeeperAssess": false,
       "mergeASARs": false,
       "target": {
         "target": "default",
