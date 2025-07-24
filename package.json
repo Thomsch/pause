@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "dotenv": "^16.4.5",
-    "electron": "^27.1.0",
+    "electron": "^28.3.2",
     "electron-builder": "^24.6.4",
     "electron-notarize": "^1.2.2"
   },
