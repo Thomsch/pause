@@ -24,8 +24,8 @@ if (process.contextIsolated) {
     console.error(error)
   }
 } else {
-  // @ts-ignore
+  // @ts-ignore -- fallback for non-isolated context
   window.electron = electronAPI
-  // @ts-ignore
+  // @ts-ignore -- fallback for non-isolated context
   window.api = api
 }

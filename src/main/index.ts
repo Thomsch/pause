@@ -156,9 +156,7 @@ function onTimerEnd(): void {
     })
 
     if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
-      notificationWindow.loadURL(
-        process.env['ELECTRON_RENDERER_URL'] + '/notification/index.html'
-      )
+      notificationWindow.loadURL(process.env['ELECTRON_RENDERER_URL'] + '/notification/index.html')
     } else {
       notificationWindow.loadFile(join(__dirname, '../renderer/notification/index.html'))
     }

@@ -59,8 +59,8 @@ onMounted(() => {
 }
 
 * {
-  font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    'Helvetica Neue', sans-serif;
+  font-family:
+    -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
   font-size: 0.8rem;
   color: #3b4351;
 }
@@ -85,7 +85,11 @@ onMounted(() => {
   line-height: 1.2rem;
   padding: 0.25rem 0.4rem;
   outline: none;
-  transition: background 0.2s, border 0.2s, box-shadow 0.2s, color 0.2s;
+  transition:
+    background 0.2s,
+    border 0.2s,
+    box-shadow 0.2s,
+    color 0.2s;
 }
 
 .duration-input:focus {
@@ -112,7 +116,11 @@ onMounted(() => {
   outline: none;
   text-align: center;
   text-decoration: none;
-  transition: background 0.2s, border 0.2s, box-shadow 0.2s, color 0.2s;
+  transition:
+    background 0.2s,
+    border 0.2s,
+    box-shadow 0.2s,
+    color 0.2s;
   user-select: none;
   white-space: nowrap;
 }
