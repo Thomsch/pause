@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      @keyframes start {
+        from {
+          background-color: rgba(255, 255, 255, 0.1);
+        }
+        to {
+          background-color: rgba(255, 255, 255, 0.9);
+        }
+      }
+
+      html {
+        font-size: 20px;
+        line-height: 1.5;
+      }
+
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto,
+          'Helvetica Neue', sans-serif;
+        font-size: 0.8rem;
+        color: #3b4351;
+        animation-name: start;
+        animation-duration: 3s;
+        animation-timing-function: ease-out;
+        animation-fill-mode: forwards;
+      }
+
+      .container {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: 0;
+      }
+
+      h1 {
+        font-weight: 300;
+        font-size: 1.6rem;
+        color: #3b4351;
+      }
+
+      .subtitle {
+        margin: 4vh 0;
+        color: #66758c;
+      }
+
+      .subtitle em {
+        font-style: italic;
+      }
+
+      .actions {
+        padding: 2vh;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        background-color: #e6f5fa;
+      }
+
+      button {
+        appearance: none;
+        border: 0.05rem solid #02a4d3;
+        border-radius: 0.1rem;
+        color: #02a4d3;
+        cursor: pointer;
+        font-size: 1rem;
+        height: 2.4rem;
+        line-height: 1.2rem;
+        padding: 0.35rem 0.6rem;
+        margin: 0.4rem;
+        text-align: center;
+        text-decoration: none;
+        transition: background 0.2s, border 0.2s, box-shadow 0.2s, color 0.2s;
+        user-select: none;
+        white-space: nowrap;
+        background: #fff;
+        outline: none;
+      }
+
+      button.primary {
+        background: #02a4d3;
+        border-color: #0293bc;
+        color: #fff;
+      }
+
+      button.primary:hover {
+        background: #0290b8;
+        border-color: #0280a3;
+      }
+
+      button:hover {
+        background: #e6f5fa;
+      }
+
+      button:focus {
+        box-shadow: 0 0 0 0.1rem rgba(2, 164, 211, 0.2);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Enjoy a break</h1>
+      <p class="subtitle"><em>Relax your eyes and stretch</em></p>
+      <div class="actions">
+        <button id="resume" class="primary">Resume</button>
+        <button id="postpone">Postpone</button>
+      </div>
+    </div>
+    <script type="module" src="./notification.ts"></script>
+  </body>
+</html>
