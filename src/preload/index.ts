@@ -1,4 +1,4 @@
-import { contextBridge, ipcRenderer } from 'electron'
+import { contextBridge, ipcRenderer, shell } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
 
 const api = {
@@ -13,6 +13,9 @@ const api = {
   },
   onTimerStopped: (callback: () => void): void => {
     ipcRenderer.on('timer-stopped', () => callback())
+  },
+  openExternal: (url: string): void => {
+    shell.openExternal(url)
   }
 }
 

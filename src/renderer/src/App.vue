@@ -19,6 +19,10 @@ function isValidInput(): boolean {
   return /^[0-9]+$/.test(duration.value) && Number(duration.value) > 0
 }
 
+function openGitHub(): void {
+  window.api.openExternal('https://github.com/Thomsch/pause')
+}
+
 onMounted(() => {
   window.api.onTimerUpdate((value: string) => {
     progress.value = Number(Number(value).toFixed(2))
@@ -49,6 +53,9 @@ onMounted(() => {
   <div class="progress-bar">
     <div class="progress-fill" :style="{ width: progress + '%' }"></div>
   </div>
+  <a class="github-link" href="https://github.com/Thomsch/pause" @click.prevent="openGitHub">
+    Made with <span class="heart">&#9829;</span>
+  </a>
 </template>
 
 <style scoped>
@@ -152,5 +159,45 @@ onMounted(() => {
   height: 100%;
   background: #02a4d3;
   transition: width 0.1s linear;
+}
+
+@keyframes heartbeat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+}
+
+.github-link {
+  position: fixed;
+  bottom: 0.5rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.6rem;
+  color: #acb3bf;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    color 0.3s,
+    transform 0.3s;
+}
+
+.github-link .heart {
+  display: inline-block;
+  transition: color 0.3s;
+}
+
+.github-link:hover {
+  color: #02a4d3;
+  transform: translateY(-2px);
+}
+
+.github-link:hover .heart {
+  color: #02a4d3;
+  animation: heartbeat 0.8s ease-in-out;
 }
 </style>

@@ -5,6 +5,7 @@ interface PauseAPI {
   stopTimer: () => void
   onTimerUpdate: (callback: (value: string) => void) => void
   onTimerStopped: (callback: () => void) => void
+  openExternal: (url: string) => void
 }
 
 declare global {
