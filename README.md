@@ -9,26 +9,34 @@ Pause allows you to set a timer to remind you to take a break from your work on 
   <img src="https://raw.githubusercontent.com/Thomsch/pause/develop/misc/app.png" alt="Screenshot of the application"/>
 </p>
 
+## Tech Stack
+
+Built with [Electron](https://www.electronjs.org/), [Vue 3](https://vuejs.org/), and [TypeScript](https://www.typescriptlang.org/). Uses [electron-vite](https://electron-vite.org/) for bundling and HMR.
+
 ## Installation
 Pause is available for Windows, MacOS and Linux.
 
 1. Download the latest version from the [releases](https://github.com/Thomsch/pause/releases) page.
 
 ## Developing
-- Install Yarn
-- Install nvm 
+- Install [Yarn](https://yarnpkg.com/)
+- Install [nvm](https://github.com/nvm-sh/nvm)
 - `nvm install 18.17.1 && nvm use 18.17.1`
 - Install dependencies: `yarn install`
-- Build and run: `yarn start`
+- Run in development mode with HMR: `yarn dev`
+- Lint: `yarn lint`
+- Format: `yarn format`
+- Typecheck: `yarn typecheck`
+- Build for production: `yarn build`
 
 ### Releasing
-- Create a new release draft on GitHub. You can use any name.
-  - Add tag 'vX.Y.Z', matching the `version` in package.json (but with a 'v' appended).
-- Run `GH_TOKEN=<Personal Access Token> yarn deploy`
-- Test signing conformance
-  - `spctl -a -t exec -vv dist/mac-universal/pause.app/Contents/MacOS/pause`
-  - `codesign --verify --deep --strict --verbose=2 dist/mac-universal/pause.app/Contents/MacOS/pause`
-  - Send the DMG to yourself from website, messages, or air drop. This will trigger the GateKeeper check during installation or first opening.
+1. Update `version` in `package.json`.
+2. Create a new release draft on GitHub with tag `vX.Y.Z` matching the version.
+3. Run `GH_TOKEN=<Personal Access Token> yarn deploy`
+4. Test signing conformance:
+   - `spctl -a -t exec -vv dist/mac-universal/pause.app/Contents/MacOS/pause`
+   - `codesign --verify --deep --strict --verbose=2 dist/mac-universal/pause.app/Contents/MacOS/pause`
+   - Send the DMG to yourself from a website, messages, or AirDrop. This will trigger the GateKeeper check during installation or first opening.
 
 ## Licensing
 
