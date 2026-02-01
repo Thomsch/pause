@@ -93,8 +93,8 @@ onMounted(() => {
 }
 
 .duration-input:focus {
-  border-color: #39b4c6;
-  box-shadow: 0 0 0 0.1rem rgba(57, 180, 198, 0.2);
+  border-color: #02a4d3;
+  box-shadow: 0 0 0 0.1rem rgba(2, 164, 211, 0.2);
 }
 
 .label {
@@ -104,8 +104,8 @@ onMounted(() => {
 
 .toggle-btn {
   appearance: none;
-  background: #39b4c6;
-  border: 0.05rem solid #32a0b0;
+  background: #02a4d3;
+  border: 0.05rem solid #0293bc;
   border-radius: 5px;
   color: #fff;
   cursor: pointer;
@@ -126,12 +126,12 @@ onMounted(() => {
 }
 
 .toggle-btn:focus {
-  box-shadow: 0 0 0 0.1rem rgba(57, 180, 198, 0.2);
+  box-shadow: 0 0 0 0.1rem rgba(2, 164, 211, 0.2);
 }
 
 .toggle-btn:hover:not(:disabled) {
-  background: #2fa1b1;
-  border-color: #2991a0;
+  background: #0290b8;
+  border-color: #0280a3;
 }
 
 .toggle-btn:disabled {
@@ -150,7 +150,7 @@ onMounted(() => {
 
 .progress-fill {
   height: 100%;
-  background: #39b4c6;
+  background: #02a4d3;
   transition: width 0.1s linear;
 }
 </style>

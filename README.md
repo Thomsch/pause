@@ -4,7 +4,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/d08245ed4044c3580c97/maintainability)](https://codeclimate.com/github/Thomsch/pause/maintainability)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Thomsch_pause&metric=alert_status)](https://sonarcloud.io/dashboard?id=Thomsch_pause)
 
-A desktop app that reminds you to take breaks. Set a timer, focus on your work, and Pause will let you know when it's time to rest. The timer restarts automatically unless you stop it.
+A desktop app that reminds you to take breaks . Set a timer, focus on your work, and Pause will let you know when it's time to rest. The timer restarts automatically unless you stop it.
 
 ![Screenshot of the application](https://raw.githubusercontent.com/Thomsch/pause/develop/misc/app.png)
 
