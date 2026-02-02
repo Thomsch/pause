@@ -1,10 +1,10 @@
-import { app, BrowserWindow, ipcMain, screen } from 'electron'
+import { app, BrowserWindow, ipcMain, screen, session, shell } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import Timer from 'tiny-timer'
 import log from 'electron-log/main'
 
-log.initialize({ preload: true })
+log.initialize()
 
 let mainWindow: BrowserWindow | null = null
 const timer = new Timer({ interval: 100 })
@@ -16,6 +16,12 @@ app.setName('Pause')
 
 app.whenReady().then(() => {
   electronApp.setAppUserModelId('org.thomsch.pause')
+
+  // Deny all permission requests - timer app needs no special permissions
+  session.defaultSession.setPermissionRequestHandler((_webContents, permission, callback) => {
+    log.warn(`Permission request denied: ${permission}`)
+    callback(false)
+  })
 
   app.on('browser-window-created', (_, window) => {
     optimizer.watchWindowShortcuts(window)
@@ -42,6 +48,12 @@ timer.on('tick', (ms: number) => {
 
 timer.on('done', onTimerEnd)
 
+function isValidDuration(duration: number): boolean {
+  return (
+    typeof duration === 'number' && Number.isFinite(duration) && duration > 0 && duration <= 1440 // Max 24 hours
+  )
+}
+
 function setupIpcListeners(): void {
   ipcMain.on('display-notification', () => {
     onTimerEnd()
@@ -58,8 +70,33 @@ function setupIpcListeners(): void {
   })
 
   ipcMain.on('new-timer', (_event, arg: number) => {
+    if (!isValidDuration(arg)) {
+      log.error('Invalid timer duration received:', arg)
+      return
+    }
     duration = arg
     startSession(duration)
+  })
+
+  ipcMain.on('open-external', (_event, url: string) => {
+    try {
+      const parsedUrl = new URL(url)
+      const allowedDomains = ['github.com', 'www.github.com']
+
+      if (parsedUrl.protocol !== 'https:') {
+        log.warn('Only HTTPS URLs are allowed:', url)
+        return
+      }
+
+      if (!allowedDomains.includes(parsedUrl.hostname)) {
+        log.warn('Domain not allowed:', parsedUrl.hostname)
+        return
+      }
+
+      shell.openExternal(url)
+    } catch (error) {
+      log.error('Invalid URL:', error)
+    }
   })
 
   ipcMain.on('stop-timer', () => {
@@ -83,8 +120,33 @@ function createWindow(): void {
     icon: join(app.getAppPath(), './build/icons/icon.ico'),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
-      sandbox: false
+      sandbox: true,
+      contextIsolation: true,
+      nodeIntegration: false,
+      nodeIntegrationInWorker: false,
+      nodeIntegrationInSubFrames: false
     }
+  })
+
+  // Prevent navigation to external sites
+  mainWindow.webContents.on('will-navigate', (event, navigationUrl) => {
+    const parsedUrl = new URL(navigationUrl)
+
+    if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
+      const allowedOrigin = new URL(process.env['ELECTRON_RENDERER_URL']).origin
+      if (parsedUrl.origin === allowedOrigin) {
+        return
+      }
+    }
+
+    log.warn('Navigation blocked:', navigationUrl)
+    event.preventDefault()
+  })
+
+  // Prevent opening new windows
+  mainWindow.webContents.setWindowOpenHandler(({ url }) => {
+    log.warn('Window open blocked:', url)
+    return { action: 'deny' }
   })
 
   mainWindow.on('ready-to-show', () => {
@@ -151,8 +213,23 @@ function onTimerEnd(): void {
       minimizable: false,
       webPreferences: {
         preload: join(__dirname, '../preload/notification.js'),
-        sandbox: false
+        sandbox: true,
+        contextIsolation: true,
+        nodeIntegration: false,
+        nodeIntegrationInWorker: false,
+        nodeIntegrationInSubFrames: false
       }
+    })
+
+    // Notification windows should never navigate
+    notificationWindow.webContents.on('will-navigate', (event, navigationUrl) => {
+      log.warn('Notification navigation blocked:', navigationUrl)
+      event.preventDefault()
+    })
+
+    notificationWindow.webContents.setWindowOpenHandler(({ url }) => {
+      log.warn('Notification window open blocked:', url)
+      return { action: 'deny' }
     })
 
     if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
