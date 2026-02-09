@@ -1,16 +1,28 @@
 {
-  "extends": "@electron-toolkit/tsconfig/tsconfig.web.json",
-  "include": [
-    "src/renderer/src/**/*",
-    "src/renderer/src/env.d.ts",
-    "src/renderer/notification/**/*",
-    "src/preload/index.d.ts"
-  ],
   "compilerOptions": {
     "composite": true,
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "preserve",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
     "paths": {
       "@renderer/*": ["./src/renderer/src/*"]
     }
-  }
+  },
+  "include": [
+    "src/renderer/src/**/*",
+    "src/renderer/src/env.d.ts",
+    "src/renderer/notification/**/*"
+  ]
 }

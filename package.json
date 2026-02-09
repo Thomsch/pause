@@ -2,8 +2,6 @@
   "name": "pause",
   "version": "0.9.3",
   "description": "Healthy productivity companion",
-  "main": "./out/main/index.js",
-  "bundleId": "org.thomsch.pause",
   "author": {
     "name": "Thomsch",
     "email": "thms.sch@gmail.com",
@@ -12,17 +10,7 @@
   "homepage": "https://github.com/Thomsch/pause",
   "license": "ISC",
   "scripts": {
-    "dev": "electron-vite dev",
-    "start": "electron-vite preview",
-    "build": "npm run typecheck && electron-vite build",
-    "build:mac": "electron-vite build && electron-builder --mac",
-    "build:win": "electron-vite build && electron-builder --win",
-    "build:linux": "electron-vite build && electron-builder --linux",
-    "deploy": "electron-vite build && electron-builder build --publish always",
-    "postinstall": "electron-builder install-app-deps",
-    "typecheck": "npm run typecheck:node && npm run typecheck:web",
-    "typecheck:node": "tsc --noEmit -p tsconfig.node.json --composite false",
-    "typecheck:web": "vue-tsc --noEmit -p tsconfig.web.json --composite false",
+    "typecheck": "vue-tsc --noEmit -p tsconfig.web.json --composite false",
     "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts,.vue --fix",
     "format": "prettier --write src/"
   },
@@ -31,24 +19,14 @@
     "url": "https://github.com/thomsch/pause.git"
   },
   "dependencies": {
-    "@electron-toolkit/preload": "^3.0.0",
-    "@electron-toolkit/utils": "^3.0.0",
-    "electron-log": "^5.0.0",
-    "tiny-timer": "^1.5.0"
+    "@tauri-apps/api": "^2",
+    "@tauri-apps/plugin-shell": "^2"
   },
   "devDependencies": {
-    "@electron-toolkit/eslint-config": "^1.0.2",
-    "@electron-toolkit/eslint-config-ts": "^2.0.0",
-    "@electron-toolkit/tsconfig": "^1.0.1",
     "@rushstack/eslint-patch": "^1.10.3",
     "@vitejs/plugin-vue": "^5.0.5",
     "@vue/eslint-config-prettier": "^9.0.0",
     "@vue/eslint-config-typescript": "^13.0.0",
-    "dotenv": "^16.4.5",
-    "electron": "^28.3.2",
-    "electron-builder": "^24.6.4",
-    "electron-notarize": "^1.2.2",
-    "electron-vite": "^2.3.0",
     "eslint": "^8.57.0",
     "eslint-plugin-vue": "^9.27.0",
     "prettier": "^3.3.3",

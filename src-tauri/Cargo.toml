@@ -1,0 +1,21 @@
+[package]
+name = "pause"
+version = "0.9.3"
+description = "Healthy productivity companion"
+authors = ["Thomsch <thms.sch@gmail.com>"]
+license = "ISC"
+repository = "https://github.com/thomsch/pause"
+edition = "2021"
+
+[lib]
+name = "pause"
+crate-type = ["lib", "cdylib", "staticlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-shell = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"

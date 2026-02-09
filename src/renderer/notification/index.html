@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'none'; script-src 'self'; style-src 'unsafe-inline'; connect-src 'none'; img-src 'none'"
+      content="default-src 'self' ipc: http://ipc.localhost; script-src 'self' 'unsafe-inline'; style-src 'unsafe-inline'; connect-src ipc: http://ipc.localhost https://ipc.localhost; img-src 'none'"
     />
     <style>
       @keyframes start {

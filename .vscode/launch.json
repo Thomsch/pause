@@ -1,32 +1,14 @@
 {
-    "version": "0.2.0",
-    "compounds": [
-      {
-        "name": "Main + renderer",
-        "configurations": ["Main", "Renderer"],
-        "stopAll": true
-      }
-    ],
-    "configurations": [
-      {
-        "name": "Renderer",
-        "port": 9222,
-        "request": "attach",
-        "type": "chrome",
-        "webRoot": "${workspaceFolder}"
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Tauri Dev",
+      "type": "lldb",
+      "request": "launch",
+      "cargo": {
+        "args": ["build", "--manifest-path=./src-tauri/Cargo.toml", "--no-default-features"]
       },
-      {
-        "name": "Main",
-        "type": "node",
-        "request": "launch",
-        "cwd": "${workspaceFolder}",
-        "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
-        "windows": {
-          "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd"
-        },
-        "args": [".", "--remote-debugging-port=9222"],
-        "outputCapture": "std",
-        "console": "integratedTerminal"
-      }
-    ]
-  }
+      "preLaunchTask": "tauri:dev"
+    }
+  ]
+}

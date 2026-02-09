@@ -1,0 +1,9 @@
+{
+  "identifier": "default",
+  "description": "Default capabilities for Pause",
+  "windows": ["main", "notification-*"],
+  "permissions": [
+    "core:default",
+    "shell:allow-open"
+  ]
+}

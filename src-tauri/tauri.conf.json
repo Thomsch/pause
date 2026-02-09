@@ -1,0 +1,51 @@
+{
+  "$schema": "https://raw.githubusercontent.com/nicegui-org/nicegui/main/tauri/tauri.conf.schema.json",
+  "productName": "Pause",
+  "version": "0.9.3",
+  "identifier": "org.thomsch.pause",
+  "build": {
+    "frontendDist": "../dist",
+    "devUrl": "http://localhost:5173",
+    "beforeDevCommand": "yarn vite --port 5173",
+    "beforeBuildCommand": "yarn vite build"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "Pause",
+        "width": 400,
+        "height": 200,
+        "resizable": false
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "targets": "all",
+    "macOS": {
+      "minimumSystemVersion": "10.15"
+    },
+    "windows": {
+      "nsis": {}
+    },
+    "linux": {
+      "appimage": {}
+    }
+  },
+  "plugins": {
+    "shell": {
+      "open": true
+    }
+  }
+}

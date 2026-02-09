@@ -1,16 +1,22 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
+import { invoke } from '@tauri-apps/api/core'
+import { listen, type UnlistenFn } from '@tauri-apps/api/event'
+import { open } from '@tauri-apps/plugin-shell'
 
 const duration = ref('30')
 const running = ref(false)
 const progress = ref(0)
 
+let unlistenUpdate: UnlistenFn | null = null
+let unlistenStopped: UnlistenFn | null = null
+
 function toggle(): void {
   if (running.value) {
-    window.api.stopTimer()
+    invoke('stop_timer')
     running.value = false
   } else {
-    window.api.startTimer(Number(duration.value))
+    invoke('start_timer', { duration: Number(duration.value) })
     running.value = true
   }
 }
@@ -20,17 +26,22 @@ function isValidInput(): boolean {
 }
 
 function openGitHub(): void {
-  window.api.openExternal('https://github.com/Thomsch/pause')
+  open('https://github.com/Thomsch/pause')
 }
 
-onMounted(() => {
-  window.api.onTimerUpdate((value: string) => {
-    progress.value = Number(Number(value).toFixed(2))
+onMounted(async () => {
+  unlistenUpdate = await listen<string>('timer-update', (event) => {
+    progress.value = Number(Number(event.payload).toFixed(2))
   })
-  window.api.onTimerStopped(() => {
+  unlistenStopped = await listen('timer-stopped', () => {
     progress.value = 0
     running.value = false
   })
+})
+
+onUnmounted(() => {
+  unlistenUpdate?.()
+  unlistenStopped?.()
 })
 </script>
 
