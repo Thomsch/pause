@@ -18,7 +18,7 @@ Available for **Windows**, **macOS**, and **Linux**. Download the latest version
 
 ```bash
 yarn install
-cargo tauri dev
+yarn dev
 ```
 
 This launches the app in development mode with hot module replacement.
@@ -27,8 +27,8 @@ This launches the app in development mode with hot module replacement.
 
 | Command | Description |
 |---|---|
-| `cargo tauri dev` | Run with HMR for development |
-| `cargo tauri build` | Build for production |
+| `yarn dev` | Run with HMR for development |
+| `yarn build` | Build for production |
 | `yarn lint` | Lint and auto-fix with ESLint |
 | `yarn format` | Format with Prettier |
 | `yarn typecheck` | Run TypeScript type checking |

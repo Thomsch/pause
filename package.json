@@ -10,6 +10,8 @@
   "homepage": "https://github.com/Thomsch/pause",
   "license": "ISC",
   "scripts": {
+    "dev": "cargo tauri dev",
+    "build": "cargo tauri build",
     "typecheck": "vue-tsc --noEmit -p tsconfig.web.json --composite false",
     "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts,.vue --fix",
     "format": "prettier --write src/"
