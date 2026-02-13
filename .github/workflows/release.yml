@@ -1,13 +1,12 @@
-name: CI
+name: Release
 
 on:
   push:
-    branches: ['**']
-    tags-ignore: ['**']
-  pull_request:
+    tags:
+      - 'v*'
 
 jobs:
-  build:
+  release:
     runs-on: ${{ matrix.platform }}
 
     strategy:
@@ -36,13 +35,19 @@ jobs:
       - name: Install frontend dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Lint
-        run: yarn lint
-
-      - name: Typecheck
-        run: yarn typecheck
-
-      - name: Build Tauri app
+      - name: Build and release Tauri app
         uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE }}
+          APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+          APPLE_SIGNING_IDENTITY: ${{ secrets.APPLE_SIGNING_IDENTITY }}
+          APPLE_ID: ${{ secrets.APPLEID }}
+          APPLE_PASSWORD: ${{ secrets.APPLEIDPASS }}
+          APPLE_TEAM_ID: ${{ secrets.APPLETEAMID }}
+        with:
+          tagName: v__VERSION__
+          releaseName: "Pause v__VERSION__"
+          releaseBody: ""
+          releaseDraft: true
+          prerelease: false
