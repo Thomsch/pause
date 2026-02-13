@@ -64,6 +64,7 @@ fn open_notification_windows(app: &AppHandle) {
 
     for (i, monitor) in monitors.iter().enumerate() {
         let label = format!("notification-{}", i);
+        let scale = monitor.scale_factor();
         let position = monitor.position();
         let size = monitor.size();
 
@@ -71,8 +72,8 @@ fn open_notification_windows(app: &AppHandle) {
 
         match WebviewWindowBuilder::new(app, &label, url)
             .title("Pause - Break Time")
-            .inner_size(size.width as f64, size.height as f64)
-            .position(position.x as f64, position.y as f64)
+            .inner_size(size.width as f64 / scale, size.height as f64 / scale)
+            .position(position.x as f64 / scale, position.y as f64 / scale)
             .decorations(false)
             .always_on_top(true)
             .skip_taskbar(true)
