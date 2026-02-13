@@ -29,7 +29,14 @@ function openGitHub(): void {
   open('https://github.com/Thomsch/pause')
 }
 
+function onKeydown(e: KeyboardEvent): void {
+  if (e.key === 'Enter' && isValidInput()) {
+    toggle()
+  }
+}
+
 onMounted(async () => {
+  window.addEventListener('keydown', onKeydown)
   unlistenUpdate = await listen<string>('timer-update', (event) => {
     progress.value = Number(Number(event.payload).toFixed(2))
   })
@@ -40,6 +47,7 @@ onMounted(async () => {
 })
 
 onUnmounted(() => {
+  window.removeEventListener('keydown', onKeydown)
   unlistenUpdate?.()
   unlistenStopped?.()
 })
