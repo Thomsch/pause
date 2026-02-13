@@ -3,6 +3,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import { invoke } from '@tauri-apps/api/core'
 import { listen, type UnlistenFn } from '@tauri-apps/api/event'
 import { open } from '@tauri-apps/plugin-shell'
+import { isValidDuration } from './validation'
 
 const duration = ref('30')
 const running = ref(false)
@@ -22,7 +23,7 @@ function toggle(): void {
 }
 
 function isValidInput(): boolean {
-  return /^[0-9]+$/.test(duration.value) && Number(duration.value) > 0
+  return isValidDuration(duration.value)
 }
 
 function openGitHub(): void {

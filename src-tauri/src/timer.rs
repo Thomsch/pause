@@ -66,3 +66,31 @@ impl TimerState {
         *self.duration_minutes.lock().unwrap()
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::sync::atomic::Ordering;
+
+    #[test]
+    fn new_defaults() {
+        let state = TimerState::new();
+        assert!(!state.cancel.load(Ordering::SeqCst));
+        assert_eq!(state.stored_duration(), 30);
+    }
+
+    #[test]
+    fn stop_sets_cancel_flag() {
+        let state = TimerState::new();
+        state.stop();
+        assert!(state.cancel.load(Ordering::SeqCst));
+    }
+
+    #[test]
+    fn stored_duration_returns_value() {
+        let state = TimerState::new();
+        assert_eq!(state.stored_duration(), 30);
+        *state.duration_minutes.lock().unwrap() = 45;
+        assert_eq!(state.stored_duration(), 45);
+    }
+}

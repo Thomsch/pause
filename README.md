@@ -29,6 +29,10 @@ This launches the app in development mode with hot module replacement.
 |---|---|
 | `yarn dev` | Run with HMR for development |
 | `yarn build` | Build for production |
+| `yarn test` | Run frontend tests (Vitest) |
+| `yarn test:all` | Run all tests (Rust + frontend) |
+| `yarn test:watch` | Run frontend tests in watch mode |
+| `yarn test:rust` | Run Rust unit tests |
 | `yarn lint` | Lint and auto-fix with ESLint |
 | `yarn format` | Format with Prettier |
 | `yarn typecheck` | Run TypeScript type checking |

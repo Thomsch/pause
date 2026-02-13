@@ -14,6 +14,10 @@
     "build": "cargo tauri build",
     "typecheck": "vue-tsc --noEmit -p tsconfig.web.json --composite false",
     "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts,.vue --fix",
+    "test": "vitest run",
+    "test:all": "yarn test:rust && yarn test",
+    "test:watch": "vitest",
+    "test:rust": "cargo test --manifest-path src-tauri/Cargo.toml",
     "format": "prettier --write src/"
   },
   "repository": {
@@ -29,11 +33,14 @@
     "@vitejs/plugin-vue": "^5.0.5",
     "@vue/eslint-config-prettier": "^9.0.0",
     "@vue/eslint-config-typescript": "^13.0.0",
+    "@vue/test-utils": "^2.4.6",
     "eslint": "^8.57.0",
     "eslint-plugin-vue": "^9.27.0",
+    "happy-dom": "^20.6.1",
     "prettier": "^3.3.3",
     "typescript": "^5.5.4",
     "vite": "^5.3.4",
+    "vitest": "^4.0.18",
     "vue": "^3.4.35",
     "vue-tsc": "^2.0.29"
   }
